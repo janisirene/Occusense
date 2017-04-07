@@ -1,0 +1,37 @@
+This is a BU ECE Technical report preparation package for LaTeX/BiBTeX
+typsetting environment. It has been tested under Linux, but should work under
+MikTeX on Windows.
+
+The package specifies report style (either generic report style with chapters
+or article style with sections) to assure uniformity among reports from
+different authors. It also defines cover page formatted to fit the cutout in BU
+report cardboard covers. This makes for a nice bound copy of a report.
+
+In order to get your technical report number, contact the administrative
+secretary of the Department Chair (PHO324), and provide him/her with report
+title and authors. The department does not have a repository of past technical
+reports but records report titles, author names and report numbers.
+
+The following files are included in the package:
+
+  bu_ece_report.sty	 - BU ECE technical report LaTeX style file,
+  fancybox.sty           - fancy box style file for the title-box page,
+  fancyheadings.sty      - fancy headings style file for advanced headings,
+  BUseal_color.eps	 - BU seal EPS file,
+  BUlogo_pantone.eps 	 - BU logo EPS file (pantone 186 red),
+  BUlogo_cmyk.eps 	 - BU logo EPS file (cmyk red),
+  BUlogo_black.eps 	 - BU logo EPS file (black),
+  ieeetr.bst       	 - unsorted IEEE BiBTeX style file,
+  ieeetrsrt.bst   	 - sorted IEEE BiBTeX style file,
+  report.tex     	 - LaTeX template for a report,
+
+The first five files (bu_ece_report.sty, fancybox.sty, fancyheadings.sty)
+specify the BU ECE report style.
+
+The next two files (ieeetr.bst, ieeetrsrt.bst) are recommended as the
+bibliography style (unsorted and sorted, respectively) for the BU ECE technical
+reports.
+
+Finally, report.tex is a template LaTeX file that is suggested as a starting
+point for the preparation of a BU ECE technical report (report.bbl is needed
+for the compilation of report.tex).
