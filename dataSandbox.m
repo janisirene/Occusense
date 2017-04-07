@@ -1,8 +1,8 @@
 % data exploration script
 
-ptToData = 'OccusenseData\IN';
+ptToData = 'C:\Users\jintoy\Documents\OccusenseData';
 
-condition = 'IN';
+condition = 'OUT';
 
 dr = dir(fullfile(ptToData, condition, '*.txt'));
 
@@ -12,9 +12,12 @@ fname = fullfile(ptToData, condition, dr(i).name);
 v = readOccusenseVideo(fname);
 
 %% look at max heat in each row
+sy = '*os^';
 maxHeatRow = squeeze(max(v, [], 2));
 figure(); clf; hold on;
-plot(1:size(v, 3), maxHeatRow, '.-', 'markersize', 10, 'linewidth', 2);
+for j = 1:4
+    plot(1:size(v, 3), maxHeatRow(j, :), [sy(j), '-'], 'markersize', 10, 'linewidth', 2);
+end
 xlabel('time index');
 ylabel('max temperature');
 legend('1st row', '2nd row', '3rd row', '4th row');
