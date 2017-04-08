@@ -1,14 +1,16 @@
 function fullMask = backgroundSubtraction(v, params)
 % fullMask = backgroundSubtraction(v, params)
+% implementation of Foreground-Adaptive Background subtraction based on
+% McHugh, Konrad, Saligrama, Jodoin (2009)
 % assumes that first several samples of videos are background
+%
 % inputs:
 %   v - 3d array [4x16xtime] of temperatures
 %   params - structure of parameters, see below
 % output:
 %   fullMask - logical array, same size as v, true when foreground, false
 %       when background
-% implementation of Foreground-Adaptive Background subtraction based on
-% McHugh, Konrad, Saligrama, Jodoin (2009)
+%
 % author: Janis Intoy
 % updated: April 8, 2017
 
@@ -50,7 +52,7 @@ prevBack = v(:, :, 1:N);
 for ti = N+1:nFrames
     currentFrame = v(:, :, ti);
     
-    % probability of background at each pixel
+    % probability of background at each pixel - eq(1)
     sIdx = max(1, ti-N);
     Pb = nanmean(...
         normpdf(...
@@ -58,34 +60,40 @@ for ti = N+1:nFrames
         0, sigma),...
         3);
     
-    % initial detection mask
+    % initial detection mask - simplified likelihood ratio test
+    % (equation in bottom of page 391, left column)
     e = (Pb < theta); % e = 1 -> foreground
     
-    %     if doPlot
-    %         [r, c] = find(e);
-    %         figure(50); clf; hold on;
-    %         imshow(v(:, :, ti), colorLims);
-    %         plot(c, r, 'r.', 'markersize', 20);
-    %         title(sprintf('frame = %i, iteration = %i', ti, 0));
-    %         keyboard;
-    %     end
+    %{
+    if doPlot
+        [r, c] = find(e);
+        figure(50); clf; hold on;
+        imshow(v(:, :, ti), colorLims);
+        plot(c, r, 'r.', 'markersize', 20);
+        title(sprintf('frame = %i, iteration = %i', ti, 0));
+        keyboard;
+    end
+    %}
     
-    % probability of foreground at each pixel
     for ii = 1:nIterations
-        Pf = nan(size(Pb));
-        deltaQ = nan(size(Pb)); % array to store (Qf-Qb) as in eq (8)
+        Pf = nan(size(Pb)); % probability of foreground at each pixel
+        deltaQ = nan(size(Pb)); % array to store (Qf-Qb) as in eq(8)
         for nn = 1:(h*w)
+            % we want theforeground-only neighborhood  
+            % (definition just before 3)
             thisEta = nn + eta;
             thisEta(thisEta < 1 | thisEta > h*w) = [];
-            
             isForeground = e(thisEta);
             
             if ~any(isForeground)
                 % presumably no foreground object, so uniform PDF
-                Pf(nn) = 1 / length(thisEta);
+                Pf(nn) = 1 / length(thisEta); % ??? Is this right?
                 deltaQ(nn) = -length(thisEta); % all background neighbors
             else
+                % this is the foreground only neighborhood
                 thisEta = thisEta(isForeground);
+                
+                % probability of the foreground at this pixel eq(3)
                 Pf(nn) = 1 / length(thisEta) *...
                     sum(normpdf(...
                     currentFrame(nn) - currentFrame(thisEta),...
@@ -95,18 +103,25 @@ for ti = N+1:nFrames
         end
         
         % update the detection mask - adaptive threshold
+        % Do I do this every step or just once at the end???????
         e = (Pb ./ Pf < theta .* exp(deltaQ / gamma));
-        %         if doPlot && any(e(:))
-        %             [r, c] = find(e);
-        %             figure(50); clf; hold on;
-        %             imshow(v(:, :, ti), colorLims);
-        %             plot(c, r, 'r.', 'markersize', 20);
-        %             title(sprintf('frame = %i, iteration = %i', ti, ii));
-        %             keyboard;
-        %         end
+        % e = (Pb ./ Pf < theta);
+        %{
+        if doPlot && any(e(:))
+            [r, c] = find(e);
+            figure(50); clf; hold on;
+            imshow(v(:, :, ti), colorLims);
+            plot(c, r, 'r.', 'markersize', 20);
+            title(sprintf('frame = %i, iteration = %i', ti, ii));
+            keyboard;
+        end
+        %}
     end
+    % now use the adaptive threshold
+    e = (Pb ./ Pf < theta .* exp(deltaQ / gamma));
     
-    % update previous backgrounds, only bumping
+    % update previous backgrounds, only bumping when a pixel was background
+    % anyways
     for nn = 1:size(prevBack)
         if ~e(nn) % if background, bump a far time
             [r, c] = ind2sub(size(prevBack), nn);
