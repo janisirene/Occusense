@@ -6,12 +6,18 @@ vidx = 1;
 while ischar(tline)
     if strcmp(tline, '0')
         tmp = nan(4, 16);
-        for i = 1:4
+        cnt = 0;
+        while cnt < 4
             ln = fgetl(fid);
-            if ln == -1
+            if ln == -1 
                 break;
             end
-            tmp(i, :) = str2num(ln);
+            if isempty(ln) % empty line, skip
+                continue;
+            else
+                cnt = cnt + 1;
+                tmp(cnt, :) = str2num(ln);
+            end
         end
         if ln ~= -1
             v(:, :, vidx) = tmp;
