@@ -1,6 +1,6 @@
 % data exploration script
 
-ptToData = 'C:\Users\jintoy\Documents\OccusenseData';
+ptToData = 'OccusenseData';
 
 condition = 'OUT';
 
