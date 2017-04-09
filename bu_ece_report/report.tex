@@ -97,14 +97,16 @@ the number of people in the room.
 In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, a senior design team at Boston University is working towards developing sensing technology and algorithms to count the number of people in a room so that the system is always conscious of room occupancy and can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures of a crowded room. There are a number of ways to detect occupancy. However, this project assumes that if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, there would be a continuous knowledge of the number of people in a room. The senior design team has implemented a privacy-inclined low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array at frame rates of 0.5 to 512 Hz. Using this information, our project is tasked at developing algorithms to count the number of people entering or leaving a room. Specifically, this algorithm will
 1) detect the presence of a moving person in the frame and 2) determine the direction of motion.
 
-Here comes the introduction and reference to a paper \cite{Mchugh09}.
-
 % Following sections, subsections, etc.
 % -------------------------------------
 \section{Literature Review}  % Article style
 %\chapter{Starting chapter}  % Report style
 % Briefly review the literature discussing some other approaches proposed to solve the problem (if any).
-
+Many background subtraction algorithms have been developed to detect changing pixels in a series of images.
+A brief review of the more common change detection algorithms can be found in \cite{Goyette14}.
+The most successful amongst these incorporate a background model into the algorithm. Using a
+background model to segregate the foreground and background is robust to realistic 
+environments which may have some motion or noise. 
 
 
 \section{Problem Statement}  % Article style

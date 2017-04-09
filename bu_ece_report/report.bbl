@@ -1,5 +1,9 @@
 \begin{thebibliography}{1}
 
+\bibitem{Goyette14}
+ N.~Goyette, P.~Jodoin, F.~Porikli, J.~Konrad, and P.~Ishwar, ``A Novel Video Dataset for Change Detection
+	Benchmarking,'' {\em IEEE Transactions on Image Processing}, vol.~23, pp.~4663-79, Nov. 2014.
+
 \bibitem{Mchugh09}
   J.~McHugh, J.~Konrad, V.~Saligrama, and P.~Jodoin, ``Foreground-Adaptive Background Subtraction,''
   	{\em IEEE Signal Processing Letters}, vol.~16, pp.~390-393, May 2009.
