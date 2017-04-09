@@ -32,11 +32,11 @@
 % Definitions.
 % ------------
 \buecedefinitions%
-        {A VERY VERY VERY LONG LONG LONG TITLE TITLE TITLE TITLE OF THE REPORT}
-        {AN ABBREVIATED TITLE FOR RUNNING HEADERS}
-        {FullAuthor1, FullAuthor2 and FullAuthor3}
-        {Date}
-        {YYYY-NN} % Number of the report (four year digits and number)
+        {Room Occupancy sensing using a thermal tripwire}
+        {Occusense: Intermediate Report}
+        {Janis Intoy and Emily Lam}
+        {April 10, 2017}
+        {2017-??} % Number of the report (four year digits and number) What is the number supposed to be????????
 
 % Box with title to fit the opening in the cover
 % (adds an empty page in double-sided printing mode).
@@ -61,7 +61,15 @@ to indicate to whom the document is dedicated, etc.}
 % ---------------------------------------------------
 \pagenumbering{roman}
 \setcounter{page}{1}
-\buecereportsummary{SIn modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, a senior design team at Boston University is working towards developing sensing technology and algorithms to count the number of people in a room so that the system is always conscious of room occupancy and can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures of a crowded room. There are a number of ways to detect occupancy. However, this project assumes that if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, there would be a continuous knowledge of the number of people in a room. The senior design team has implemented a privacy-inclined low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array at frame rates of 0.5 to 512 Hz. Using this information, our project is tasked at developing algorithms to count the number of people entering or leaving a room. Namely, we will be looking into defining features for data training, testing, and classifying. Good performance would be characterized by a low number of false detections and missed detections.}
+\buecereportsummary{
+The efficiency of HVAC (Heating Ventilation \& Air Conditioning) systems can be improved by making them
+adaptive to the number of people in a room. Automatic adjustments to room ventilation and temperature based on 
+room occupancy reduces energy use and is more cost efficient.
+In order to a estimate a room's occupancy level, the Occusense Senior Design team has created
+a reliable, thermal sensor system to capture the motion of people through doorways. We aim to develop
+a reliable, real-time algorithm to detect the direction of motion of people passing through in order to track 
+the number of people in the room.
+}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -86,36 +94,40 @@ to indicate to whom the document is dedicated, etc.}
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, a senior design team at Boston University is working towards developing sensing technology and algorithms to count the number of people in a room so that the system is always conscious of room occupancy and can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures of a crowded room. There are a number of ways to detect occupancy. However, this project assumes that if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, there would be a continuous knowledge of the number of people in a room. The senior design team has implemented a privacy-inclined low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array at frame rates of 0.5 to 512 Hz. Using this information, our project is tasked at developing algorithms to count the number of people entering or leaving a room. Specifically, this algorithm will
+1) detect the presence of a moving person in the frame and 2) determine the direction of motion.
 
-Here comes the introduction and reference to a paper \cite{Konr01cm}.
+Here comes the introduction and reference to a paper \cite{Mchugh09}.
 
 % Following sections, subsections, etc.
 % -------------------------------------
-\section{Starting chapter}  % Article style
+\section{Literature Review}  % Article style
 %\chapter{Starting chapter}  % Report style
 
-This is how the first chapter starts.
 
-\subsection{Early section}  % Article style
+
+\section{Problem Statement}  % Article style
 %\section{Early section}  % Report style
 
 And this is the first section of this chapter.
 
-\section{Another chapter}  % Article style
+\section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 
-\subsection{New section}  % Article style
+\subsection{}  % Article style
 %\section{New section}  % Report style
 
 Section goes here ...
 
-\section{Final chapter}  % Article style
+\section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
 
 \subsection{Another section}  % Article style
 %\section{Another section}  % Report style
 
 Section with a figure (Fig.~\ref{fig:example}).
+
+\section{Conclusions}
 
 % Plots (PostScript files) are included through the ``figure'' environment.
 % For more complicated figures use the minipage commaned (see LaTeX manual).
