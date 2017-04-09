@@ -104,9 +104,14 @@ In modern efficient buildings, controlling the HVAC system preemptively can be a
 % Briefly review the literature discussing some other approaches proposed to solve the problem (if any).
 Many background subtraction algorithms have been developed to detect changing pixels in a series of images.
 A brief review of the more common change detection algorithms can be found in \cite{Goyette14}.
-The most successful amongst these incorporate a background model into the algorithm. Using a
-background model to segregate the foreground and background is robust to realistic 
-environments which may have some motion or noise. 
+The most successful amongst these incorporate a background model into the algorithm. The use of a model
+allows for thresholding of probabilities instead of pixel intensities and is therefore more robust to some variation
+in the background scene. In addition, foreground models can improve the sensitivity of the change detectors 
+\cite{Elgammal02}. McHugh et al. suggested a foreground model algorithm that is more general as it
+is based on spatial neighborhoods. To further improve the discrimination, they also suggest a Markov model
+so that labels are more spatially coherent
+\cite{Mchugh09}.
+
 
 
 \section{Problem Statement}  % Article style
