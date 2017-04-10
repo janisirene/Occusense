@@ -8,5 +8,5 @@
 \contentsline {subsection}{\numberline {4.2}Person Detection}{3}
 \contentsline {subsection}{\numberline {4.3}Direction Discrimination}{3}
 \contentsline {section}{\numberline {5}Experimental Results}{3}
-\contentsline {subsection}{\numberline {5.1}Another section}{3}
-\contentsline {section}{\numberline {6}Conclusions}{3}
+\contentsline {subsection}{\numberline {5.1}Background Subtraction}{3}
+\contentsline {section}{\numberline {6}Conclusions}{4}
