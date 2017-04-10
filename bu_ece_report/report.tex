@@ -138,12 +138,12 @@ $B_k[\mathbf{n}]$ are the $N$ previous time indices at which the pixel located a
 background, and $\mathcal{K}$ is a zero-mean Gaussian with variance $\sigma^2$. Thresholding these probabilities
 with threshold $\theta$ gives an initial classification of pixels into background or foreground.
 \\ \\
-The development of the foreground model follows a similar formulation to that above, but the summation is over
+The development of the foreground model follows a similar formulation, but the summation is over
 pixels in the neighborhood of $\mathbf{n}$ that have been already been labeled as foreground. The
 likelihood ratio of the probability density functions $P_\mathcal{B}$ and 
 $P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furthermore,
 the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
-neighbors a pixel has the easier it is to be labeled as threshold. This will contribute to the spatial
+neighbors a pixel has the easier it is to be labeled as foreground. This will contribute to the spatial
 coherency of the labels. Thus, a pixel is labeled as background if
 $$\frac{P_\mathcal{B}(I[\mathbf{n}])}{P_\mathcal{F}(I[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
 	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] )\right)$$
@@ -160,7 +160,7 @@ Emily
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
-The current implementation of the algorithm is in Matlab. To integrate with the senior design team they 
+The current implementation of the algorithm is in Matlab. To integrate with the senior design team it
 would need to be ported into Python.
 
 \subsection{Data Acquisition}  % Article style
@@ -196,10 +196,7 @@ foreground pixels would be more robust than thresholding the raw temperature val
 if a person is in the frame.
 \begin{figure}[htb]
 \includegraphics[scale=0.5]{backgroundSubtractionResults.png}
-\caption{Results of adaptive background subtraction algorithm in detecting a person in the frame
-for data simulated by concatenating real recordings. TOP:
-Mean temperature of frame over time. BOTTOM: Number of detected foreground pixels in each frame.
-Gray regions mark the times when a person was in the frame.}
+\caption{Comparison of mean frame temperature and number of detected foreground pixels.}
 \end{figure}
 
 \section{Conclusions}
@@ -208,41 +205,41 @@ Gray regions mark the times when a person was in the frame.}
 % Plots (PostScript files) are included through the ``figure'' environment.
 % For more complicated figures use the minipage commaned (see LaTeX manual).
 % --------------------------------------------------------------------------
-\begin{figure}[htb]
-%
-  \begin{minipage}[t]{0.49\linewidth}\centering
-%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
-    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
-    \medskip
-    \centerline{(a)}
-  \end{minipage}\hfill
-%
-  \begin{minipage}[t]{0.49\linewidth}\centering
-%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
-    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
-    \medskip
-    \centerline{(b)}
-  \end{minipage}
-
-  \bigskip
-
-  \begin{minipage}[t]{0.49\linewidth}\centering
-%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
-    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
-    \medskip
-    \centerline{(c)}
-  \end{minipage}\hfill
-%
-  \begin{minipage}[t]{0.49\linewidth}\centering
-%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
-    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
-    \medskip
-    \centerline{(d)}
-  \end{minipage}
-%
-  \caption{Block diagram: (a) one; (b) two; (c) three, and (d) four.}
-  \label{fig:example}
-\end{figure}
+%%\begin{figure}[htb]
+%%%
+%%  \begin{minipage}[t]{0.49\linewidth}\centering
+%%%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
+%%    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
+%%    \medskip
+%%    \centerline{(a)}
+%%  \end{minipage}\hfill
+%%%
+%%  \begin{minipage}[t]{0.49\linewidth}\centering
+%%%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
+%%    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
+%%    \medskip
+%%    \centerline{(b)}
+%%  \end{minipage}
+%%
+%%  \bigskip
+%%
+%%  \begin{minipage}[t]{0.49\linewidth}\centering
+%%%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
+%%    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
+%%    \medskip
+%%    \centerline{(c)}
+%%  \end{minipage}\hfill
+%%%
+%%  \begin{minipage}[t]{0.49\linewidth}\centering
+%%%    \centerline{\epsfig{figure=figures/regbsdcod.eps,width=8.0cm}}
+%%    \Ovalbox{\vbox to 1.5in{\vfill\hbox{\vtop{\hsize=2.5in\hfill}\hfill}\vfill}}
+%%    \medskip
+%%    \centerline{(d)}
+%%  \end{minipage}
+%%%
+%%  \caption{Block diagram: (a) one; (b) two; (c) three, and (d) four.}
+%%  \label{fig:example}
+%%\end{figure}
 
 % Bibliography.
 % -------------
