@@ -8,8 +8,8 @@ doWrite = false; % write videos or not
 minFrames = 500;
 pr = 0.3; % probability of motion (smaller is easier)
 
-%[v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
-load('exampleSimulation.mat');
+[v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
+% load('exampleSimulation.mat');
 
 %% background subtraction
 backsubParams = struct(...
@@ -30,8 +30,8 @@ subplot(2, 1, 1);
 himg = imshow(v(:, :, 1), [20, 30]);
 
 subplot(2, 1, 2); hold on;
-yl = [22, 27];
 mmv = squeeze(mean(mean(v, 1), 2));
+yl = round([min(mmv)-1, max(mmv) + 1]);
 pcolor(1:size(v, 3), yl(1):yl(2), repmat(0+isBackground', [diff(yl)+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
 hMn = plot(mmv, 'b');
@@ -110,7 +110,7 @@ ylabel(hAx(2), '# detected foreground pixels');
 
 if doWrite, vw = VideoWriter('exampleVideoBS.avi'); open(vw); end
 for ti = 1:size(v, 3)
-    [r, c] = find(fullMask(:, :, ti));
+    [r, c] = find(foreground(:, :, ti));
     set(hDots, 'XData', c, 'YData', r);
     set(himg, 'CData', v(:, :, ti));
     set(hVert, 'XData', [ti, ti]);
