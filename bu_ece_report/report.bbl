@@ -12,7 +12,8 @@
 \bibitem{Mchugh09}
   J.~McHugh, J.~Konrad, V.~Saligrama, and P.~Jodoin, ``Foreground-Adaptive Background Subtraction,''
   	{\em IEEE Signal Processing Letters}, vol.~16, pp.~390-393, May 2009.
-	
 
+\bibitem{Smith97}
+  S.~Smith, ``Reviews of Optic Flow, Motion Segmentation, Edge finding and Corner Finding," {\em Technical Report TR97SMS1, Oxford Centre for Functional Magnetic Resonance Imaging of the Brain (FMRIB)}, https://users.fmrib.ox.ac.uk/~steve/review/review/review.html, 1997.
 
 \end{thebibliography}

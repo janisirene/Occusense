@@ -111,6 +111,8 @@ in the background scene. In addition, foreground models can improve the sensitiv
 is based on spatial neighborhoods. To further improve the discrimination, they also suggest a Markov model
 so that labels are more spatially coherent
 \cite{Mchugh09}.
+\\ \\
+We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach as we use background subtraction to determine foreground elements ahead of time. The foreground elements can then be put through a gradient-based optical flow algorithm to determine the motion of the object. This can be modeled as a gradient with partial derivatives spatially and temporally for each pixel intensity, as each pixel will have a change in both the x-direction, y-direction, and time. \cite{Smith97}.
 
 \section{Problem Statement}  % Article style
 %\section{Early section}  % Report style
@@ -155,7 +157,11 @@ This algorithm will result in labels for each pixel in each frame as background 
 pixels in each frame could indicate whether a person is in the frame.
 
 \subsection{Direction Discrimination}
-Emily
+After determining the foreground from the background, we look at determining the direction of flow of the foreground elements. We do this by taking the foreground elements only, setting the background elements to zero, and applying a gradient-based optical flow algorithm. This can be modeled as described in \cite{Smith97}:
+$$\frac{\partial I}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial I}{\partial y}\frac{\partial y}{\partial t} + \frac{\partial I}{\partial t}=0$$
+Since we are only concerned about the vertical velocity, i.e. a person walks through the door frame and the laterally motion is trivial, the previous equation can be written: 
+$$v_y = - \frac{\frac{\partial I}{\partial t}}{\frac{\partial I}{\partial y}}$$
+where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. In our system of 4x16 array of pixels, we generate an optical flow matrix consisting of 3x16 pixels to take the boundary condition into account. Next, we perform two averages, we average the rows to find the optical flow of the row, and we then average those row averages together to obtain an overall optical flow for the entire array. This overall velocity value is used to determine the optical flow of the foreground which determine whether a person is walking into or out of the room. 
 
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
@@ -180,7 +186,7 @@ be modified to run in real time and, depending on the size of the history for th
 PDF, would not require too much memory.
 
 \subsection{Direction Discrimination}
-Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function. Future work include testing out different methods for calculating the derivative of the vertical change and time change.
+Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
@@ -191,32 +197,39 @@ The temperatures of the frames are shifted for continuity between frames.
 
 \subsection{Background Subtraction}  % Article style
 This method seems to work very well in detecting motion even with a background
-temperature that is changing slowly over time as shown in Figure ???. Thresholding the number of detected
+temperature that is changing slowly over time as shown in Figure \ref{bgd}. Thresholding the number of detected
 foreground pixels would be more robust than thresholding the raw temperature values to determine
 if a person is in the frame.
-\begin{figure}[htb]
-\includegraphics[scale=0.5]{backgroundSubtractionResults.png}
-\caption{Comparison of mean frame temperature and number of detected foreground pixels.}
-\end{figure}
+
 
 \subsection{Direction Discrimination}  % Article style
-This method seems to work well in detecting direction. However, it is still not accurate all the time. 
-In figure ???., we threshold to see if the velocity is large enough to count as a person moving in a direction
-as there are some bounce back residual effects. But for some 
+This method seems to work well in detecting direction. However, it is still not accurate all the time, $\sim80\%$.
+In Figure \ref{opflw}., we threshold to see if the velocity is large enough to count as a person moving in a direction
+as there are some bounce back residual effects. For some 
 cases, it detects the person as moving in the opposite direction. 
-\begin{figure}[htb]
-\includegraphics[scale=0.25]{opflow.png}
-\caption{Figure showing which direction a person is moving when detected.}
-\end{figure}
+
 
 
 \section{Next Steps} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
 \begin{itemize}
 \item Large-scale testing: We can simulate more and longer test videos to measure performance of the algorithms
-and their different parameter varieties. Based on these results we can modify the algorithms as needed.
+and their different parameter varieties. Based on these results we can modify the algorithms to improve performance.
 \item Data Acquisition: We will collect more difficult data to test the robustness of the algorithms.
 \end{itemize}
+
+\section{Figures} % Tossed figures at end so page count is easier to discern
+\begin{figure}[htb] 
+\includegraphics[scale=0.45]{backgroundSubtractionResults.png}
+\caption{Comparison of mean frame temperature and number of detected foreground pixels.}
+\label{bgd}
+\end{figure}
+\begin{figure}[htb]
+\includegraphics[scale=0.35]{opflow.png}
+\caption{Figure showing which direction a person is moving when detected.}
+\label{opflw}
+\end{figure}
+
 
 % Plots (PostScript files) are included through the ``figure'' environment.
 % For more complicated figures use the minipage commaned (see LaTeX manual).
@@ -266,5 +279,7 @@ and their different parameter varieties. Based on these results we can modify th
 % Important: substitute your BiBTeX (*.bib) files below.
 % ------------------------------------------------------
 \bibliography{strings,konrad,manuals}
+
+
 
 \end{document}
