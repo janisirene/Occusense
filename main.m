@@ -24,14 +24,16 @@ backsubParams = struct(...
 % foreground, 0 for background)
 foreground = backgroundSubtraction(v, backsubParams);
 
+%% things for plotting
+mmv = squeeze(mean(mean(v, 1), 2));
+yl = round([min(mmv)-1, max(mmv) + 1]);
+
 %% play the video
 figure(1); clf; set(gcf, 'Color', 'w');
 subplot(2, 1, 1);
 himg = imshow(v(:, :, 1), [20, 30]);
 
 subplot(2, 1, 2); hold on;
-mmv = squeeze(mean(mean(v, 1), 2));
-yl = round([min(mmv)-1, max(mmv) + 1]);
 pcolor(1:size(v, 3), yl(1):yl(2), repmat(0+isBackground', [diff(yl)+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
 hMn = plot(mmv, 'b');
@@ -86,8 +88,6 @@ himg = imshow(v(:, :, 1), [20, 30]);
 hDots = plot(0, 0, 'r.', 'markersize', 20);
 
 subplot(2, 1, 2); hold on;
-yl = [22, 27];
-mmv = squeeze(mean(mean(v, 1), 2));
 ax1 = gca;
 pcolor(1:size(v, 3), yl(1):yl(2), repmat(0+isBackground', [diff(yl)+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
