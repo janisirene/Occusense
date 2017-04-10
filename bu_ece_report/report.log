@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 APR 2017 16:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 APR 2017 20:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -209,11 +209,11 @@ Package pdftex.def Info: BUlogo_cmyk-eps-converted-to.pdf used on input line 49
 
 ] (./report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 5.
+(Font)              <12> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 5.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 5.
+(Font)              <6> on input line 4.
 )
 \tf@toc=\write4
 \openout4 = `report.toc'.
@@ -242,44 +242,72 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ]
 Missing character: There is no ° in font cmr12!
 Missing character: There is no ° in font cmr12!
- [1
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--133
+
+ []
+
+[1
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 134--148
 
-LaTeX Warning: \oval, \circle, or \line size unavailable on input line 153.
-
-
-LaTeX Warning: \oval, \circle, or \line size unavailable on input line 160.
+ []
 
 
-LaTeX Warning: \oval, \circle, or \line size unavailable on input line 169.
+Underfull \hbox (badness 10000) in paragraph at lines 149--156
+
+ []
 
 
-LaTeX Warning: \oval, \circle, or \line size unavailable on input line 176.
+Underfull \hbox (badness 10000) in paragraph at lines 168--175
 
-(./report.bbl [2]) [3] (./report.aux) ) 
+ []
+
+[2]
+
+LaTeX Warning: \oval, \circle, or \line size unavailable on input line 204.
+
+
+LaTeX Warning: \oval, \circle, or \line size unavailable on input line 211.
+
+
+LaTeX Warning: \oval, \circle, or \line size unavailable on input line 220.
+
+
+LaTeX Warning: \oval, \circle, or \line size unavailable on input line 227.
+
+(./report.bbl) [3] [4] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 1876 strings out of 493089
- 26063 string characters out of 6134842
- 87550 words of memory out of 5000000
- 5338 multiletter control sequences out of 15000+600000
- 10991 words of font info for 38 fonts, out of 8000000 for 9000
+ 1880 strings out of 493089
+ 26101 string characters out of 6134842
+ 89550 words of memory out of 5000000
+ 5340 multiletter control sequences out of 15000+600000
+ 11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,10n,29p,1234b,294s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,25p,1234b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/font
 s/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/amsfonts/latxfont/lcirclew.pfb>
-Output written on report.pdf (17 pages, 123917 bytes).
+/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmss12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmssbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmssi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmti12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmtt12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/latxfont/lcirclew.pfb>
+Output written on report.pdf (18 pages, 190985 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 135 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

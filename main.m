@@ -65,7 +65,7 @@ yl = [22, 27];
 mmv = squeeze(mean(mean(v, 1), 2));
 ax1 = gca;
 pcolor(1:size(v, 3), yl(1):yl(2), repmat(0+isBackground', [diff(yl)+1, 1]));
-shading flat; caxis([-2 1]);
+shading flat; caxis([-2 1]); colormap gray;
 [hAx, hMn, hN] = plotyy(1:length(mmv), mmv,...
     1:length(mmv), squeeze(sum(sum(foreground, 1), 2)));
 hVert = plot(hAx(1), [0, 0], yl, 'r-', 'linewidth', 2);
@@ -81,7 +81,7 @@ set([ax1, hAx], 'XLim', [1, length(mmv)]);
 set(hMn, 'Color', 'b');
 set(hAx(1), 'YTick', yl(1):yl(2));
 ylabel(hAx(1), 'mean frame temp');
-ylabel(hAx(2), '# detected foreground');
+ylabel(hAx(2), '# detected foreground pixels');
 
 if doWrite, vw = VideoWriter('exampleVideoBS.avi'); open(vw); end
 for ti = 1:size(v, 3)

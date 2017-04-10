@@ -112,23 +112,75 @@ is based on spatial neighborhoods. To further improve the discrimination, they a
 so that labels are more spatially coherent
 \cite{Mchugh09}.
 
-
-
 \section{Problem Statement}  % Article style
 %\section{Early section}  % Report style
 % Describe the problem in detail, and the solution proposed, including assumptions, constraints, math formulas, algorithms,
 % etc.
+Our approach breaks the problem into two parts: 1) detect a person in the doorway and 2) determine the direction of 
+motion of the person.
 
-And this is the first section of this chapter.
+\subsection{Person Detection}
+We propose a background subtraction method to detect a person or persons in the frame. In order to accomplish this
+we make several assumptions about the acquired data. First, we assume that the background has slow temporal dynamics.
+Second, we assume that the data starts with some number of background-only frames. For business and residential 
+buildings this is likely true if they close for the night. Finally, we assume that the surface temperature of a single body as 
+detected by the sensor has the same variability as the background.
+\\ \\
+The proposed solution is inspired primarily by the foreground-adaptive background subtraction described in
+\cite{Mchugh09}.
+The background can be modeled by a probability density function estimated at each pixel location $\mathbf{n}$
+from the $N$ most recent pixels that were labeled as background:
+$$P_\mathcal{B}\left(I^{(k)} [\mathbf{n}]\right) = \frac{1}{N}\sum_{i \in \mathcal{B}_k[\mathbf{n}]} \mathcal{K}
+	\left(I^{(k)}[\mathbf{n}] - I^{(i)}[\mathbf{n}] \right)$$
+where 
+$I^{(k)}[\mathbf{n}]$ is the temperature at location $\mathbf{n}$,
+$B_k[\mathbf{n}]$ are the $N$ previous time indices at which the pixel located at $\mathbf{n}$ was labeled
+background, and $\mathcal{K}$ is a zero-mean Gaussian with variance $\sigma^2$. Thresholding these probabilities
+with threshold $\theta$ gives an initial classification of pixels into background or foreground.
+\\ \\
+The development of the foreground model follows a similar formulation to that above, but the summation is over
+pixels in the neighborhood of $\mathbf{n}$ that have been already been labeled as foreground. The
+likelihood ratio of the probability density functions $P_\mathcal{B}$ and 
+$P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furthermore,
+the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
+neighbors a pixel has the easier it is to be labeled as threshold. This will contribute to the spatial
+coherency of the labels. Thus, a pixel is labeled as background if
+$$\frac{P_\mathcal{B}(I[\mathbf{n}])}{P_\mathcal{F}(I[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
+	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] )\right)$$
+where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number of neighbors that are 
+foreground and background respectively and $\gamma$ is a parameter to control how strongly the threshold
+adapts. The thresholding step can be done iteratively as labels are updated in each step.
+\\ \\
+This algorithm will result in labels for each pixel in each frame as background or foreground. The number of foreground
+pixels in each frame could indicate whether a person is in the frame.
+
+\subsection{Direction Discrimination}
+Emily
 
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
+The current implementation of the algorithm is in Matlab. To integrate with the senior design team they 
+would need to be ported into Python.
 
-\subsection{}  % Article style
+\subsection{Data Acquisition}  % Article style
 %\section{New section}  % Report style
+The senior design team has a the thermal sensor setup and given us access to record data from it so that we can 
+continue to collect data on top of what they have already shared with us. We plan to collect a few trials of realistic
+but potentially difficult situations such as a person lingering in the doorway or multiple people passing through
+the door in quick succession.
+\\ \\
+The data is recorded into text files at a rate of 8-12Hz. The data we currently have was recorded at 8Hz
+though the Occusense team has updated the sampling rate to 12Hz.
 
-Section goes here ...
+\subsection{Person Detection}
+Janis implemented this algorithm in the file backgroundSubtraction.m. It takes as input a structure of parameters
+and a 3-D array of temperatures over the two spatial and one time dimensions. This implementation could
+be modified to run in real time and, depending on the size of the history for the computation of the background
+PDF, would not require too much memory.
+
+\subsection{Direction Discrimination}
+Emily
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
