@@ -39,8 +39,10 @@ v_y_avg_h = plot(x,'YDataSource','y');
 hold on;
 plot(1:n,ones(1,n)*1.75);
 plot(1:n,ones(1,n)*-1.75);
-axis([0 n+50 -5 5]);
+axis([0 n+50 -20 20]);
 set(gca,'XMinorTick','on')
+xlabel('Time Index');
+ylabel('Vertical Velocity');
 
 % refresh
 for i = 1:n
