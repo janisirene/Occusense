@@ -1,14 +1,11 @@
 function playVideo(v, params, groundTruth, computed)
 [h, w, nFrames] = size(v);
 
-mmv = squeeze(mean(mean(v, 1), 2));
-yl = round([min(mmv)-1, max(mmv) + 1]);
-
 if ~exist('params', 'var') || ~isempty(params)
      clim = params.clim;
      doWrite = params.doWrite;
 else
-    clim = quantile(v(:), [.1, .9]);
+    clim = quantile(v(:), [.05, .95]);
     doWrite = false;
 end
 
@@ -17,6 +14,7 @@ if exist('groundTruth', 'var')
     isBackground = groundTruth.isBackground;
     events = groundTruth.events;
     mmv = groundTruth.frameMeans;
+    yl = [min(mmv), max(mmv)];
 else
     isBackground = true(nFrames, 1);
     events = [];
@@ -41,7 +39,8 @@ xlim([1, w]); ylim([1, h]);
 
 subplot(2, 1, 2); hold on;
 ax1 = gca;
-pcolor(1:size(v, 3), yl(1):yl(2), repmat(0+isBackground', [diff(yl)+1, 1]));
+pcolor(1:size(v, 3), floor(yl(1)):ceil(yl(2)), ...
+    repmat(0+isBackground', [ceil(yl(2)) - floor(yl(1))+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
 [hAx, hMn, hN] = plotyy(1:length(mmv), mmv,...
     1:length(mmv), foreFeature);
@@ -56,11 +55,11 @@ title('mean frame temperature');
 set([ax1, hAx(1)], 'YLim', yl);
 set([ax1, hAx], 'XLim', [1, length(mmv)]);
 set(hMn, 'Color', 'b');
-set(hAx(1), 'YTick', yl(1):yl(2));
+set(hAx(1), 'YTick', floor(yl(1)):ceil(yl(2)));
 ylabel(hAx(1), 'mean frame temp');
-ylabel(hAx(2), '# detected foreground pixels');
+ylabel(hAx(2), 'computed frame feature');
 
-if doWrite, vw = VideoWriter('exampleVideoBS.avi'); open(vw); end
+if doWrite, vw = VideoWriter('tempName.avi'); open(vw); end
 
 for ti = 1:size(v, 3)
     if ~isempty(foreground)

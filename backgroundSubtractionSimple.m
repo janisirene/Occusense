@@ -2,12 +2,12 @@ function out = backgroundSubtractionSimple(v, params)
 
 %% parameters
 if ~exist('params', 'var')
-    N = 20; % use N recents frames to estimate background PDF
-    thr = 2.5; % std above which is foreground
+    N = 15; % use N recents frames to estimate background PDF
+    thr = 1; % std above which is foreground
     etaOrder = 1; % order of spatial neighborhood - 1 or 2 for now
     nIterations = 3; % number of iterations of likelihood ratio testing - 2 or 3
     gamma = 1; % small -> strong influence of MRF
-    rho = .1; % weight of most recent frame
+    rho = .5; % weight of most recent frame
     
     % plotting parameters
     doPlot = true; % flag to plot results or not   
@@ -35,7 +35,7 @@ switch etaOrder % (relative indices)
 end
 seta = sum(eta(:));
 
-out = zeros(size(v));
+out = nan(size(v));
 
 %% loop through frames
 for ti = N+1:nFrames
@@ -53,9 +53,9 @@ for ti = N+1:nFrames
         gs = (thisFrame - mut) ./ sqrt(vrt);
         
         neighFore = imfilter(e, eta);
-        deltaQ = 2 * seta - neighFore;
+        deltaQ = 2 * neighFore - seta;
         
-        adThr = thr * exp(deltaQ / gamma);
+        adThr = thr * exp(-deltaQ / gamma);
         
         e = gs > adThr;
     end
@@ -64,6 +64,6 @@ for ti = N+1:nFrames
     mu = e .* mu + (1 - e) .* (rho  * thisFrame + (1 - rho ) * mu);
     vr = e .* vr + (1 - e) .* (rho * (thisFrame-mut).^2 + (1-rho ) * vr);
     
-    out(:, :, ti) = (thisFrame - mu) ./ sqrt(vr);
+    out(:, :, ti) = (thisFrame - mu) ./ sqrt(vr) - adThr;
 end
 end

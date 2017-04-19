@@ -11,7 +11,7 @@ pr = 0.3; % probability of motion (smaller is easier)
 % [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
 load('exampleSimulation.mat');
 
-%% background subtraction
+%% background subtraction - adaptive foreground detection
 backsubParams = struct(...
     'nBackgroundFrames', 20,...     % background history
     'sigma', 0.5,...                % standard deviation of gaussian kernel
