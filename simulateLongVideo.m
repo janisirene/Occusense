@@ -46,7 +46,7 @@ peopleCount = 0;
 events = [];
 while 1
     % for contiguity - keep means of attached frames similar
-    prevFrame = v(:, :, sIdx - 1);
+    prevFrame = v(:, :, sIdx-1);
     mPrev = mean(prevFrame(:));
     
     r = rand(1);
@@ -58,13 +58,13 @@ while 1
         fused(fidx) = true;
         
         fg = foregrounds{fidx};
-        fg1 = fg(:, :, 1);
+        fg1 = fg(:, :, 1:2);
         fg = fg - mean(fg1(:)) + mPrev;
         l = size(fg, 3);
         v(:, :, sIdx:sIdx+l-1) = fg;
         peopleCount = peopleCount + direction(fidx);
         events = [events; sIdx, direction(fidx)];
-            
+        isBackground(sIdx:sIdx+l-1) = false;
         sIdx = sIdx + l;
     else % more background
         idx = find(~bused);
@@ -74,8 +74,7 @@ while 1
         bused(fidx) = true;
         
         bg = backgrounds{fidx};
-        bg1 = bg(:, :, 1);
-        bg = bg - mean(bg1(:)) + mPrev;
+        bg = bg - mean(bg(:)) + mPrev;
         l = size(bg, 3);
         v(:, :, sIdx:sIdx+l-1) = bg;
         isBackground(sIdx:sIdx+l-1) = true;

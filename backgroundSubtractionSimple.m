@@ -2,15 +2,12 @@ function out = backgroundSubtractionSimple(v, params)
 
 %% parameters
 if ~exist('params', 'var')
-    N = 15; % use N recents frames to estimate background PDF
+    N = 20; % use N recents frames to estimate background PDF
     thr = 1; % std above which is foreground
     etaOrder = 1; % order of spatial neighborhood - 1 or 2 for now
     nIterations = 3; % number of iterations of likelihood ratio testing - 2 or 3
-    gamma = 1; % small -> strong influence of MRF
-    rho = .5; % weight of most recent frame
-    
-    % plotting parameters
-    doPlot = true; % flag to plot results or not   
+    gamma = 2; % small -> strong influence of MRF
+    rho = .3; % weight of most recent frame  
 else
     N = params.nBackgroundFrames;
     thr = params.threshold;
@@ -18,9 +15,8 @@ else
     nIterations = params.nIterations;
     gamma = params.gamma;
     rho = params.rho;
-    doPlot = params.doPlot;
 end
-colorLims = [20, 30];
+
 
 %% initial conditions
 [~, ~, nFrames] = size(v);
