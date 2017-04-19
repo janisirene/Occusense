@@ -24,6 +24,15 @@ backsubParams = struct(...
 % foreground, 0 for background)
 foreground = backgroundSubtraction(v, backsubParams);
 
+%% optical flow
+% find foreground variables
+indices = find(foreground == 0);
+new_v = v;
+new_v(indices) = 0;
+
+% optical flow using foreground only
+[v_y, v_y_avg, v_y_avg_all] = opticalflow(new_v);
+
 %% things for plotting
 mmv = squeeze(mean(mean(v, 1), 2));
 yl = round([min(mmv)-1, max(mmv) + 1]);
@@ -37,6 +46,11 @@ playVideo(v, [], groundTruth);
 computed = struct('foreground', foreground, 'frameFeature',...
     squeeze(sum(sum(foreground, 1), 2)));
 playVideo(v, [], groundTruth, computed);
+
+%% play the direction video
+comOF = struct('foreground', foreground, 'frameFeature',...
+    -v_y_avg_all);
+playVideo(v, [], groundTruth, comOF);
 
 %% plot results of person detection
 figure(100); clf; set(gcf, 'Color', 'w');

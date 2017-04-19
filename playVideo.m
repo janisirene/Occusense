@@ -6,7 +6,7 @@ if ~exist('params', 'var') || ~isempty(params)
      doWrite = params.doWrite;
 else
     clim = quantile(v(:), [.05, .95]);
-    doWrite = false;
+    doWrite = true;
 end
 
 % ground truth parameters if you have them
@@ -28,18 +28,18 @@ if exist('computed', 'var')
 else
     foreground = [];
     foreFeature = squeeze(mean(mean(v, 1), 2));
+    foreFeature = nan(size(mmv));
 end
-
 
 figure(123); clf; set(gcf, 'Color', 'w');
 subplot(2, 1, 1); hold on;
 himg = imshow(v(:, :, 1), clim);
 hDots = plot(-1, -1, 'r.', 'markersize', 20);
-xlim([1, w]); ylim([1, h]);
+xlim([.5, w+.5]); ylim([.5, h+.5]);
 
 subplot(2, 1, 2); hold on;
 ax1 = gca;
-pcolor(1:size(v, 3), floor(yl(1)):ceil(yl(2)), ...
+imagesc(1:size(v, 3), floor(yl(1)):ceil(yl(2)), ...
     repmat(0+isBackground', [ceil(yl(2)) - floor(yl(1))+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
 [hAx, hMn, hN] = plotyy(1:length(mmv), mmv,...
@@ -68,8 +68,8 @@ for ti = 1:size(v, 3)
     end
     set(himg, 'CData', v(:, :, ti));
     set(hVert, 'XData', [ti, ti]);
-    if doWrite, writeVideo(vw, getframe(2));end
-    pause(0.1);
+    if doWrite, writeVideo(vw, getframe(123));end
+    %pause(0.1);
 end
 if doWrite, close(vw); end
 end
