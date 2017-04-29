@@ -3,7 +3,7 @@ minFrames = 1000;
 pr = 0.3; % probability of motion (smaller is easier)
 
 backsubParams1 = struct(...
-    'nBackgroundFrames', 10,...     % background history
+    'nBackgroundFrames', 20,...     % background history
     'sigma', 0.5,...                % standard deviation of gaussian kernel
     'neighborhoodOrder', 1,...      % spatial neighborhoods
     'nIterations', 3,...            % number of iterations per frame for labelling
@@ -18,7 +18,7 @@ backsubParams2 = struct(...
     'gamma', 2,...
     'rho', .3);
 
-nSimulations = 50;
+nSimulations = 100;
 testThrs = [0:5; -5:0]';
 
 totals = [0, 0]; % total fore and backgrounds
@@ -47,7 +47,7 @@ for i = 1:nSimulations
     new_v(indices) = 0;
     
     % optical flow using foreground only
-    [I_y1, I_y_avg1, I_t1, v_y1, v_y_avg_all1] = opticalflow(v);
+    [I_y1, I_y_avg1, I_t1, v_y1, v_y_avg_all1] = opticalflow(new_v);
     [I_y2, I_y_avg2, I_t2, v_y2, v_y_avg_all2] = opticalflow(out);
 
     
@@ -79,11 +79,13 @@ for i = 1:nSimulations
     pctotals = pctotals + length(events);
     for tt = 1:size(testThrs, 1)
         %% people counting part
-        [pc1, dirs1, event1, ind1] = peopleCounter(foreground, v_y_avg_all1, testThrs(tt, 1));
-        peopleCounts1(i, tt) = pc1;
-        [pc2, dirs2, event2, ind2] = peopleCounter(mmv, v_y_avg_all2, testThrs(tt, 2));
-        peopleCounts2(i, tt) = pc2;
-        
+%         [pc1, dirs1, event1, ind1] = peopleCounter(foreground, v_y_avg_all1, testThrs(tt, 1));
+%         peopleCounts1(i, tt) = pc1;
+%         [pc2, dirs2, event2, ind2] = peopleCounter(mmv, v_y_avg_all2, testThrs(tt, 2));
+%         peopleCounts2(i, tt) = pc2;
+        [pc1,startstopdir1] = pCounter(I_y_avg1,foreground, testThrs(tt, 1));
+        %[pc2,startstopdir2] = pCounter(I_y_avg2,foreground, testThrs(tt, 2));
+        pc2 = pc1; startstopdir2 = startstopdir1;
         isFore1 = nPixels > testThrs(tt, 1);
         isFore2 = mmv > testThrs(tt, 2);
         for ii = 1:length(si)
@@ -98,22 +100,30 @@ for i = 1:nSimulations
         
         % check whether direction was correctly classified
         for ee = 1:size(events, 1)
-            [d1, mi1] = sort(abs(events(ee, 1) - ind1(:, 1)));
-            [d2, mi2] = sort(abs(events(ee, 1) - ind2(:, 1)));
+%             [d1, mi1] = sort(abs(events(ee, 1) - ind1(:, 1)));
+%             [d2, mi2] = sort(abs(events(ee, 1) - ind2(:, 1)));
+            
+            [d1, mi1] = sort(abs(events(ee, 1) - startstopdir1(:, 1)));
+            [d2, mi2] = sort(abs(events(ee, 1) - startstopdir2(:, 1)));
+            
             nPeople = abs(events(ee, 2));
             
             for nn = 1:nPeople
                 trueDir = sign(events(ee, 2));
-                if d1(nn) < 10
-                    myDir = sign(dirs1(mi1(nn)));
-                    
+                if length(d1) >= nn && d1(nn) < 10
+                    %myDir = sign(dirs1(mi1(nn)));
+                    myDir = startstopdir1(mi1(nn), 3);
                     if myDir == trueDir % correct
                         pcCorrect(tt, 1) = pcCorrect(tt, 1) + 1;
+%                     else
+%                         keyboard;
                     end
+%                 else
+%                     keyboard;
                 end
-                if d2(nn) < 10
-                    myDir = sign(dirs2(mi2(nn)));
-                    
+                if length(d2) >= nn && d2(nn) < 10
+%                     myDir = sign(dirs2(mi2(nn)));
+                    myDir = startstopdir2(mi2(nn), 3);
                     if myDir == trueDir % correct
                         pcCorrect(tt, 2) = pcCorrect(tt, 2) + 1;
                     end
