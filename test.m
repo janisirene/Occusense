@@ -24,8 +24,8 @@ testThrs = [0:5; -7:-2]';
 totals = [0, 0]; % total fore and backgrounds
 correct1 = zeros(size(testThrs)); % hits and correct rejections
 correct2 = zeros(size(testThrs));
-peopleCounts1 = nan(nSimulations, size(testThrs, 2)+1);
-peopleCounts2 = nan(nSimulations, size(testThrs, 2)+1);
+peopleCounts1 = nan(nSimulations, size(testThrs, 1)+1);
+peopleCounts2 = nan(nSimulations, size(testThrs, 1)+1);
 pcCorrect = zeros(size(testThrs));
 pctotals = 0;
 for i = 1:nSimulations
@@ -85,6 +85,9 @@ for i = 1:nSimulations
 %         peopleCounts2(i, tt) = pc2;
         [pc1,startstopdir1] = pCounter(I_y_avg1,foreground, testThrs(tt, 1));
         [pc2,startstopdir2] = pCounter(I_y_avg2,mmv, testThrs(tt, 2));
+        
+        peopleCounts1(i, tt) = pc1;
+        peopleCounts2(i, tt) = pc2;
         
         isFore1 = nPixels > testThrs(tt, 1);
         isFore2 = mmv > testThrs(tt, 2);

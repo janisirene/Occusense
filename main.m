@@ -8,17 +8,17 @@ doWrite = false; % write videos or not
 minFrames = 1000;
 pr = 0.3; % probability of motion (smaller is easier)
 
-[v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
+% rng(2);
 % [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
-%load('exampleSimulation.mat');
-doPlot = false;
+load('exampleSimulation.mat');
+% doPlot = false;
 %% background subtraction - adaptive foreground detection
 backsubParams = struct(...
     'nBackgroundFrames', 20,...     % background history
     'sigma', 0.5,...                % standard deviation of gaussian kernel
     'neighborhoodOrder', 1,...      % spatial neighborhoods
     'nIterations', 3,...            % number of iterations per frame for labelling
-    'gamma', 1,...                  % control influence of MRF model
+    'gamma', .2,...                  % control influence of MRF model
     'doPlot', false);               % plot or not
 
 % returns a binary mask that is the same size as the original video (1 for

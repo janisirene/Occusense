@@ -1,7 +1,7 @@
 function playVideo(v, params, groundTruth, computed)
 [h, w, nFrames] = size(v);
 
-if ~exist('params', 'var') || ~isempty(params)
+if exist('params', 'var') && ~isempty(params)
      clim = params.clim;
      doWrite = params.doWrite;
 else
