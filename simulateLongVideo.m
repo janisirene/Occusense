@@ -58,7 +58,7 @@ while 1
         fused(fidx) = true;
         
         fg = foregrounds{fidx};
-        fg1 = fg(:, :, 1:2);
+        fg1 = fg(:, :, 1);
         fg = fg - mean(fg1(:)) + mPrev;
         l = size(fg, 3);
         v(:, :, sIdx:sIdx+l-1) = fg;
@@ -74,7 +74,8 @@ while 1
         bused(fidx) = true;
         
         bg = backgrounds{fidx};
-        bg = bg - mean(bg(:)) + mPrev;
+        bg1 = bg(:, :, 1);
+        bg = bg - mean(bg1(:)) + mPrev;
         l = size(bg, 3);
         v(:, :, sIdx:sIdx+l-1) = bg;
         isBackground(sIdx:sIdx+l-1) = true;
@@ -91,4 +92,19 @@ while 1
         break; 
     end
 end
+
+% mmv = squeeze(mean(mean(v, 1), 2));
+% dmmv = diff(mmv);
+% dmmv(~isBackground) = nan;
+% sd = nanstd(dmmv);
+% 
+% bad = find(abs(dmmv) > 2.5 * sd) + 1;
+% bad(bad == 1 | bad == length(mmv)) = [];
+% for bi = 1:length(bad)
+%     bidx = bad(bi);
+%     mPrev = mean(mean(v(:, :, bidx-1), 1), 2);
+%     mHere = mean(mean(v(:, :, bidx), 1), 2);
+%     
+%     v(:, :, bidx:end) = v(:, :, bidx:end) - mHere + mPrev + randn(1)*.01;
+% end
 end

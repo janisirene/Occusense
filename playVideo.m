@@ -15,6 +15,7 @@ if exist('groundTruth', 'var')
     events = groundTruth.events;
     mmv = groundTruth.frameMeans;
     yl = [min(mmv), max(mmv)];
+        mmv = nan(size(mmv));
 else
     isBackground = true(nFrames, 1);
     events = [];
@@ -49,6 +50,11 @@ for ei = 1:size(events, 1)
     text(events(ei, 1)+1, yl(1) + .75 * diff(yl), num2str(events(ei, 2)),...
         'FontSize', 14);
 end
+if any(foreFeature < 0)
+    hold(hAx(2), 'on');
+    set(hAx(2), 'Ylim', [-10, 10]); 
+    plot(hAx(2), [0, length(mmv)], [0, 0], 'k--');
+end
 xlim([0, size(v, 3)]);
 xlabel('time index');
 title('mean frame temperature');
@@ -69,7 +75,7 @@ for ti = 1:size(v, 3)
     set(himg, 'CData', v(:, :, ti));
     set(hVert, 'XData', [ti, ti]);
     if doWrite, writeVideo(vw, getframe(123));end
-    %pause(0.1);
+    pause(0.1);
 end
 if doWrite, close(vw); end
 end
