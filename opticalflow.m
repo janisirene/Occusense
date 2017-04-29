@@ -34,26 +34,26 @@ function [I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(v)
                 I_t(:,k) = I_y_avg(:,k) - I_y_avg(:,k-1);
             end
             
-            avg_y(k) = nanmean(I_y_avg(:,k));
-            avg_t(k) = nanmean(I_t(:,k));
+%             avg_y(k) = nanmean(I_y_avg(:,k));
+%             avg_t(k) = nanmean(I_t(:,k));
             
-%             for i = 1:l-1
-%                 for j = 1:n
-%                     if I_t(i,j) == 0 || I_y_avg(i,j) == 0
-% 
-%                     else
-%                         v_y(i,j) = -I_t(i,j)./I_y_avg(i,j);
-%                     end
-%                 end
-%             end
+            for i = 1:l-1
+                for j = 1:n
+                    if I_t(i,j) == 0 || I_y_avg(i,j) == 0
+
+                    else
+                        v_y(i,j) = -I_t(i,j)./I_y_avg(i,j);
+                    end
+                end
+            end
             
         end
 
     end
 
-    %v_y(find(v_y == 0)) = nan;
-%     v_y_avg_all = nanmean(v_y,1);
-    v_y_avg_all = -avg_t./avg_y;
+    v_y(find(v_y == 0)) = nan;
+    v_y_avg_all = nanmean(v_y,1);
+%     v_y_avg_all = -avg_t./avg_y;
 
 end
 
