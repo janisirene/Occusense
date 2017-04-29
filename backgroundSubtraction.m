@@ -87,7 +87,7 @@ for ti = N+1:nFrames
             
             if ~any(isForeground)
                 % presumably no foreground object, so uniform PDF
-                Pf(nn) = 1 / length(thisEta); % ??? Is this right?
+                Pf(nn) = 1/length(thisEta); % ??? Is this right?
                 deltaQ(nn) = -length(thisEta); % all background neighbors
             else
                 % this is the foreground only neighborhood
