@@ -19,7 +19,7 @@ backsubParams2 = struct(...
     'rho', .3);
 
 nSimulations = 100;
-testThrs = [0:5; -5:0]';
+testThrs = [0:5; -7:-2]';
 
 totals = [0, 0]; % total fore and backgrounds
 correct1 = zeros(size(testThrs)); % hits and correct rejections
@@ -84,8 +84,8 @@ for i = 1:nSimulations
 %         [pc2, dirs2, event2, ind2] = peopleCounter(mmv, v_y_avg_all2, testThrs(tt, 2));
 %         peopleCounts2(i, tt) = pc2;
         [pc1,startstopdir1] = pCounter(I_y_avg1,foreground, testThrs(tt, 1));
-        %[pc2,startstopdir2] = pCounter(I_y_avg2,foreground, testThrs(tt, 2));
-        pc2 = pc1; startstopdir2 = startstopdir1;
+        [pc2,startstopdir2] = pCounter(I_y_avg2,mmv, testThrs(tt, 2));
+        
         isFore1 = nPixels > testThrs(tt, 1);
         isFore2 = mmv > testThrs(tt, 2);
         for ii = 1:length(si)

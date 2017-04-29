@@ -1,14 +1,18 @@
 function [pc,startstopdir] = pCounter(v,foreground, thr)
 
 pc = 0;
-%iy = mean(v,1);
-iy = zeros(size(v, 2), 1);
-for i = 1:length(iy)
-    [m, mi] = max(abs(v(:, i)));
-    iy(i) = sign(v(mi, i)) * m; 
-end
+iy = mean(v,1);
+% iy = zeros(size(v, 2), 1);
+% for i = 1:length(iy)
+%     [m, mi] = max(abs(v(:, i)));
+%     iy(i) = sign(v(mi, i)) * m; 
+% end
 
-event = sum(sum(foreground,1));
+if ndims(foreground) == 3
+    event = sum(sum(foreground,1));
+else
+    event = foreground; 
+end
 df = diff(event > thr);
 
 startIdx = find(df > 0) + 1;
