@@ -3,7 +3,8 @@ function playVideo(v, params, groundTruth, computed)
 
 if exist('params', 'var') && ~isempty(params)
      clim = params.clim;
-     doWrite = params.doWrite;
+     %doWrite = params.doWrite;
+     doWrite = true;
 else
     clim = quantile(v(:), [.05, .95]);
     doWrite = true;
@@ -29,7 +30,7 @@ if exist('computed', 'var')
 else
     foreground = [];
     foreFeature = squeeze(mean(mean(v, 1), 2));
-    foreFeature = nan(size(mmv));
+    %foreFeature = nan(size(mmv));
 end
 
 figure(123); clf; set(gcf, 'Color', 'w');
@@ -43,29 +44,27 @@ ax1 = gca;
 imagesc(1:size(v, 3), floor(yl(1)):ceil(yl(2)), ...
     repmat(0+isBackground', [ceil(yl(2)) - floor(yl(1))+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
-[hAx, hMn, hN] = plotyy(1:length(mmv), mmv,...
-    1:length(mmv), foreFeature);
-hVert = plot(hAx(1), [0, 0], yl, 'r-', 'linewidth', 2);
+hMn = plot(1:length(mmv), foreFeature);
+hVert = plot([0, 0], yl, 'r-', 'linewidth', 2);
 for ei = 1:size(events, 1)
     text(events(ei, 1)+1, yl(1) + .75 * diff(yl), num2str(events(ei, 2)),...
-        'FontSize', 14);
+        'FontSize', 18, 'FontWeight', 'bold');
 end
-if any(foreFeature < 0)
-    hold(hAx(2), 'on');
-    set(hAx(2), 'Ylim', [-10, 10]); 
-    plot(hAx(2), [0, length(mmv)], [0, 0], 'k--');
-end
+
 xlim([0, size(v, 3)]);
 xlabel('time index');
-title('mean frame temperature');
-set([ax1, hAx(1)], 'YLim', yl);
-set([ax1, hAx], 'XLim', [1, length(mmv)]);
+title('mean frame value');
+set(ax1, 'YLim', yl);
+set(ax1, 'XLim', [1, length(mmv)]);
 set(hMn, 'Color', 'b');
-set(hAx(1), 'YTick', floor(yl(1)):ceil(yl(2)));
-ylabel(hAx(1), 'mean frame temp');
-ylabel(hAx(2), 'computed frame feature');
+set(ax1, 'YTick', floor(yl(1)):ceil(yl(2)));
+set(ax1, 'FontSize', 16, 'FontWeight', 'bold');
 
-if doWrite, vw = VideoWriter('tempName.avi'); open(vw); end
+if doWrite
+    vw = VideoWriter('tempName.avi'); 
+    vw.FrameRate = 10;
+    open(vw); 
+end
 
 for ti = 1:size(v, 3)
     if ~isempty(foreground)
@@ -75,7 +74,7 @@ for ti = 1:size(v, 3)
     set(himg, 'CData', v(:, :, ti));
     set(hVert, 'XData', [ti, ti]);
     if doWrite, writeVideo(vw, getframe(123));end
-    pause(0.1);
+    %pause(0.1);
 end
 if doWrite, close(vw); end
 end
