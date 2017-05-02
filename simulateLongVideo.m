@@ -58,12 +58,22 @@ while 1
         fused(fidx) = true;
         
         fg = foregrounds{fidx};
+        
+        d = rand(1);
+        if d > .5
+            fg = flipud(fg);
+            peopleCount = peopleCount - direction(fidx);
+            events = [events; sIdx, -direction(fidx)];
+        else
+            peopleCount = peopleCount + direction(fidx);
+            events = [events; sIdx, direction(fidx)];
+        end
+        
         fg1 = fg(:, :, 1);
         fg = fg - mean(fg1(:)) + mPrev;
         l = size(fg, 3);
         v(:, :, sIdx:sIdx+l-1) = fg;
-        peopleCount = peopleCount + direction(fidx);
-        events = [events; sIdx, direction(fidx)];
+        
         isBackground(sIdx:sIdx+l-1) = false;
         sIdx = sIdx + l;
     else % more background
