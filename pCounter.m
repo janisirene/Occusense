@@ -17,24 +17,39 @@ df = diff(event > thr);
 
 startIdx = find(df > 0) + 1;
 stopIdx = find(df < 0);
+
+if isempty(startIdx)
+    pc = 0;
+    startstopdir = [];
+    return;
+end
+
 if startIdx(1) > stopIdx(1)
     startIdx = [1; startIdx];
 end
 if stopIdx(end) < startIdx(end)
     stopIdx = [stopIdx; length(event)];
 end
-kill = (startIdx == stopIdx);
-startIdx(kill) = [];
-stopIdx(kill) = [];
+% kill = (startIdx == stopIdx);
+% startIdx(kill) = [];
+% stopIdx(kill) = [];
 
 e_len = length(startIdx);
 dirs = zeros(e_len,1);
 for i = 1:e_len
-    if iy(startIdx(i)) > iy(stopIdx(i))
+    if startIdx(i) == stopIdx(i)
+        iyend = 0;
+        if event(startIdx) < 4
+            continue; 
+        end
+    else
+        iyend = iy(stopIdx(i));
+    end
+    if iy(startIdx(i)) > iyend
         %     if mean(iy(startIdx(i):startIdx(i)+1)) > iy(stopIdx(i))
         pc = pc -1;
         dirs(i) = -1;
-    elseif iy(startIdx(i)) < iy(stopIdx(i))
+    elseif iy(startIdx(i)) < iyend
         pc = pc +1;
         dirs(i) = +1;
     end
