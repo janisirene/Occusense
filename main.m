@@ -18,7 +18,26 @@ pr = 0.3; % probability of motion (smaller is easier)
 % events = [20, -1; 39, 1];
 % peopleCount = 0;
 
+% v = readOccusenseVideo('OccusenseData/WeirdData/lingerThroughOut');
+% isBackground = true(size(v, 3), 1);
+% isBackground(31:71) = false;
+% events = [31, -1];
+% peopleCount = -1;
 
+v = readOccusenseVideo('OccusenseData/WeirdData/twoquickout');
+isBackground = true(size(v, 3), 1);
+isBackground(35:51) = false;
+isBackground(68:76) = false;
+isBackground(84:90) = false;
+events = [35, -2; 68, 1; 84, 1];
+peopleCount = 0;
+
+% v = readOccusenseVideo('OccusenseData/TWO/OUT/two_out.txt');
+% isBackground = true(size(v, 3), 1);
+% isBackground(26:30) = false;
+% isBackground(34:37) = false;
+% events = [26, -1; 34, -1];
+% peopleCount = -2;
 doPlot = false;
 %% background subtraction - adaptive foreground detection
 backsubParams = struct(...
@@ -47,8 +66,6 @@ foreground = backgroundSubtraction(v, backsubParams);
 indices = find(foreground == 0);
 new_v = v;
 new_v(indices) = 0;
-
-out(out < -136) = -137;
 
 % optical flow using foreground only
 [I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(new_v);

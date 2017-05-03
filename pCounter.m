@@ -5,13 +5,15 @@ iy = mean(v,1);
 % iy = zeros(size(v, 2), 1);
 % for i = 1:length(iy)
 %     [m, mi] = max(abs(v(:, i)));
-%     iy(i) = sign(v(mi, i)) * m; 
+%     iy(i) = sign(v(mi, i)) * m;
 % end
 
 if ndims(foreground) == 3
     event = sum(sum(foreground,1));
+    thr2 = 3;
 else
-    event = foreground; 
+    event = foreground;
+    thr2 = thr + 1;
 end
 df = diff(event > thr);
 
@@ -37,12 +39,13 @@ end
 e_len = length(startIdx);
 dirs = zeros(e_len,1);
 for i = 1:e_len
+    mEvent = mean(event(startIdx(i):stopIdx(i)));
+    if mEvent <= thr2
+        continue;
+    end
     if startIdx(i) == stopIdx(i)
         iyend = 0;
-        if event(startIdx) < 4
-            continue; 
-        end
-    else
+    else    
         iyend = iy(stopIdx(i));
     end
     if iy(startIdx(i)) > iyend

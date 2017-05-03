@@ -21,16 +21,19 @@ else
     isBackground = true(nFrames, 1);
     events = [];
     mmv = [];
+    yl = [0, 1];
 end
 
 % foreground if you have it
 if exist('computed', 'var')
     foreground = computed.foreground;
     foreFeature = computed.frameFeature;
+    yl = [floor(min(foreFeature)), ceil(max(foreFeature))];
 else
     foreground = [];
     foreFeature = squeeze(mean(mean(v, 1), 2));
     %foreFeature = nan(size(mmv));
+    yl = [floor(min(foreFeature)), ceil(max(foreFeature))];
 end
 
 figure(123); clf; set(gcf, 'Color', 'w');
@@ -44,7 +47,7 @@ ax1 = gca;
 imagesc(1:size(v, 3), floor(yl(1)):ceil(yl(2)), ...
     repmat(0+isBackground', [ceil(yl(2)) - floor(yl(1))+1, 1]));
 shading flat; caxis([-2 1]); colormap gray;
-hMn = plot(1:length(mmv), foreFeature);
+hMn = plot(1:length(foreFeature), foreFeature);
 hVert = plot([0, 0], yl, 'r-', 'linewidth', 2);
 for ei = 1:size(events, 1)
     text(events(ei, 1)+1, yl(1) + .75 * diff(yl), num2str(events(ei, 2)),...
@@ -55,9 +58,8 @@ xlim([0, size(v, 3)]);
 xlabel('time index');
 title('mean frame value');
 set(ax1, 'YLim', yl);
-set(ax1, 'XLim', [1, length(mmv)]);
+set(ax1, 'XLim', [1, length(foreFeature)]);
 set(hMn, 'Color', 'b');
-set(ax1, 'YTick', floor(yl(1)):ceil(yl(2)));
 set(ax1, 'FontSize', 16, 'FontWeight', 'bold');
 
 if doWrite
@@ -74,7 +76,7 @@ for ti = 1:size(v, 3)
     set(himg, 'CData', v(:, :, ti));
     set(hVert, 'XData', [ti, ti]);
     if doWrite, writeVideo(vw, getframe(123));end
-    %pause(0.1);
+    pause(.1);
 end
 if doWrite, close(vw); end
 end
