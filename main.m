@@ -2,7 +2,7 @@
 % simulate video from given labelled data
 % run background subtraction algorithm
 % play / write videos at the end
-doWrite = false; % write videos or not
+doWrite = true; % write videos or not
 
 % parameters for simulation
 minFrames = 1000;
@@ -10,20 +10,37 @@ pr = 0.3; % probability of motion (smaller is easier)
 
 % rng(2);
 % [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
-load('exampleSimulation.mat');
-% doPlot = false;
+% load('exampleSimulation.mat');
+% v = readOccusenseVideo('OccusenseData/WeirdData/runoutandin');
+% isBackground = true(size(v, 3), 1);
+% isBackground(20:23) = false;
+% isBackground(39:41) = false;
+% events = [20, -1; 39, 1];
+% peopleCount = 0;
+
+
+doPlot = false;
 %% background subtraction - adaptive foreground detection
 backsubParams = struct(...
     'nBackgroundFrames', 20,...     % background history
     'sigma', 0.5,...                % standard deviation of gaussian kernel
     'neighborhoodOrder', 1,...      % spatial neighborhoods
     'nIterations', 3,...            % number of iterations per frame for labelling
-    'gamma', .2,...                  % control influence of MRF model
+    'gamma', .5,...                  % control influence of MRF model
     'doPlot', false);               % plot or not
+
+backsubParams2 = struct(...
+    'nBackgroundFrames', 20,...     % background history
+    'threshold', 2.5,...
+    'neighborhoodOrder', 1,...
+    'nIterations', 3,...
+    'gamma', 1,...
+    'rho', .3);
 
 % returns a binary mask that is the same size as the original video (1 for
 % foreground, 0 for background)
 foreground = backgroundSubtraction(v, backsubParams);
+%out = backgroundSubtractionSimple(v, backsubParams2);
 
 %% optical flow
 % find foreground variables
@@ -31,12 +48,15 @@ indices = find(foreground == 0);
 new_v = v;
 new_v(indices) = 0;
 
+out(out < -136) = -137;
+
 % optical flow using foreground only
-[I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(v);
+[I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(new_v);
+
+%[I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(out);
 
 %% people counter
-thr = 3;
-[pc, dirs, event, ind] = peopleCounter(foreground, v_y_avg_all, thr);
+[pc,startstopdir] = pCounter(I_y_avg,foreground, 0);
 
 %% things for plotting
 if doPlot
@@ -74,6 +94,7 @@ if doPlot
             'FontSize', 16, 'FontWeight', 'bold');
     end
     set(gca, 'FontSize', 14, 'FontWeight', 'bold');
+    ylim(yl);
     
     subplot(2, 1, 2); hold on;
     yl2 = [0, 40];
