@@ -31,7 +31,7 @@ switch etaOrder % (relative indices)
 end
 seta = sum(eta(:));
 
-out = nan(size(v));
+out = false(size(v));
 
 %% loop through frames
 for ti = N+1:nFrames
@@ -60,6 +60,6 @@ for ti = N+1:nFrames
     mu = e .* mu + (1 - e) .* (rho  * thisFrame + (1 - rho ) * mu);
     vr = e .* vr + (1 - e) .* (rho * (thisFrame-mut).^2 + (1-rho ) * vr);
     
-    out(:, :, ti) = (thisFrame - mu) ./ sqrt(vr) - adThr;
+    out(:, :, ti) = (thisFrame - mu) ./ sqrt(vr) > adThr;
 end
 end
