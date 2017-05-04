@@ -1,4 +1,4 @@
-function [pc,startstopdir,iy] = pCounter(v,foreground, thr)
+function [pc,startstopdir] = pCounter(v,foreground, thr)
 
 pc = 0;
 iy = mean(v,1);
@@ -40,50 +40,22 @@ e_len = length(startIdx);
 dirs = zeros(e_len,1);
 for i = 1:e_len
     mEvent = mean(event(startIdx(i):stopIdx(i)));
-    mAbsIy = mean(abs(iy(startIdx(i):stopIdx(i))));
-    
-    % smooth signal-ish
-    for k = startIdx(i)+1:stopIdx(i)
-        if sign(iy(k-1)) ~= sign(iy(k)) && abs(iy(k))<0.5*mAbsIy
-            iy(k) = - iy(k);
-        end
-    end
-    
     if mEvent <= thr2
         continue;
     end
     if startIdx(i) == stopIdx(i)
-        
-        iyend = 0; 
-        if iy(startIdx(i)) > iyend
-            pc = pc -1;
-            dirs(i) = -1;
-        elseif iy(startIdx(i)) < iyend
-            pc = pc +1;
-            dirs(i) = +1;
-        end
-        
+        iyend = 0;
     else    
-        for k = startIdx(i)+1:stopIdx(i)
-            if sign(iy(k-1)) > sign(iy(k)) 
-                pc = pc -1;
-                dirs(i) = dirs(i)-1;
-            elseif sign(iy(k-1)) < sign(iy(k)) 
-                pc = pc +1;
-                dirs(i) = dirs(i)+1;
-            end
-        end
+        iyend = iy(stopIdx(i));
     end
-    
-
-    
-%     if iy(startIdx(i)) > iyend
-%         pc = pc -1;
-%         dirs(i) = -1;
-%     elseif iy(startIdx(i)) < iyend
-%         pc = pc +1;
-%         dirs(i) = +1;
-%     end
+    if iy(startIdx(i)) > iyend
+        %     if mean(iy(startIdx(i):startIdx(i)+1)) > iy(stopIdx(i))
+        pc = pc -1;
+        dirs(i) = -1;
+    elseif iy(startIdx(i)) < iyend
+        pc = pc +1;
+        dirs(i) = +1;
+    end
 end
 
 startstopdir = [startIdx stopIdx dirs];

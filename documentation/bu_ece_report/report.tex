@@ -36,7 +36,7 @@
         {Occusense: Intermediate Report}
         {Janis Intoy and Emily Lam}
         {May 5, 2017}
-        {2017-01} % Number of the report (four year digits and number) What is the number supposed to be???????? NO IDEA!!
+        {2017-01} % Number of the report (four year digits and number) What is the number supposed to be????????
 
 % Box with title to fit the opening in the cover
 % (adds an empty page in double-sided printing mode).
@@ -62,7 +62,14 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \buecereportsummary{
-A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to a estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. Final results are . . . . }
+The efficiency of HVAC (Heating Ventilation \& Air Conditioning) systems can be improved by making them
+adaptive to the number of people in a room. Automatic adjustments to room ventilation and temperature based on 
+room occupancy reduces energy use and is more cost efficient.
+In order to a estimate a room's occupancy level, the Occusense Senior Design team has created
+a reliable, thermal sensor system to capture the motion of people through doorways. We aim to develop
+a reliable, real-time algorithm to detect the direction of motion of people passing through in order to track 
+the number of people in the room.
+}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -87,7 +94,8 @@ A large part of a building's efficiency depends on the efficiency of its HVAC (H
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
-In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, a senior design team at Boston University is working towards developing sensing technology and algorithms to count the number of people in a room so that the system is always conscious of room occupancy and can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures of a crowded room. There are a number of ways to detect occupancy. However, this project assumes that if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, there would be a continuous knowledge of the number of people in a room. The senior design team has implemented a privacy-inclined low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array at frame rates of 0.5 to 512 Hz. Using this information, our project is tasked at developing algorithms to count the number of people entering or leaving a room. Specifically, this algorithm will
+1) detect the presence of a moving person in the frame and 2) determine the direction of motion.
 
 % Following sections, subsections, etc.
 % -------------------------------------
@@ -110,8 +118,8 @@ We also looked into algorithms for determining optical flow. Optical flow descri
 %\section{Early section}  % Report style
 % Describe the problem in detail, and the solution proposed, including assumptions, constraints, math formulas, algorithms,
 % etc.
-Our approach breaks the problem into three parts: 1) detect a person in the doorway, 2) determine the direction of 
-motion of the person, 3) classify the motion and track total number of people in a room.
+Our approach breaks the problem into two parts: 1) detect a person in the doorway and 2) determine the direction of 
+motion of the person.
 
 \subsection{Person Detection}
 We propose a background subtraction method to detect a person or persons in the frame. In order to accomplish this
@@ -158,7 +166,8 @@ where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
-The current implementation of the algorithm is in Matlab. 
+The current implementation of the algorithm is in Matlab. To integrate with the senior design team it
+would need to be ported into Python.
 
 \subsection{Data Acquisition}  % Article style
 %\section{New section}  % Report style
@@ -178,9 +187,6 @@ PDF, would not require too much memory.
 
 \subsection{Direction Discrimination}
 Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
-
-\subsection{Direction Discrimination}
-Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on . . .
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
@@ -204,7 +210,7 @@ cases, it detects the person as moving in the opposite direction.
 
 
 
-\section{Conclusions} % Should become Conclusions
+\section{Next Steps} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
 \begin{itemize}
 \item Large-scale testing: We can simulate more and longer test videos to measure performance of the algorithms

@@ -10,7 +10,7 @@ pr = 0.3; % probability of motion (smaller is easier)
 
 % rng(2);
 % [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
-load('exampleSimulation.mat');
+% load('exampleSimulation.mat');
 % v = readOccusenseVideo('OccusenseData/WeirdData/runoutandin');
 % isBackground = true(size(v, 3), 1);
 % isBackground(20:23) = false;
@@ -18,19 +18,19 @@ load('exampleSimulation.mat');
 % events = [20, -1; 39, 1];
 % peopleCount = 0;
 
-v = readOccusenseVideo('OccusenseData/WeirdData/lingerThroughOut');
-isBackground = true(size(v, 3), 1);
-isBackground(31:71) = false;
-events = [31, -1];
-peopleCount = -1;
-
-% v = readOccusenseVideo('OccusenseData/WeirdData/twoquickout');
+% v = readOccusenseVideo('OccusenseData/WeirdData/lingerThroughOut');
 % isBackground = true(size(v, 3), 1);
-% isBackground(35:51) = false;
-% isBackground(68:76) = false;
-% isBackground(84:90) = false;
-% events = [35, -2; 68, 1; 84, 1];
-% peopleCount = 0;
+% isBackground(31:71) = false;
+% events = [31, -1];
+% peopleCount = -1;
+
+v = readOccusenseVideo('OccusenseData/WeirdData/twoquickout');
+isBackground = true(size(v, 3), 1);
+isBackground(35:51) = false;
+isBackground(68:76) = false;
+isBackground(84:90) = false;
+events = [35, -2; 68, 1; 84, 1];
+peopleCount = 0;
 
 % v = readOccusenseVideo('OccusenseData/TWO/OUT/two_out.txt');
 % isBackground = true(size(v, 3), 1);
@@ -73,7 +73,7 @@ new_v(indices) = 0;
 %[I_y, I_y_avg, I_t, v_y, v_y_avg_all] = opticalflow(out);
 
 %% people counter
-[pc,startstopdir,o_iy] = pCounter(I_y_avg,foreground, 0);
+[pc,startstopdir] = pCounter(I_y_avg,foreground, 0);
 
 %% things for plotting
 if doPlot
