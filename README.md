@@ -5,6 +5,8 @@ entry point: main.m
 
 Main algorithm files:
 1. backgroundSubtraction.m
+2. opticalflow.m
+3. pCounter.m
 
 Example Simulation Videos:
 1. exampleVideo.avi - simulated data created by concatenating labelled data
