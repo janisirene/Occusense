@@ -177,6 +177,12 @@ where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to
 The current implementation of the algorithm is in Matlab. The three parts of the algorithm (Fig ...)
 are implemented
 separately and can be run in sequence to output a single room occupancy number.
+\begin{figure}[htb] % implentation flow
+\centering
+\includegraphics[scale=0.2]{images/threestep.png}
+\caption{Three-step implementation.}
+\label{threestep}
+\end{figure}
 
 \subsection{Data Acquisition}  % Article style
 %\section{New section}  % Report style
@@ -194,9 +200,49 @@ They take as input a structure of parameters
 and a 3-D array of temperatures over the two spatial and one temporal dimensions. This implementation could
 be modified to run in real time and, depending on the size of the history for the computation of the background
 PDF, would not require too much memory.
+\begin{figure}[htb]  % detected foreground pixels
+\centering
+\includegraphics[scale=0.45]{images/foreground_example.png}
+\caption{Example of detected foreground pixels.}
+\label{bgd}
+\end{figure}
+
+\begin{figure}[htb]  % # detected foreground pixels / frame
+\centering
+\includegraphics[scale=0.45]{images/abs_example.png}
+\caption{Example of total number of foreground pixels in each frame compared to 
+ground truth events in gray.}
+\label{bgd}
+\end{figure}
 
 \subsection{Direction Discrimination}
 Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/quiver_gradients.png}
+\caption{Example of optical flow vectors.}
+\label{opflw}
+\end{figure}
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/two_out.png}
+\caption{Mean vertical gradient for two people walking out.}
+\label{twoout}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/lingerThrough.png}
+\caption{Mean vertical gradient for lingering through the door.}
+\label{linger}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/runoutandin.png}
+\caption{Mean vertical gradient for running out and in through the door.}
+\label{run}
+\end{figure}
 
 \subsection{People Count}
 Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on . . .
@@ -221,16 +267,36 @@ $0.2 \le \gamma \le 0.8$ based on a first order neighborhood,
 and a gaussian kernel with $\sigma = 0.5$ (approximately the standard deviation of 
 the background estimated from the data).
 
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/roc.png}
+\caption{ROC curves of detecting motion events using different parameters for the two proposed
+background subtraction algorithms.}
+\label{roc}
+\end{figure}
+
 \subsection{Direction Discrimination}  % Article style
 This method seems to work well in detecting direction. However, it is still not accurate all the time, $\sim80\%$.
 In Figure \ref{opflw}., we threshold to see if the velocity is large enough to count as a person moving in a direction
 as there are some bounce back residual effects. For some 
 cases, it detects the person as moving in the opposite direction. 
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/dirClass.png}
+\caption{Proportion of correct direction classifications.}
+\label{dirclass}
+\end{figure}
 
 \subsection{People Count}
 Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
 integrate, we find that the variance of the error is quite large after only several motion events. As shown in Figure 9,
 the standard deviation of the error after 10 events is up to 3.
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/pcerror_gamma020_hist.png}
+\caption{Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}
+\label{hist}
+\end{figure}
 
 \section{Conclusions} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
@@ -243,75 +309,6 @@ the detection of motion events could be improved to split single events that are
 For example, when two people pass through quickly, one event is labeled but there are two clear peaks in the
 number of detected pixels. Finally, this split could also occur in the direction detection state where zero crossings
 of the vertical gradient indicate a person passing through the doorway.
-
-\newpage
-\section{Figures} % Tossed figures at end so page count is easier to discern
-\begin{figure}[htb] 
-\centering
-\includegraphics[scale=0.45]{images/foreground_example.png}
-\caption{Example of detected foreground pixels.}
-\label{bgd}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/quiver_gradients.png}
-\caption{Example of optical flow vectors.}
-\label{opflw}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.2]{images/threestep.png}
-\caption{Three-step implementation.}
-\label{threestep}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/two_out.png}
-\caption{Mean vertical gradient for two people walking out.}
-\label{twoout}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/lingerThrough.png}
-\caption{Mean vertical gradient for lingering through the door.}
-\label{linger}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/runoutandin.png}
-\caption{Mean vertical gradient for running out and in through the door.}
-\label{run}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/roc.png}
-\caption{ROC curves of detecting motion events using different parameters for the two proposed
-background subtraction algorithms.}
-\label{roc}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/dirClass.png}
-\caption{Proportion of correct direction classifications.}
-\label{dirclass}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/pcerror_gamma020_hist.png}
-\caption{Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}
-\label{hist}
-\end{figure}
-
-
-
 
 % Plots (PostScript files) are included through the ``figure'' environment.
 % For more complicated figures use the minipage commaned (see LaTeX manual).
