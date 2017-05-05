@@ -8,7 +8,7 @@ backsubParams1 = struct(...
     'sigma', 0.5,...                % standard deviation of gaussian kernel
     'neighborhoodOrder', 1,...      % spatial neighborhoods
     'nIterations', 3,...            % number of iterations per frame for labelling
-    'gamma', 01,...                  % control influence of MRF model
+    'gamma', 0.5,...                  % control influence of MRF model
     'doPlot', false);               % plot or not
 
 backsubParams2 = struct(...
@@ -16,11 +16,11 @@ backsubParams2 = struct(...
     'threshold', 2.5,...
     'neighborhoodOrder', 1,...
     'nIterations', 3,...
-    'gamma', .8,...
-    'rho', .1);
+    'gamma', 1.5,...
+    'rho', .01);
 
-nSimulations = 10;
-testThrs = [0:5; -7452.8 + linspace(0, 1, 6)]';
+nSimulations = 1;
+testThrs = [0:5; 0:5]';
 
 totals = [0, 0]; % total fore and backgrounds
 correct1 = zeros(size(testThrs)); % hits and correct rejections
@@ -38,8 +38,8 @@ for i = 1:nSimulations
     foreground = backgroundSubtraction(v, backsubParams1);
     nPixels = squeeze(sum(sum(foreground, 1), 2));
     
-    out = backgroundSubtractionSimple(v, backsubParams2);
-    mmv = squeeze(mean(mean(out, 1), 2));
+%     out = backgroundSubtractionSimple(v, backsubParams2);
+%     mmv = squeeze(sum(sum(out, 1), 2));
     
     %% optical flow
     % find foreground variables
@@ -47,10 +47,13 @@ for i = 1:nSimulations
     new_v = v;
     new_v(indices) = 0;
     
+%     new_v2 = v;
+%     new_v2(~out) = 0;
+    
     
     % optical flow using foreground only
     [I_y1, I_y_avg1, I_t1, v_y1, v_y_avg_all1] = opticalflow(v);
-    [I_y2, I_y_avg2, I_t2, v_y2, v_y_avg_all2] = opticalflow(out);
+%     [I_y2, I_y_avg2, I_t2, v_y2, v_y_avg_all2] = opticalflow(v);
     
     
     %% testing stuff
@@ -86,27 +89,31 @@ for i = 1:nSimulations
         %         [pc2, dirs2, event2, ind2] = peopleCounter(mmv, v_y_avg_all2, testThrs(tt, 2));
         %         peopleCounts2(i, tt) = pc2;
         [pc1,startstopdir1] = pCounter(I_y_avg1,foreground, testThrs(tt, 1));
-        [pc2,startstopdir2] = pCounter(I_y_avg2,mmv, testThrs(tt, 2));
+%         [pc2,startstopdir2] = pCounter(I_y_avg2,out, testThrs(tt, 2));
         
         peopleCounts1(i, tt) = pc1;
-        peopleCounts2(i, tt) = pc2;
+%         peopleCounts2(i, tt) = pc2;
         
         isFore1 = nPixels > testThrs(tt, 1);
-        isFore2 = squeeze(mmv) > testThrs(tt, 2);
+%         isFore2 = mmv > testThrs(tt, 2);
         
-        for jj = 2:length(isFore1)-1 % kill single frame events
-            isFore1(jj) = isFore1(jj) & (isFore1(jj-1) | isFore1(jj+1));
-            isFore2(jj) = isFore2(jj) & (isFore2(jj-1) | isFore2(jj+1));
-        end
+%         for jj = 2:length(isFore1)-1 % kill single frame events
+%             isFore1(jj) = isFore1(jj) & (isFore1(jj-1) | isFore1(jj+1));
+%             isFore2(jj) = isFore2(jj) & (isFore2(jj-1) | isFore2(jj+1));
+%         end
         
         for ii = 1:length(si)
             % total number of events?
             cnt1 = sum(isFore1(si(ii):ei(ii)));
-            cnt2 = sum(isFore2(si(ii):ei(ii)));
+%             cnt2 = sum(isFore2(si(ii):ei(ii)));
+
+            if cnt1 < (ei(ii) - si(ii))/4
+               keyboard; 
+            end
             
             % was the event picked up?
             correct1(tt, 1) = correct1(tt, 1) + (cnt1 > (ei(ii)-si(ii))/4);
-            correct2(tt, 1) = correct2(tt, 1) + (cnt2 > (ei(ii)-si(ii))/4);
+%             correct2(tt, 1) = correct2(tt, 1) + (cnt2 > (ei(ii)-si(ii))/4);
         end
         
         % check whether direction was correctly classified
@@ -116,11 +123,11 @@ for i = 1:nSimulations
             else
                 d1 = [];
             end
-            if ~isempty(startstopdir2)
-                [d2, mi2] = sort(abs(events(ee, 1) - startstopdir2(:, 1)));
-            else
-                d2 = [];
-            end
+%             if ~isempty(startstopdir2)
+%                 [d2, mi2] = sort(abs(events(ee, 1) - startstopdir2(:, 1)));
+%             else
+%                 d2 = [];
+%             end
             
             nPeople = abs(events(ee, 2));
             
@@ -134,19 +141,19 @@ for i = 1:nSimulations
                     end
                     
                 end
-                if length(d2) >= nn && d2(nn) < 10
-                    
-                    myDir = startstopdir2(mi2(nn), 3);
-                    if myDir == trueDir % correct
-                        pcCorrect(tt, 2) = pcCorrect(tt, 2) + 1;
-                    end
-                end
+%                 if length(d2) >= nn && d2(nn) < 10
+%                     
+%                     myDir = startstopdir2(mi2(nn), 3);
+%                     if myDir == trueDir % correct
+%                         pcCorrect(tt, 2) = pcCorrect(tt, 2) + 1;
+%                     end
+%                 end
             end
             
         end
         
         correct1(tt, 2) = correct1(tt, 2) + sum(isBackground & ~isFore1);
-        correct2(tt, 2) = correct2(tt, 2) + sum(isBackground & ~isFore2);
+%         correct2(tt, 2) = correct2(tt, 2) + sum(isBackground & ~isFore2);
     end
     
 end
@@ -157,13 +164,13 @@ roc2 = bsxfun(@rdivide, correct2, totals);
 roc = roc1;
 thrs = testThrs(:, 1);
 pccorr = pcCorrect(:, 1);
-sname = sprintf('abs_gamma%1.2f_2.mat', backsubParams1.gamma);
-%save(sname, 'roc', 'thrs', 'pccorr', 'backsubParams1', 'pctotals', 'peopleCounts1');
+sname = sprintf('abs_gamma%1.2f_sigma%1.2f_eta%i_2.mat', backsubParams1.gamma, backsubParams1.sigma, backsubParams1.neighborhoodOrder);
+save(sname, 'roc', 'thrs', 'pccorr', 'backsubParams1', 'pctotals', 'peopleCounts1');
 
 roc = roc2;
 thrs = testThrs(:, 2);
 pccorr = pcCorrect(:, 2);
-sname = sprintf('bs_gamma%1.2f_rho%1.2_thr%1.2.mat', backsubParams2.gamma,...
+sname = sprintf('bs_gamma%1.2f_rho%1.2f_thr%1.2f_2.mat', backsubParams2.gamma,...
     backsubParams2.rho, backsubParams2.threshold);
 save(sname, 'roc', 'thrs', 'pccorr', 'backsubParams2', 'pctotals', 'peopleCounts2');
 
