@@ -62,7 +62,7 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \buecereportsummary{
-A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to a estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. Final results are . . . . }
+A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to a estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and a standard deviation of 3 after 10 events.}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -87,7 +87,7 @@ A large part of a building's efficiency depends on the efficiency of its HVAC (H
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
-In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly, before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
 
 % Following sections, subsections, etc.
 % -------------------------------------
@@ -173,7 +173,7 @@ where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
 The current implementation of the algorithm is in Matlab. The three parts of the algorithm (Fig ...)
 are implemented
-separately and can be run in sequence to output a single room occupancy number.
+separately and can be run in sequence to output a single room occupancy number. We define an event as a series of consecutive frames with detected motion as determined by the background subtraction algorithm.
 \begin{figure}[htb] % implentation flow
 \centering
 \includegraphics[scale=0.2]{images/threestep.png}
@@ -184,11 +184,11 @@ separately and can be run in sequence to output a single room occupancy number.
 \subsection{Data Acquisition}  % Article style
 %\section{New section}  % Report style
 In addition to the labelled data from the senior design team, we acquired several trials of realistic but more
-difficult situations. This includes a person lingering in the doorway and multiple people passing through
+difficult situations. This includes a person lingering in the doorway, a person rushing out the door and back in, multiple people passing through
 the door in quick succession.
 \\ \\
-The data is recorded into text files at a rate of 8-12Hz. The data we currently have was recorded at 8Hz
-though the Occusense team has updated the sampling rate to 12Hz.
+The data is recorded into text files at a rate of 8-12Hz. The labeled data is recorded at 8Hz
+by the Occusense team and the difficult situations data is recorded at 12Hz.
 
 \subsection{Person Detection}
 Janis implemented both proposed background subtraction algorithms in backgroundSubtractionSimple.m 
@@ -204,7 +204,7 @@ thresholding the total number of detected pixels (Figure \ref{abs_example}).
 blah & blah & blah & blah & blah & blah
 \end{tabular}\end{center}
 
-\begin{figure}[htb]  % detected foreground pixels
+\begin{figure}[htb] 
 \centering
 \includegraphics[scale=0.45]{images/foreground_example.png}
 \caption{Example of detected foreground pixels.}
@@ -218,6 +218,7 @@ blah & blah & blah & blah & blah & blah
 ground truth events in gray.}
 \label{abs_example}
 \end{figure}
+
 
 \subsection{Direction Discrimination}
 Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
@@ -250,6 +251,41 @@ Emily implemented this algorithm in the file opticalflow.m. It takes as input a 
 
 \subsection{People Count}
 Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on . . .
+
+
+\subsection{People Count}
+Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when a even starts and stops.
+
+\section{Experimental Results}  % Article style
+%\chapter{Final chapter}  % Report style
+% Describe the experiments you have conducted and the results you have obtained. Are you results consistent
+% with your original goals?
+Algorithms were tested on simulated data generated by randomly concatenating the labelled data.
+The temperatures of the frames are shifted for continuity between frames. 
+
+\subsection{Background Subtraction}  % Article style
+The background subtraction results are shown in the following ROC curves.The kernel-based method
+had overall better performance than the parametric method achieving hit rates of over 90\% for the best
+parameter sets with negligible false alarms in detecting a person in the frames. Most misses occurred
+because of spontaneous rapid changes in temperature of background pixels. These occur infrequently
+in the data but also arise when true foreground pixels are mislabelled and bias the background model, for 
+example at the edges of the foreground person.
+\\ \\
+The best parameters for the kernel-based method had strong influence from the Markov random field
+$0.2 \le \gamma \le 0.8$ based on a first order neighborhood, 
+and a gaussian kernel with $\sigma = 0.5$ (approximately the standard deviation of 
+the background estimated from the data).
+
+\subsection{Direction Discrimination}  % Article style
+This method seems to work well in detecting direction. However, it is still not accurate all the time, $\sim80\%$.
+In Figure \ref{opflw}., we threshold to see if the velocity is large enough to count as a person moving in a direction
+as there are some bounce back residual effects. For some 
+cases, it detects the person as moving in the opposite direction. 
+
+\subsection{People Count}
+Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
+integrate, we find that the variance of the error is quite large after only several motion events. As shown in Figure 9,
+the standard deviation of the error after 10 events is up to 3.
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
