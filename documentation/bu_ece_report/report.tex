@@ -87,7 +87,14 @@ A large part of a building's efficiency depends on the efficiency of its HVAC (H
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
-In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly, before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly, before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down, Figure~\ref{door}. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.4]{images/door.png}
+\caption{Overarching system diagram. Our work focuses on the orange boxes.}
+\label{door}
+\end{figure}
 
 % Following sections, subsections, etc.
 % -------------------------------------
@@ -107,12 +114,11 @@ so that labels are more spatially coherent
 \\ \\
 We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with space and time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach as we use background subtraction to determine foreground elements ahead of time. The foreground elements can then be put through a gradient-based optical flow algorithm to determine the motion of the object. This can be modeled as a gradient with partial derivatives spatially and temporally for each pixel intensity, as each pixel will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
 
-\section{Problem Statement}  % Article style
+\section{Problem Statement and Proposed Solution}  % Article style
 %\section{Early section}  % Report style
 % Describe the problem in detail, and the solution proposed, including assumptions, constraints, math formulas, algorithms,
 % etc.
-Our approach breaks the problem into three parts: 1) detect a person in the doorway, 2) determine the direction of 
-motion of the person, 3) classify the motion and track total number of people in a room.
+Our project aims to keep track of the number of people in a room based on the tripwire methodology. Our approach breaks the problem into three parts: 1) detect a person in the doorway, 2) determine the direction of motion of the person, 3) classify the motion and track total number of people in a room.
 
 \subsection{Person Detection}
 In order to accomplish this
@@ -168,6 +174,11 @@ Since we are only concerned about the vertical velocity, i.e. a person walks thr
 $$v_y = - \frac{\frac{\partial I}{\partial t}}{\frac{\partial I}{\partial y}}$$
 where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. In our system of 4x16 array of pixels, we generate an spatial gradient matrix consisting of 3x16 pixels to take the boundary condition into account. Next, we perform two averages, we average the rows to find the overall spatial gradient of the row, and we then average those row averages together to obtain an overall spatial gradient for the entire array per a time. Next, the temporal gradients are obtained between consecutive frames. The final velocity is then calculated and used to determine the optical flow of the foreground which determines whether a person is walking into or out of the room. 
 
+\subsection{Classifier and Counter}
+The classier determines when an event starts and stops based on the background subtraction algorithm. It then compares the spatial gradients at different times during each event and increments the overall counter according. In addition, it takes into account edge cases for determining between noise and data for single-frame events.
+
+\newpage
+
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
@@ -203,7 +214,7 @@ be modified to run in real time and, depending on the size of the history for th
 PDF, would not require too much memory. The output of this function is a binary array of pixel labels 
 (Figure~\ref{foregroundexample}). Motion events are identified by
 thresholding the total number of detected pixels (Figure~ \ref{abs_example}).
-\begin{table}\begin{tabular}{|clr|clr|}
+\begin{table}[htb]\begin{tabular}{|clr|clr|}
 \hline
 \multicolumn{3}{|c|}{Foreground Adaptive} & \multicolumn{3}{|c|}{Running Gaussian Average}\\
 \hline
@@ -228,7 +239,7 @@ $\theta$ & automatic & - & $\theta$ & threshold & 2.5\\
 \label{foregroundexample}
 \end{figure}
 
-\begin{figure}[htb]  % # detected foreground pixels / frame
+\begin{figure}[!htb]  % # detected foreground pixels / frame
 \centering
 \includegraphics[scale=0.45]{images/abs_example.png}
 \caption{Example of total number of foreground pixels in each frame compared to 
@@ -252,29 +263,10 @@ Emily implemented this algorithm in the file opticalflow.m. It takes as input a 
 \label{twoout}
 \end{figure}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/lingerThrough.png}
-\caption{Mean vertical gradient for lingering through the door.}
-\label{linger}
-\end{figure}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/runoutandin.png}
-\caption{Mean vertical gradient for running out and in through the door.}
-\label{run}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\includegraphics[scale=0.52]{images/quickoutandin.png}
-\caption{Mean vertical gradient for two people walking in together}
-\label{together}
-\end{figure}
 
 \subsection{People Count}
-Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients over time, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. The direction is then decided based on this information. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when a event starts and stops.
+Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients over time, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. The direction is then decided based on this information. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when an event starts and stops.
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
@@ -304,27 +296,49 @@ background subtraction algorithms.}
 \end{figure}
 
 \subsection{Direction Discrimination}  % Article style
-The direction discrimination works for all cases we tried except for multiple people walking in together. For the simple case of two people walking out (Figure~\ref{twoout}, the background subtraction algorithm correctly identifies two events, and the direction is easy to discriminate from the optical flow. For linger at the door, (Figure~\ref{linger}, because the noisy information in the middle frames are ignored, this also works well with our algorithm. In the case of someone running out and in quickly, Figure~\ref{run} again our algorithm is successful in determining between direction and successfully determines single frame events as motion versus noise. However, in the case where the background subtraction algorithm fails to detect individual people as individual events, the direction discrimination fails because it does not consider the middle frames in its decision, Figure~\ref{together}. This could be remedied by taking into account of the middle frames and employing peak counting or zero-crossing analysis. However, since the middle frames provide noisy information as seen in the lingering example, this information cannot be relied on counting the number of people entering or leaving. 
+The direction discrimination works for all cases we tried except for multiple people walking in together. For the simple case of two people walking out, Figure~\ref{twoout}, the background subtraction algorithm correctly identifies two events, and the direction is easy to discriminate from the optical flow. For linger at the door, Figure~\ref{linger}, because the noisy information in the middle frames are ignored, this also works well with our algorithm. In the case of someone running out and in quickly, Figure~\ref{run}, again our algorithm is successful in determining between direction and successfully determines single frame events as motion versus noise. However, in the case where the background subtraction algorithm fails to detect individual people as individual events, the direction discrimination fails because it does not consider the middle frames in its decision, Figure~\ref{together}. This could be remedied by taking into account of the middle frames and employing peak counting or zero-crossing analysis. However, since the middle frames provide noisy information as seen in the lingering example, this information cannot be relied on counting the number of people entering or leaving. Overall, the direction discrimination works well, Figure~\ref{dirclass}, and the major result in error is accounted for by the error in the background subtraction algorithm.
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.52]{images/lingerThrough.png}
+\caption{Mean vertical gradient for lingering through the door.}
+\label{linger}
+\end{figure}
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.52]{images/runoutandin.png}
+\caption{Mean vertical gradient for running out and in through the door.}
+\label{run}
+\end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.52]{images/quickoutandin.png}
+\caption{Mean vertical gradient for two people walking in together}
+\label{together}
+\end{figure}
+
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.52]{images/dirClass.png}
-\caption{Proportion of correct direction classifications.}
+\caption{Proportion of correct direction classifications with peak peformance at ~90\%.}
 \label{dirclass}
 \end{figure}
 
-\subsection{People Count}
-Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
-integrate, we find that the variance of the error is quite large after only several motion events.
-The standard deviation of the error after 10 events is up to 3 (Figure~\ref{hist}).
-\begin{figure}[htb]
+\begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.52]{images/pcerror_gamma020_hist.png}
 \caption{Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}
 \label{hist}
 \end{figure}
+
+\clearpage
+\subsection{People Count}
+Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
+integrate, we find that the variance of the error is quite large after only several motion events.
+The standard deviation of the error after 10 events is up to 3 (Figure~\ref{hist}).
+
 
 \section{Conclusions} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
@@ -336,7 +350,8 @@ background noise but this can be dealt with by preprocessing the data or by the 
 the detection of motion events could be improved to split single events that are suggestive of multiple people
 For example, when two people pass through quickly, one event is labeled but there are two clear peaks in the
 number of detected pixels. Finally, this split could also occur in the direction detection state where zero crossings
-of the vertical gradient indicate a person passing through the doorway.
+of the vertical gradient indicate a person passing through the doorway. In addition, the logically next step would be
+to implement the algorithms in real-time.
 
 % Plots (PostScript files) are included through the ``figure'' environment.
 % For more complicated figures use the minipage commaned (see LaTeX manual).
