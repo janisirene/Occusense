@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 13:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -302,30 +302,42 @@ File: images/runoutandin.png Graphic file (type png)
 <use images/runoutandin.png>
 Package pdftex.def Info: images/runoutandin.png used on input line 264.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
+
+<images/quickoutandin.png, id=69, 620.0766pt x 413.3844pt>
+File: images/quickoutandin.png Graphic file (type png)
+
+<use images/quickoutandin.png>
+Package pdftex.def Info: images/quickoutandin.png used on input line 271.
+(pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
  [6 <./images/quiver_gradients.png> <./images/two_out.png>] <images/roc.png, id
-=74, 620.0766pt x 413.3844pt>
+=75, 620.0766pt x 413.3844pt>
 File: images/roc.png Graphic file (type png)
- <use images/roc.png>
-Package pdftex.def Info: images/roc.png used on input line 293.
+
+<use images/roc.png>
+Package pdftex.def Info: images/roc.png used on input line 300.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-<images/dirClass.png, id=75, 620.0766pt x 413.3844pt>
+
+LaTeX Warning: Reference `together' on page 7 undefined on input line 307.
+
+[7 <./images/lingerThrough.png>]
+<images/dirClass.png, id=81, 620.0766pt x 413.3844pt>
 File: images/dirClass.png Graphic file (type png)
 
 <use images/dirClass.png>
-Package pdftex.def Info: images/dirClass.png used on input line 306.
+Package pdftex.def Info: images/dirClass.png used on input line 313.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-<images/pcerror_gamma020_hist.png, id=76, 620.0766pt x 413.3844pt>
+<images/pcerror_gamma020_hist.png, id=82, 620.0766pt x 413.3844pt>
 File: images/pcerror_gamma020_hist.png Graphic file (type png)
 
 <use images/pcerror_gamma020_hist.png>
-Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 31
-7.
+Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 32
+4.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
- [7 <./images/lingerThrough.png>]
-[8 <./images/runoutandin.png>] [9 <./images/roc.png (PNG copy)> <./images/dirCl
-ass.png (PNG copy)>] [10 <./images/pcerror_gamma020_hist.png (PNG copy)>]
+ [8 <./images/runoutandin.png>] [9 <./images/quickoutandin.png>] [10 <./images/
+roc.png (PNG copy)> <./images/dirClass.png (PNG copy)>] [11 <./images/pcerror_g
+amma020_hist.png (PNG copy)>]
 (./report.bbl
 Underfull \hbox (badness 3690) in paragraph at lines 21--22
 []\OT1/cmr/m/n/12 S. Smith, ``Re-views of Op-tic Flow, Mo-tion Seg-men-ta-tion,
@@ -344,39 +356,45 @@ Underfull \hbox (badness 2529) in paragraph at lines 21--22
 n (FM-RIB)\OT1/cmr/m/n/12 ,
  []
 
-) [11
+) [12
 
-] (./report.aux) ) 
+] (./report.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1944 strings out of 493089
- 27483 string characters out of 6134842
+ 1950 strings out of 493089
+ 27625 string characters out of 6134842
  90620 words of memory out of 5000000
- 5392 multiletter control sequences out of 15000+600000
+ 5397 multiletter control sequences out of 15000+600000
  11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,11n,29p,1503b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew
-.pfb>
-Output written on report.pdf (17 pages, 583356 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
+texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
+e/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew.pfb>
+Output written on report.pdf (18 pages, 617699 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 154 PDF objects out of 1000 (max. 8388607)
+ 96 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

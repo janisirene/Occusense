@@ -10,6 +10,6 @@
 \contentsline {subsection}{\numberline {4.4}People Count}{6}
 \contentsline {section}{\numberline {5}Experimental Results}{7}
 \contentsline {subsection}{\numberline {5.1}Background Subtraction}{7}
-\contentsline {subsection}{\numberline {5.2}Direction Discrimination}{7}
+\contentsline {subsection}{\numberline {5.2}Direction Discrimination}{8}
 \contentsline {subsection}{\numberline {5.3}People Count}{8}
-\contentsline {section}{\numberline {6}Conclusions}{8}
+\contentsline {section}{\numberline {6}Conclusions}{9}

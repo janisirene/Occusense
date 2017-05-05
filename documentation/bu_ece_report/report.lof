@@ -5,6 +5,7 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Mean vertical gradient for two people walking out.}}{6}
 \contentsline {figure}{\numberline {6}{\ignorespaces Mean vertical gradient for lingering through the door.}}{7}
 \contentsline {figure}{\numberline {7}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{8}
-\contentsline {figure}{\numberline {8}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{9}
-\contentsline {figure}{\numberline {9}{\ignorespaces Proportion of correct direction classifications.}}{9}
-\contentsline {figure}{\numberline {10}{\ignorespaces Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}}{10}
+\contentsline {figure}{\numberline {8}{\ignorespaces Mean vertical gradient for two people walking in together}}{9}
+\contentsline {figure}{\numberline {9}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{10}
+\contentsline {figure}{\numberline {10}{\ignorespaces Proportion of correct direction classifications.}}{10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}}{11}
