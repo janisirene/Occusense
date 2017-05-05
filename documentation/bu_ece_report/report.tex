@@ -15,7 +15,7 @@
 %\documentclass[12pt]{report}          %Single-sided report style (chapters)
 %\documentclass[12pt,twoside]{report}  %Double-sided report style (chapters)
 %\documentclass[12pt]{article}         %Single-sided article style (no chapters)
-\documentclass[12pt,twoside]{article} %Double-sided article style (no chapters)
+\documentclass[12pt,oneside]{article} %Double-sided article style (no chapters)
 
 \usepackage{bu_ece_report}
 
@@ -246,51 +246,69 @@ of the vertical gradient indicate a person passing through the doorway.
 
 \newpage
 \section{Figures} % Tossed figures at end so page count is easier to discern
-%\begin{figure}[htb] 
-%\includegraphics[scale=0.45]{images/foreground_example.png}
-%\caption{Example of detected foreground pixels.}
-%\label{bgd}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/quiver_gradients.png}
-%\caption{Example of optical flow vectors.}
-%\label{opflw}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.2]{images/threestep.png}
-%\caption{three-step approach}
-%\label{threestep}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/two_out.png}
-%\caption{Mean vertical gradient for two out}
-%\label{twoout}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/lingerThrough.png}
-%\caption{Mean vertical gradient for lingering through the door}
-%\label{linger}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/runoutandin.png}
-%\caption{Mean vertical gradient for running out and in through the door}
-%\label{run}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/roc.png}
-%\caption{ROC}
-%\label{roc}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/dirClass.png}
-%\caption{Direction Classifier}
-%\label{dirclass}
-%\end{figure}
-%\begin{figure}[htb]
-%\includegraphics[scale=0.52]{images/pcerror_gamma0.20_hist.png}
-%\caption{Histogram}
-%\label{hist}
-%\end{figure}
+\begin{figure}[htb] 
+\centering
+\includegraphics[scale=0.45]{images/foreground_example.png}
+\caption{Example of detected foreground pixels.}
+\label{bgd}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/quiver_gradients.png}
+\caption{Example of optical flow vectors.}
+\label{opflw}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.2]{images/threestep.png}
+\caption{three-step approach}
+\label{threestep}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/two_out.png}
+\caption{Mean vertical gradient for two out}
+\label{twoout}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/lingerThrough.png}
+\caption{Mean vertical gradient for lingering through the door}
+\label{linger}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/runoutandin.png}
+\caption{Mean vertical gradient for running out and in through the door}
+\label{run}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/roc.png}
+\caption{ROC curves of detecting motion events using different parameters for the two proposed
+background subtraction algorithms.}
+\label{roc}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/dirClass.png}
+\caption{Proportion of correct direction classifications.}
+\label{dirclass}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/pcerror_gamma020_hist.png}
+\caption{Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}
+\label{hist}
+\end{figure}
 
 
 
