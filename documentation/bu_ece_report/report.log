@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 12:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 12:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -85,11 +85,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \epsfxsize=\dimen112
 \epsfysize=\dimen113
 ))
-(./report.aux
-
-LaTeX Warning: Label `bgd' multiply defined.
-
-)
+(./report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
@@ -104,7 +100,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
- (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+
+(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count88
 \scratchdimen=\dimen114
@@ -242,19 +239,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 144--158
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 159--166
-
- []
-
-<images/threestep.png, id=50, 1888.05376pt x 822.07124pt>
+[2] <images/threestep.png, id=50, 1888.05376pt x 822.07124pt>
 File: images/threestep.png Graphic file (type png)
 
 <use images/threestep.png>
-Package pdftex.def Info: images/threestep.png used on input line 182.
+Package pdftex.def Info: images/threestep.png used on input line 179.
 (pdftex.def)             Requested size: 377.60406pt x 164.41133pt.
  [3]
-Underfull \hbox (badness 10000) in paragraph at lines 189--195
+Underfull \hbox (badness 10000) in paragraph at lines 186--192
 
  []
 
@@ -262,27 +254,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--195
 File: images/foreground_example.png Graphic file (type png)
 
 <use images/foreground_example.png>
-Package pdftex.def Info: images/foreground_example.png used on input line 205.
+Package pdftex.def Info: images/foreground_example.png used on input line 208.
 (pdftex.def)             Requested size: 292.6908pt x 99.94847pt.
 
 <images/abs_example.png, id=56, 650.43pt x 300.1614pt>
 File: images/abs_example.png Graphic file (type png)
 
 <use images/abs_example.png>
-Package pdftex.def Info: images/abs_example.png used on input line 212.
+Package pdftex.def Info: images/abs_example.png used on input line 215.
 (pdftex.def)             Requested size: 292.6908pt x 135.07138pt.
 
 <images/quiver_gradients.png, id=57, 562.1pt x 183.68625pt>
 File: images/quiver_gradients.png Graphic file (type png)
 
 <use images/quiver_gradients.png>
-Package pdftex.def Info: images/quiver_gradients.png used on input line 222.
+Package pdftex.def Info: images/quiver_gradients.png used on input line 225.
 (pdftex.def)             Requested size: 292.29369pt x 95.51738pt.
 
 <images/two_out.png, id=58, 620.0766pt x 413.3844pt>
 File: images/two_out.png Graphic file (type png)
  <use images/two_out.png>
-Package pdftex.def Info: images/two_out.png used on input line 228.
+Package pdftex.def Info: images/two_out.png used on input line 231.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
 [4 <./images/threestep.png>]
@@ -290,45 +282,44 @@ Package pdftex.def Info: images/two_out.png used on input line 228.
 File: images/lingerThrough.png Graphic file (type png)
 
 <use images/lingerThrough.png>
-Package pdftex.def Info: images/lingerThrough.png used on input line 235.
+Package pdftex.def Info: images/lingerThrough.png used on input line 238.
 (pdftex.def)             Requested size: 334.46748pt x 214.96112pt.
 
 <images/runoutandin.png, id=64, 620.0766pt x 413.3844pt>
 File: images/runoutandin.png Graphic file (type png)
 
 <use images/runoutandin.png>
-Package pdftex.def Info: images/runoutandin.png used on input line 242.
+Package pdftex.def Info: images/runoutandin.png used on input line 245.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
  [5 <./images/foreground_example.png> <./images/abs_example.png (PNG copy)> <./
 images/quiver_gradients.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 258--269
+Underfull \hbox (badness 10000) in paragraph at lines 261--272
 
  []
 
 <images/roc.png, id=70, 620.0766pt x 413.3844pt>
 File: images/roc.png Graphic file (type png)
  <use images/roc.png>
-Package pdftex.def Info: images/roc.png used on input line 272.
+Package pdftex.def Info: images/roc.png used on input line 275.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
-
-<images/dirClass.png, id=71, 620.0766pt x 413.3844pt>
+ [6 <./images/two_out.png (PNG copy)>]
+<images/dirClass.png, id=74, 620.0766pt x 413.3844pt>
 File: images/dirClass.png Graphic file (type png)
 
 <use images/dirClass.png>
-Package pdftex.def Info: images/dirClass.png used on input line 285.
+Package pdftex.def Info: images/dirClass.png used on input line 288.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
- [6 <./images/two_out.png (PNG copy)>]
+
 <images/pcerror_gamma020_hist.png, id=75, 620.0766pt x 413.3844pt>
 File: images/pcerror_gamma020_hist.png Graphic file (type png)
 
 <use images/pcerror_gamma020_hist.png>
 Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 29
-6.
+9.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
  [7 <./images/lingerThrough.png (PNG copy)>] [8 <./images/runoutandin.png (PNG 
-copy)> <./images/roc.png (PNG copy)>]
-[9 <./images/dirClass.png (PNG copy)> <./images/pcerror_gamma020_hist.png (PNG 
-copy)>] (./report.bbl
+copy)>] [9 <./images/roc.png (PNG copy)> <./images/dirClass.png (PNG copy)>] [1
+0 <./images/pcerror_gamma020_hist.png (PNG copy)>] (./report.bbl
 Underfull \hbox (badness 3690) in paragraph at lines 21--22
 []\OT1/cmr/m/n/12 S. Smith, ``Re-views of Op-tic Flow, Mo-tion Seg-men-ta-tion,
  Edge find-
@@ -346,42 +337,39 @@ Underfull \hbox (badness 2529) in paragraph at lines 21--22
 n (FM-RIB)\OT1/cmr/m/n/12 ,
  []
 
-) [10
+) [11
 
-] (./report.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 1942 strings out of 493089
- 27440 string characters out of 6134842
- 89643 words of memory out of 5000000
- 5390 multiletter control sequences out of 15000+600000
+ 1943 strings out of 493089
+ 27467 string characters out of 6134842
+ 89612 words of memory out of 5000000
+ 5391 multiletter control sequences out of 15000+600000
  11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,29p,1502b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
-texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew.pfb>
-Output written on report.pdf (16 pages, 583649 bytes).
+ 41i,11n,29p,1502b,227s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew
+.pfb>
+Output written on report.pdf (17 pages, 583950 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 146 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

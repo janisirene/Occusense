@@ -160,9 +160,6 @@ $$\frac{P_\mathcal{B}(I[\mathbf{n}])}{P_\mathcal{F}(I[\mathbf{n}])} > \theta \ex
 where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number of neighbors that are 
 foreground and background respectively and $\gamma$ is a parameter to control how strongly the threshold
 adapts. The thresholding step can be done iteratively as labels are updated in each step.
-\\ \\
-These algorithms result in labels for each pixel in each frame as background or foreground. The number of foreground
-pixels in each frame could indicate whether a person is in the frame.
 
 \subsection{Direction Discrimination}
 After determining the foreground from the background, we look at determining the direction of flow of the foreground elements. We do this by taking the foreground elements only, setting the background elements to zero, and applying a gradient-based optical flow algorithm. This can be modeled as described in \cite{Smith97}:
@@ -199,12 +196,19 @@ Janis implemented both proposed background subtraction algorithms in backgroundS
 They take as input a structure of parameters
 and a 3-D array of temperatures over the two spatial and one temporal dimensions. This implementation could
 be modified to run in real time and, depending on the size of the history for the computation of the background
-PDF, would not require too much memory.
+PDF, would not require too much memory. The output of this function is a binary array of pixel labels, illustrated
+by Figure \ref{foregroundexample}. Motion events are identified by
+thresholding the total number of detected pixels (Figure \ref{abs_example}).
+\begin{center}\begin{tabular}{|ccc|ccc|}
+\multicolumn{3}{|c|}{Foreground Adaptive} & \multicolumn{3}{|c|}{Foreground Adaptive}\\
+blah & blah & blah & blah & blah & blah
+\end{tabular}\end{center}
+
 \begin{figure}[htb]  % detected foreground pixels
 \centering
 \includegraphics[scale=0.45]{images/foreground_example.png}
 \caption{Example of detected foreground pixels.}
-\label{bgd}
+\label{foregroundexample}
 \end{figure}
 
 \begin{figure}[htb]  % # detected foreground pixels / frame
@@ -212,7 +216,7 @@ PDF, would not require too much memory.
 \includegraphics[scale=0.45]{images/abs_example.png}
 \caption{Example of total number of foreground pixels in each frame compared to 
 ground truth events in gray.}
-\label{bgd}
+\label{abs_example}
 \end{figure}
 
 \subsection{Direction Discrimination}
