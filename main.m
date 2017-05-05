@@ -5,11 +5,11 @@
 doWrite = true; % write videos or not
 
 % parameters for simulation
-minFrames = 1000;
+minFrames = 500;
 pr = 0.3; % probability of motion (smaller is easier)
 
-% rng(2);
-% [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
+rng(2);
+[v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr);
 % load('exampleSimulation.mat');
 % v = readOccusenseVideo('OccusenseData/WeirdData/runoutandin');
 % isBackground = true(size(v, 3), 1);
@@ -24,13 +24,13 @@ pr = 0.3; % probability of motion (smaller is easier)
 % events = [31, -1];
 % peopleCount = -1;
 
-v = readOccusenseVideo('OccusenseData/WeirdData/twoquickout');
-isBackground = true(size(v, 3), 1);
-isBackground(35:51) = false;
-isBackground(68:76) = false;
-isBackground(84:90) = false;
-events = [35, -2; 68, 1; 84, 1];
-peopleCount = 0;
+% v = readOccusenseVideo('OccusenseData/WeirdData/twoquickout');
+% isBackground = true(size(v, 3), 1);
+% isBackground(35:51) = false;
+% isBackground(68:76) = false;
+% isBackground(84:90) = false;
+% events = [35, -2; 68, 1; 84, 1];
+% peopleCount = 0;
 
 % v = readOccusenseVideo('OccusenseData/TWO/OUT/two_out.txt');
 % isBackground = true(size(v, 3), 1);
