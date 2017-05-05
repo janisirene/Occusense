@@ -1,9 +1,9 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Example of detected foreground pixels.}}{6}
 \contentsline {figure}{\numberline {2}{\ignorespaces Example of optical flow vectors.}}{6}
-\contentsline {figure}{\numberline {3}{\ignorespaces three-step approach}}{7}
-\contentsline {figure}{\numberline {4}{\ignorespaces Mean vertical gradient for two out}}{7}
-\contentsline {figure}{\numberline {5}{\ignorespaces Mean vertical gradient for lingering through the door}}{8}
-\contentsline {figure}{\numberline {6}{\ignorespaces Mean vertical gradient for running out and in through the door}}{8}
+\contentsline {figure}{\numberline {3}{\ignorespaces Three-step implementation.}}{7}
+\contentsline {figure}{\numberline {4}{\ignorespaces Mean vertical gradient for two people walking out.}}{7}
+\contentsline {figure}{\numberline {5}{\ignorespaces Mean vertical gradient for lingering through the door.}}{8}
+\contentsline {figure}{\numberline {6}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{8}
 \contentsline {figure}{\numberline {7}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{9}
 \contentsline {figure}{\numberline {8}{\ignorespaces Proportion of correct direction classifications.}}{9}
 \contentsline {figure}{\numberline {9}{\ignorespaces Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow).}}{10}
