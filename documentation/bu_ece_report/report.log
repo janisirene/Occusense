@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  4 MAY 2017 23:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 08:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -263,23 +263,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--189
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--222
+Underfull \hbox (badness 10000) in paragraph at lines 212--223
 
  []
 
 [4]
 
-LaTeX Warning: Reference `opflw' on page 5 undefined on input line 225.
+LaTeX Warning: Reference `opflw' on page 5 undefined on input line 226.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 234.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
- [5] [6]
-(./report.bbl
+[5] [6] (./report.bbl
 Underfull \hbox (badness 3690) in paragraph at lines 21--22
 []\OT1/cmr/m/n/12 S. Smith, ``Re-views of Op-tic Flow, Mo-tion Seg-men-ta-tion,
  Edge find-
@@ -305,10 +297,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 1899 strings out of 493089
- 26418 string characters out of 6134842
+ 1882 strings out of 493089
+ 26116 string characters out of 6134842
  89548 words of memory out of 5000000
- 5356 multiletter control sequences out of 15000+600000
+ 5342 multiletter control sequences out of 15000+600000
  11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,11n,29p,1502b,212s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -329,7 +321,7 @@ xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texliv
 e/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew.pfb>
-Output written on report.pdf (19 pages, 206662 bytes).
+Output written on report.pdf (19 pages, 207378 bytes).
 PDF statistics:
  139 PDF objects out of 1000 (max. 8388607)
  98 compressed objects within 1 object stream

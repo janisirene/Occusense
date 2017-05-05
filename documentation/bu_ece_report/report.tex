@@ -198,7 +198,7 @@ PDF, would not require too much memory.
 \subsection{Direction Discrimination}
 Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
 
-\subsection{Direction Discrimination}
+\subsection{People Count}
 Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on . . .
 
 \section{Experimental Results}  % Article style
@@ -213,7 +213,8 @@ The background subtraction results are shown in the following ROC curves.The ker
 had overall better performance than the parametric method achieving hit rates of over 90\% for the best
 parameter sets with negligible false alarms in detecting a person in the frames. Most misses occurred
 because of spontaneous rapid changes in temperature of background pixels. These occur infrequently
-in the data but also arise when true foreground pixels are mislabelled and bias the background model.
+in the data but also arise when true foreground pixels are mislabelled and bias the background model, for 
+example at the edges of the foreground person.
 \\ \\
 The best parameters for the kernel-based method had strong influence from the Markov random field
 $0.2 \le \gamma \le 0.8$ based on a first order neighborhood, 
@@ -226,24 +227,25 @@ In Figure \ref{opflw}., we threshold to see if the velocity is large enough to c
 as there are some bounce back residual effects. For some 
 cases, it detects the person as moving in the opposite direction. 
 
-
+\subsection{People Count}
+Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
+integrate, we find that the variance of the error is quite large after only several motion events. As shown in Figure 9,
+the standard deviation of the error after 10 events is up to 3.
 
 \section{Conclusions} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
-\begin{itemize}
-\item Large-scale testing: We can simulate more and longer test videos to measure performance of the algorithms
-and their different parameter varieties. Based on these results we can modify the algorithms to improve performance.
-\item Data Acquisition: We will collect more difficult data to test the robustness of the algorithms.
-\end{itemize}
+Although these algorithms perform well in capturing individual motion events, the resulting integrated people count is 
+not a reliable estimate of room occupancy. There are several possible ways that this method could be improved. The
+first is to increase the frame rate of the thermal sensors to improve capture of fast motion and gaps between 
+two people passing through the door in quick succession. This could also result in a different distribution of 
+background noise but this can be dealt with by preprocessing the data or by the background model. Secondly,
+the detection of motion events could be improved to split single events that are suggestive of multiple people
+For example, when two people pass through quickly, one event is labeled but there are two clear peaks in the
+number of detected pixels. Finally, this split could also occur in the direction detection state where zero crossings
+of the vertical gradient indicate a person passing through the doorway.
 
 \newpage
-
 \section{Figures} % Tossed figures at end so page count is easier to discern
-%\begin{figure}[htb]
-%\includegraphics[scale=0.45]{images/ImplementationDiagram.png}
-%\caption{Algorithm flow.}
-%\label{bgd}
-%\end{figure}
 %\begin{figure}[htb] 
 %\includegraphics[scale=0.45]{images/foreground_example.png}
 %\caption{Example of detected foreground pixels.}
