@@ -236,7 +236,7 @@ ground truth events in gray.}
 
 
 \subsection{Direction Discrimination}
-Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This function returns spatial gradients in various forms: for individual pixels (Figure~\ref{opflw}, averaged across rows, and averaged per frame (Figure~\ref{twoout}). This information is passed to pCounter.m to perform final temporal gradients, direction decisions, and track occupancy. This implementation could be modified to run in real time to follow the background subtraction function.
+Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This function returns spatial gradients in various forms: for individual pixels (Figure~\ref{opflw}), averaged across rows, and averaged per frame (Figure~\ref{twoout}). This information is passed to pCounter.m to perform final temporal gradients, direction decisions, and track occupancy. This implementation could be modified to run in real time to follow the background subtraction function.
 \begin{figure}[htb]
 \centering
 \includegraphics[scale=0.52]{images/quiver_gradients.png}
@@ -264,8 +264,15 @@ Emily implemented this algorithm in the file opticalflow.m. It takes as input a 
 \label{run}
 \end{figure}
 
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.52]{images/quickoutandin.png}
+\caption{Mean vertical gradient for two people walking in together}
+\label{together}
+\end{figure}
+
 \subsection{People Count}
-Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when a even starts and stops.
+Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients over time, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. The direction is then decided based on this information. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when a event starts and stops.
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
@@ -291,10 +298,10 @@ background subtraction algorithms.}
 \end{figure}
 
 \subsection{Direction Discrimination}  % Article style
-This method seems to work well in detecting direction. However, it is still not accurate all the time, $\sim80\%$.
-In Figure \ref{opflw}., we threshold to see if the velocity is large enough to count as a person moving in a direction
-as there are some bounce back residual effects. For some 
-cases, it detects the person as moving in the opposite direction. 
+The direction discrimination works for all cases we tried except for multiple people walking in together. For the simple case of two people walking out (Figure~\ref{twoout}, the background subtraction algorithm correctly identifies two events, and the direction is easy to discriminate from the optical flow. For linger at the door, (Figure~\ref{linger}, because the noisy information in the middle frames are ignored, this also works well with our algorithm. In the case of someone running out and in quickly, Figure~\ref{run} again our algorithm is successful in determining between direction and successfully determines single frame events as motion versus noise. However, in the case where the background subtraction algorithm fails to detect individual people as individual events, the direction discrimination fails because it does not consider the middle frames in its decision, Figure~\ref{together}. This could be remedied by taking into account of the middle frames and employing peak counting or zero-crossing analysis. However, since the middle frames provide noisy information as seen in the lingering example, this information cannot be relied on counting the number of people entering or leaving. 
+
+
+
 \begin{figure}[htb]
 \centering
 \includegraphics[scale=0.52]{images/dirClass.png}
