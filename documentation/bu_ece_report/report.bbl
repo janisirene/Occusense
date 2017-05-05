@@ -1,5 +1,9 @@
 \begin{thebibliography}{1}
 
+\bibitem{Piccardi04}
+M.~Piccardi. ``Background subtraction techniques: a review,'' {\em IEEE International Conference on Systems,
+	Man and Cybernetics}, 2004.
+
 \bibitem{Goyette14}
  N.~Goyette, P.~Jodoin, F.~Porikli, J.~Konrad, and P.~Ishwar, ``A Novel Video Dataset for Change Detection
 	Benchmarking,'' {\em IEEE Transactions on Image Processing}, vol.~23, pp.~4663-79, Nov. 2014.
