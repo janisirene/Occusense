@@ -1,4 +1,4 @@
-function [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr)
+function [v, events, peopleCount, isBackground] = simulateLongVideo(minFrames, pr, nEvents)
 % v = simulateLongVideo(minFrames, pr)
 % inputs:
 %   minFrames - minimum length of the video  [default = 500];
@@ -13,6 +13,9 @@ if ~exist('minFrames', 'var')
 end
 if ~exist('pr', 'var')
     pr = 0.3; 
+end
+if ~exist('nEvents', 'var')
+    nEvents = inf; 
 end
 temp = load('labelleddata.mat'); % foregrounds, backgrounds, direction
 foregrounds = temp.foregrounds;
@@ -100,6 +103,10 @@ while 1
     
     if sIdx > minFrames
         break; 
+    end
+    if size(events, 1) == nEvents
+        v = v(:, :, 1:sIdx - 1);
+        break;
     end
 end
 

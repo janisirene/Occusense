@@ -87,7 +87,7 @@ A large part of a building's efficiency depends on the efficiency of its HVAC (H
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
-In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30°x120° positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
 
 % Following sections, subsections, etc.
 % -------------------------------------
@@ -95,7 +95,8 @@ In modern efficient buildings, controlling the HVAC system preemptively can be a
 %\chapter{Starting chapter}  % Report style
 % Briefly review the literature discussing some other approaches proposed to solve the problem (if any).
 Many background subtraction algorithms have been developed to detect changing pixels in a series of images.
-A brief review of the more common change detection algorithms can be found in \cite{Goyette14}.
+A brief review of simple background subtraction methods can be found in \cite{Piccardi04} and
+more common change detection algorithms in \cite{Goyette14}.
 The most successful amongst these incorporate a background model into the algorithm. The use of a model
 allows for thresholding of probabilities instead of pixel intensities and is therefore more robust to some variation
 in the background scene. In addition, foreground models can improve the sensitivity of the change detectors 
@@ -104,7 +105,7 @@ is based on spatial neighborhoods. To further improve the discrimination, they a
 so that labels are more spatially coherent
 \cite{Mchugh09}.
 \\ \\
-We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach as we use background subtraction to determine foreground elements ahead of time. The foreground elements can then be put through a gradient-based optical flow algorithm to determine the motion of the object. This can be modeled as a gradient with partial derivatives spatially and temporally for each pixel intensity, as each pixel will have a change in both the x-direction, y-direction, and time. \cite{Smith97}.
+We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach as we use background subtraction to determine foreground elements ahead of time. The foreground elements can then be put through a gradient-based optical flow algorithm to determine the motion of the object. This can be modeled as a gradient with partial derivatives spatially and temporally for each pixel intensity, as each pixel will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
 
 \section{Problem Statement}  % Article style
 %\section{Early section}  % Report style
@@ -114,13 +115,28 @@ Our approach breaks the problem into three parts: 1) detect a person in the door
 motion of the person, 3) classify the motion and track total number of people in a room.
 
 \subsection{Person Detection}
-We propose a background subtraction method to detect a person or persons in the frame. In order to accomplish this
+In order to accomplish this
 we make several assumptions about the acquired data. First, we assume that the background has slow temporal dynamics.
 Second, we assume that the data starts with some number of background-only frames. For business and residential 
 buildings this is likely true if they close for the night. Finally, we assume that the surface temperature of a single body as 
-detected by the sensor has the same variability as the background.
+detected by the sensor has the same variance as the background and that it will be greater than the temperature
+of the background.
+Here we propose two background subtractions method to detect a person or persons in the frame. 
+One method to detect foreground in each frame is to model the background temperatures in each pixel as a 
+gaussian which is updated with each new frame. The parameters of the background model are updated when 
+the current pixel is labeled as background:
+$$\mu_t = \rho I_t + (1-\rho)\mu_{t-1}$$
+$$\sigma_t^2 = (I_t - \mu_t)^2 \rho + (1-\rho)\sigma_{t-1}^2$$
+where $I_t$ is the pixel temperature and $\mu_t$ and $\sigma_t^2$ are the mean and variance
+of the gaussian in frame $t$. A Markov model can be applied to improve the spatial coherency of foreground labels:
+a pixel surrounded by foreground pixels has a low threshold since it is likely also foreground. Therefore,
+a pixel is labelled as foreground when
+$$\frac{I_t - \mu_t}{\sigma_t} >_\mathcal{F} \theta \exp((Q_\mathcal{B} - Q_\mathcal{F}) / \gamma)$$
+where $\theta$ is an initial threshold (\# of standard deviations), $Q_\mathcal{B}$ and $Q_\mathcal{F}$ are the number
+of neighboring background and foreground pixels respectively, and $\gamma$ is a parameter that changes 
+the influence of the Markov model on the threshold.
 \\ \\
-The proposed solution is inspired primarily by the foreground-adaptive background subtraction described in
+The second proposed solution is inspired primarily by the foreground-adaptive background subtraction described in
 \cite{Mchugh09}.
 The background can be modeled by a probability density function estimated at each pixel location $\mathbf{n}$
 from the $N$ most recent pixels that were labeled as background:
@@ -134,7 +150,7 @@ with threshold $\theta$ gives an initial classification of pixels into backgroun
 \\ \\
 The development of the foreground model follows a similar formulation, but the summation is over
 pixels in the neighborhood of $\mathbf{n}$ that have been already been labeled as foreground. The
-likelihood ratio of the probability density functions $P_\mathcal{B}$ and 
+ratio of the probability density functions $P_\mathcal{B}$ and 
 $P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furthermore,
 the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
 neighbors a pixel has the easier it is to be labeled as foreground. This will contribute to the spatial
@@ -145,7 +161,7 @@ where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number
 foreground and background respectively and $\gamma$ is a parameter to control how strongly the threshold
 adapts. The thresholding step can be done iteratively as labels are updated in each step.
 \\ \\
-This algorithm will result in labels for each pixel in each frame as background or foreground. The number of foreground
+These algorithms result in labels for each pixel in each frame as background or foreground. The number of foreground
 pixels in each frame could indicate whether a person is in the frame.
 
 \subsection{Direction Discrimination}
@@ -158,43 +174,52 @@ where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to
 \section{Implementation}  % Article style
 %\chapter{Another chapter}  % Report style
 % Describe how you have implemented the proposed solution; include the source code in the appendix.
-The current implementation of the algorithm is in Matlab. 
+The current implementation of the algorithm is in Matlab. The three parts of the algorithm (Fig ...)
+are implemented
+separately and can be run in sequence to output a single room occupancy number.
 
 \subsection{Data Acquisition}  % Article style
 %\section{New section}  % Report style
-The senior design team has a the thermal sensor setup and given us access to record data from it so that we can 
-continue to collect data on top of what they have already shared with us. We plan to collect a few trials of realistic
-but potentially difficult situations such as a person lingering in the doorway or multiple people passing through
+In addition to the labelled data from the senior design team, we acquired several trials of realistic but more
+difficult situations. This includes a person lingering in the doorway and multiple people passing through
 the door in quick succession.
 \\ \\
 The data is recorded into text files at a rate of 8-12Hz. The data we currently have was recorded at 8Hz
 though the Occusense team has updated the sampling rate to 12Hz.
 
 \subsection{Person Detection}
-Janis implemented this algorithm in the file backgroundSubtraction.m. It takes as input a structure of parameters
-and a 3-D array of temperatures over the two spatial and one time dimensions. This implementation could
+Janis implemented both proposed background subtraction algorithms in backgroundSubtractionSimple.m 
+(running gaussian) and backgroundSubtraction.m (kernel-based approach).
+They take as input a structure of parameters
+and a 3-D array of temperatures over the two spatial and one temporal dimensions. This implementation could
 be modified to run in real time and, depending on the size of the history for the computation of the background
 PDF, would not require too much memory.
 
 \subsection{Direction Discrimination}
 Emily implemented this algorithm in the file opticalflow.m. It takes as input a 3-D array of temperatures over the two spatial and one time dimensions. This can be the raw information provided by the sensors or a masked foreground-only version that has already undergone background subtraction. This implementation could be modified to run in real time to follow the background subtraction function.
 
-\subsection{Direction Discrimination}
+\subsection{People Count}
 Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients, and averages them per a frame and calculates the temporal gradients based on . . .
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
 % Describe the experiments you have conducted and the results you have obtained. Are you results consistent
 % with your original goals?
-Algorithms are being tested on simulated data generated by randomly concatenating the current data that is labeled.
-The temperatures of the frames are shifted for continuity between frames.
+Algorithms were tested on simulated data generated by randomly concatenating the labelled data.
+The temperatures of the frames are shifted for continuity between frames. 
 
 \subsection{Background Subtraction}  % Article style
-This method seems to work very well in detecting motion even with a background
-temperature that is changing slowly over time as shown in Figure \ref{bgd}. Thresholding the number of detected
-foreground pixels would be more robust than thresholding the raw temperature values to determine
-if a person is in the frame.
-
+The background subtraction results are shown in the following ROC curves.The kernel-based method
+had overall better performance than the parametric method achieving hit rates of over 90\% for the best
+parameter sets with negligible false alarms in detecting a person in the frames. Most misses occurred
+because of spontaneous rapid changes in temperature of background pixels. These occur infrequently
+in the data but also arise when true foreground pixels are mislabelled and bias the background model, for 
+example at the edges of the foreground person.
+\\ \\
+The best parameters for the kernel-based method had strong influence from the Markov random field
+$0.2 \le \gamma \le 0.8$ based on a first order neighborhood, 
+and a gaussian kernel with $\sigma = 0.5$ (approximately the standard deviation of 
+the background estimated from the data).
 
 \subsection{Direction Discrimination}  % Article style
 This method seems to work well in detecting direction. However, it is still not accurate all the time, $\sim80\%$.
@@ -202,64 +227,70 @@ In Figure \ref{opflw}., we threshold to see if the velocity is large enough to c
 as there are some bounce back residual effects. For some 
 cases, it detects the person as moving in the opposite direction. 
 
-
+\subsection{People Count}
+Room occupancy is computed as cumulative sum of people entering and exiting the room. Since the errors here
+integrate, we find that the variance of the error is quite large after only several motion events. As shown in Figure 9,
+the standard deviation of the error after 10 events is up to 3.
 
 \section{Conclusions} % Should become Conclusions
 % Describe what you have learned from the project and what further improvements are possible.
-\begin{itemize}
-\item Large-scale testing: We can simulate more and longer test videos to measure performance of the algorithms
-and their different parameter varieties. Based on these results we can modify the algorithms to improve performance.
-\item Data Acquisition: We will collect more difficult data to test the robustness of the algorithms.
-\end{itemize}
+Although these algorithms perform well in capturing individual motion events, the resulting integrated people count is 
+not a reliable estimate of room occupancy. There are several possible ways that this method could be improved. The
+first is to increase the frame rate of the thermal sensors to improve capture of fast motion and gaps between 
+two people passing through the door in quick succession. This could also result in a different distribution of 
+background noise but this can be dealt with by preprocessing the data or by the background model. Secondly,
+the detection of motion events could be improved to split single events that are suggestive of multiple people
+For example, when two people pass through quickly, one event is labeled but there are two clear peaks in the
+number of detected pixels. Finally, this split could also occur in the direction detection state where zero crossings
+of the vertical gradient indicate a person passing through the doorway.
 
 \newpage
-
 \section{Figures} % Tossed figures at end so page count is easier to discern
-\begin{figure}[htb] 
-\includegraphics[scale=0.45]{images/foreground_example.png}
-\caption{Example of detected foreground pixels.}
-\label{bgd}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/quiver_gradients.png}
-\caption{Example of optical flow vectors.}
-\label{opflw}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.2]{images/threestep.png}
-\caption{three-step approach}
-\label{threestep}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/two_out.png}
-\caption{Mean vertical gradient for two out}
-\label{twoout}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/lingerThrough.png}
-\caption{Mean vertical gradient for lingering through the door}
-\label{linger}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/runoutandin.png}
-\caption{Mean vertical gradient for running out and in through the door}
-\label{run}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/roc.png}
-\caption{ROC}
-\label{roc}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/dirClass.png}
-\caption{Direction Classifier}
-\label{dirclass}
-\end{figure}
-\begin{figure}[htb]
-\includegraphics[scale=0.52]{images/pcerror_gamma0.20_hist.png}
-\caption{Histogram}
-\label{hist}
-\end{figure}
+%\begin{figure}[htb] 
+%\includegraphics[scale=0.45]{images/foreground_example.png}
+%\caption{Example of detected foreground pixels.}
+%\label{bgd}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/quiver_gradients.png}
+%\caption{Example of optical flow vectors.}
+%\label{opflw}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.2]{images/threestep.png}
+%\caption{three-step approach}
+%\label{threestep}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/two_out.png}
+%\caption{Mean vertical gradient for two out}
+%\label{twoout}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/lingerThrough.png}
+%\caption{Mean vertical gradient for lingering through the door}
+%\label{linger}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/runoutandin.png}
+%\caption{Mean vertical gradient for running out and in through the door}
+%\label{run}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/roc.png}
+%\caption{ROC}
+%\label{roc}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/dirClass.png}
+%\caption{Direction Classifier}
+%\label{dirclass}
+%\end{figure}
+%\begin{figure}[htb]
+%\includegraphics[scale=0.52]{images/pcerror_gamma0.20_hist.png}
+%\caption{Histogram}
+%\label{hist}
+%\end{figure}
 
 
 
