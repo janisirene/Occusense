@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 12:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  5 MAY 2017 13:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -195,7 +195,12 @@ Package pdftex.def Info: BUlogo_cmyk-eps-converted-to.pdf used on input line 49
 (pdftex.def)             Requested size: 126.63458pt x 56.9055pt.
  [2
 
- <./BUlogo_cmyk-eps-converted-to.pdf>] [1
+ <./BUlogo_cmyk-eps-converted-to.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+
+ []
+
+[1
 
 ] (./report.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -250,31 +255,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 186--192
 
  []
 
+
+Overfull \hbox (30.98788pt too wide) in paragraph at lines 204--218
+[][] 
+ []
+
 <images/foreground_example.png, id=55, 650.43pt x 222.1098pt>
 File: images/foreground_example.png Graphic file (type png)
 
 <use images/foreground_example.png>
-Package pdftex.def Info: images/foreground_example.png used on input line 208.
+Package pdftex.def Info: images/foreground_example.png used on input line 224.
 (pdftex.def)             Requested size: 292.6908pt x 99.94847pt.
 
 <images/abs_example.png, id=56, 650.43pt x 300.1614pt>
 File: images/abs_example.png Graphic file (type png)
 
 <use images/abs_example.png>
-Package pdftex.def Info: images/abs_example.png used on input line 215.
+Package pdftex.def Info: images/abs_example.png used on input line 231.
 (pdftex.def)             Requested size: 292.6908pt x 135.07138pt.
 
 <images/quiver_gradients.png, id=57, 562.1pt x 183.68625pt>
 File: images/quiver_gradients.png Graphic file (type png)
 
 <use images/quiver_gradients.png>
-Package pdftex.def Info: images/quiver_gradients.png used on input line 225.
+Package pdftex.def Info: images/quiver_gradients.png used on input line 242.
 (pdftex.def)             Requested size: 292.29369pt x 95.51738pt.
 
 <images/two_out.png, id=58, 620.0766pt x 413.3844pt>
 File: images/two_out.png Graphic file (type png)
  <use images/two_out.png>
-Package pdftex.def Info: images/two_out.png used on input line 231.
+Package pdftex.def Info: images/two_out.png used on input line 248.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
 [4 <./images/threestep.png>]
@@ -282,44 +292,50 @@ Package pdftex.def Info: images/two_out.png used on input line 231.
 File: images/lingerThrough.png Graphic file (type png)
 
 <use images/lingerThrough.png>
-Package pdftex.def Info: images/lingerThrough.png used on input line 238.
+Package pdftex.def Info: images/lingerThrough.png used on input line 255.
 (pdftex.def)             Requested size: 334.46748pt x 214.96112pt.
 
 <images/runoutandin.png, id=64, 620.0766pt x 413.3844pt>
 File: images/runoutandin.png Graphic file (type png)
 
 <use images/runoutandin.png>
-Package pdftex.def Info: images/runoutandin.png used on input line 245.
+Package pdftex.def Info: images/runoutandin.png used on input line 262.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
- [5 <./images/foreground_example.png> <./images/abs_example.png (PNG copy)> <./
-images/quiver_gradients.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 261--272
+ [5 <./images/foreground_example.png> <./images/abs_example.png (PNG copy)>] [6
+ <./images/quiver_gradients.png> <./images/two_out.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 282--293
 
  []
 
-<images/roc.png, id=70, 620.0766pt x 413.3844pt>
+[7 <./images/lingerThrough.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 313--324
+
+ []
+
+[8 <./images/runoutandin.png (PNG copy)>]
+<images/roc.png, id=80, 620.0766pt x 413.3844pt>
 File: images/roc.png Graphic file (type png)
  <use images/roc.png>
-Package pdftex.def Info: images/roc.png used on input line 275.
+Package pdftex.def Info: images/roc.png used on input line 327.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
- [6 <./images/two_out.png (PNG copy)>]
-<images/dirClass.png, id=74, 620.0766pt x 413.3844pt>
+
+<images/dirClass.png, id=81, 620.0766pt x 413.3844pt>
 File: images/dirClass.png Graphic file (type png)
 
 <use images/dirClass.png>
-Package pdftex.def Info: images/dirClass.png used on input line 288.
+Package pdftex.def Info: images/dirClass.png used on input line 340.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-<images/pcerror_gamma020_hist.png, id=75, 620.0766pt x 413.3844pt>
+<images/pcerror_gamma020_hist.png, id=82, 620.0766pt x 413.3844pt>
 File: images/pcerror_gamma020_hist.png Graphic file (type png)
 
 <use images/pcerror_gamma020_hist.png>
-Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 29
-9.
+Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 35
+1.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
- [7 <./images/lingerThrough.png (PNG copy)>] [8 <./images/runoutandin.png (PNG 
-copy)>] [9 <./images/roc.png (PNG copy)> <./images/dirClass.png (PNG copy)>] [1
-0 <./images/pcerror_gamma020_hist.png (PNG copy)>] (./report.bbl
+ [9 <./images/roc.png (PNG copy)>]
+[10 <./images/dirClass.png (PNG copy)>] [11 <./images/pcerror_gamma020_hist.png
+ (PNG copy)>] (./report.bbl
 Underfull \hbox (badness 3690) in paragraph at lines 21--22
 []\OT1/cmr/m/n/12 S. Smith, ``Re-views of Op-tic Flow, Mo-tion Seg-men-ta-tion,
  Edge find-
@@ -337,17 +353,17 @@ Underfull \hbox (badness 2529) in paragraph at lines 21--22
 n (FM-RIB)\OT1/cmr/m/n/12 ,
  []
 
-) [11
+) [12
 
 ] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 1943 strings out of 493089
- 27467 string characters out of 6134842
- 89612 words of memory out of 5000000
- 5391 multiletter control sequences out of 15000+600000
+ 1944 strings out of 493089
+ 27483 string characters out of 6134842
+ 91621 words of memory out of 5000000
+ 5392 multiletter control sequences out of 15000+600000
  11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,29p,1502b,227s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,29p,1503b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
@@ -366,10 +382,10 @@ b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></
 usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew
 .pfb>
-Output written on report.pdf (17 pages, 583950 bytes).
+Output written on report.pdf (18 pages, 588601 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 149 PDF objects out of 1000 (max. 8388607)
+ 96 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

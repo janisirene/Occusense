@@ -194,15 +194,30 @@ by the Occusense team and the difficult situations data is recorded at 12Hz.
 Janis implemented both proposed background subtraction algorithms in backgroundSubtractionSimple.m 
 (running gaussian) and backgroundSubtraction.m (kernel-based approach).
 They take as input a structure of parameters
-and a 3-D array of temperatures over the two spatial and one temporal dimensions. This implementation could
+and a 3-D array of temperatures over the two spatial and one temporal dimensions. 
+The best parameter ranges are described in Table \ref{bs_paramstable}.
+This implementation could
 be modified to run in real time and, depending on the size of the history for the computation of the background
 PDF, would not require too much memory. The output of this function is a binary array of pixel labels, illustrated
 by Figure \ref{foregroundexample}. Motion events are identified by
 thresholding the total number of detected pixels (Figure \ref{abs_example}).
-\begin{center}\begin{tabular}{|ccc|ccc|}
-\multicolumn{3}{|c|}{Foreground Adaptive} & \multicolumn{3}{|c|}{Foreground Adaptive}\\
-blah & blah & blah & blah & blah & blah
-\end{tabular}\end{center}
+\begin{table}\begin{tabular}{|clr|clr|}
+\hline
+\multicolumn{3}{|c|}{Foreground Adaptive} & \multicolumn{3}{|c|}{Running Gaussian Average}\\
+\hline
+& Description & Good Range & & Description & Good Range\\
+\hline
+$N$ & \# background frames & 10-30 & $N$ & \# background frames & 10-30\\
+$\sigma$ & std of gaussian kernel & 0.4-0.6 & $\rho$ & size of temporal window & 0.01\\
+$\gamma$ & influence of MRF & 0.2 - 0.8 & $\gamma$ & influence of MRF & $>1$\\
+$N_\eta$ & neighborhood order & 1 & $N_\eta$ & neighborhood order & 1\\
+$it$ & labelling iterations & 3 & $it$ & labelling iterations & 3\\
+$\theta$ & automatic & - & $\theta$ & threshold & 2.5\\
+\hline
+\end{tabular}
+\caption{Good parameter ranges for background subtraction algorithms.}
+\label{bs_paramstable}
+\end{table}
 
 \begin{figure}[htb] 
 \centering
