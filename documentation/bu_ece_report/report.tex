@@ -33,7 +33,7 @@
 % ------------
 \buecedefinitions%
         {Room Occupancy sensing using a thermal tripwire}
-        {Occusense: Intermediate Report}
+        {Occusense: Final Report}
         {Janis Intoy and Emily Lam}
         {May 5, 2017}
         {2017-01} % Number of the report (four year digits and number) What is the number supposed to be???????? NO IDEA!!
@@ -62,7 +62,7 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \buecereportsummary{
-A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to a estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and a standard deviation of 3 after 10 events.}
+A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and a standard deviation of 3 after 10 events.}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -87,7 +87,7 @@ A large part of a building's efficiency depends on the efficiency of its HVAC (H
 
 \section{Introduction}  % Article style
 %\chapter{Introduction}  % Report style
-In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly, before feedback sensing technology can detect abnormalities, such as rising temperatures in a crowded room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on who is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down, Figure~\ref{door}. It is capable of capturing a 16x4 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
+In modern efficient buildings, controlling the HVAC system preemptively can be a huge cost saver. Therefore, Occusense, a senior design team at Boston University, is working towards developing sensing technology and algorithms to continuously keep count of the number of people in a room. This way, the system can adjust system parameters, such as ventilation, accordingly, before feedback sensing technology can detect abnormalities in the air quality of a room. There are a number of ways to detect occupancy, such as using a fisheye camera to count the number of people in a frame. However, this project assumes a tripwire methodology, that is if a room has a low number of entry points, counting people can be done at the entries based on if someone or something is entering or leaving the room. As such, continuous knowledge of the number of people in a room is achieved as a running tally. The senior design team has implemented a low resolution thermal sensor with a field of view of 30$^\circ$x120$^\circ$ positioned at the top of the door frame and looking perpendicularly down, Figure~\ref{door}. It is capable of capturing a 4x16 pixel array of temperatures at frame rates of 8-12Hz. Using this information, our project develops an algorithm to count the number of people entering or leaving a room. Specifically, this algorithm will 1) detect the presence of a moving person in the frame, 2) determine the direction of motion of the person, and 3) keep count of the total number of people in a room.
 
 \begin{figure}[!htb]
 \centering
@@ -112,24 +112,24 @@ is based on spatial neighborhoods. To further improve the discrimination, they a
 so that labels are more spatially coherent
 \cite{Mchugh09}.
 \\ \\
-We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with space and time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach as we use background subtraction to determine foreground elements ahead of time. The foreground elements can then be put through a gradient-based optical flow algorithm to determine the motion of the object. This can be modeled as a gradient with partial derivatives spatially and temporally for each pixel intensity, as each pixel will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
+We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with space and time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach on foreground elements so that only the foreground elements are put through the gradient-based optical flow algorithm when determining object motion. While this method relies on background subtraction for foreground selection, it does not require prior training. The gradient-based optical flow algorithm models gradients based on partial derivatives for each pixel intensity with respect to space and time, as each pixel's intensity will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
 
 \section{Problem Statement and Proposed Solution}  % Article style
 %\section{Early section}  % Report style
 % Describe the problem in detail, and the solution proposed, including assumptions, constraints, math formulas, algorithms,
 % etc.
-Our project aims to keep track of the number of people in a room based on the tripwire methodology. Our approach breaks the problem into three parts: 1) detect a person in the doorway, 2) determine the direction of motion of the person, 3) classify the motion and track total number of people in a room.
+Our project aims to keep track of the number of people in a room based on the tripwire methodology. Our approach breaks the problem into three parts: 1) detect a person in the doorway, 2) determine the direction of motion of the person, 3) classify the motion and track the total number of people in a room.
 
 \subsection{Person Detection}
 In order to accomplish this
 we make several assumptions about the acquired data. First, we assume that the background has slow temporal dynamics.
 Second, we assume that the data starts with some number of background-only frames. For business and residential 
 buildings this is likely true if they close for the night. Finally, we assume that the surface temperature of a single body as 
-detected by the sensor has the same variance as the background and that it will be greater than the temperature
+detected by the sensor has the same variance as the background, that is noise is not signal dependent, and that it will be greater than the temperature
 of the background.
-Here we propose two background subtractions method to detect a person or persons in the frame. 
-One method to detect foreground in each frame is to model the background temperatures in each pixel as a 
-gaussian which is updated with each new frame. The parameters of the background model are updated when 
+Here we propose two background subtraction methods to detect a person or persons in the frame. 
+One method to detect foreground in each frame is to model the background temperatures of each pixel as a 
+Gaussian which is updated with each new frame. The parameters of the background model are updated when 
 the current pixel is labeled as background:
 $$\mu_t = \rho I_t + (1-\rho)\mu_{t-1}$$
 $$\sigma_t^2 = (I_t - \mu_t)^2 \rho + (1-\rho)\sigma_{t-1}^2$$
@@ -155,15 +155,15 @@ background, and $\mathcal{K}$ is a zero-mean Gaussian with variance $\sigma^2$. 
 with threshold $\theta$ gives an initial classification of pixels into background or foreground.
 \\ \\
 The development of the foreground model follows a similar formulation, but the summation is over
-pixels in the neighborhood of $\mathbf{n}$ that have been already been labeled as foreground. The
+pixels in the neighborhood of $\mathbf{n}$ that already have been labeled as foreground. The
 ratio of the probability density functions $P_\mathcal{B}$ and 
 $P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furthermore,
 the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
 neighbors a pixel has the easier it is to be labeled as foreground. This will contribute to the spatial
-coherency of the labels. Thus, a pixel is labeled as background if
+coherence of the labels. Thus, a pixel is labeled as background if
 $$\frac{P_\mathcal{B}(I[\mathbf{n}])}{P_\mathcal{F}(I[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
 	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] )\right)$$
-where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number of neighbors that are 
+where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number of neighbors of $\mathbf{n}$ that are 
 foreground and background respectively and $\gamma$ is a parameter to control how strongly the threshold
 adapts. The thresholding step can be done iteratively as labels are updated in each step.
 
@@ -200,8 +200,8 @@ In addition to the labelled data from the senior design team, we acquired severa
 difficult situations. This includes a person lingering in the doorway, a person rushing out the door and back in, and multiple people passing through
 the door in quick succession.
 \\ \\
-The data is recorded into text files at a rate of 8-12Hz. The labeled data is recorded at 8Hz
-by the Occusense team and the difficult situations data is recorded at 12Hz.
+The data was recorded into text files at a rate of 8-12Hz. The labeled data was recorded at 8Hz
+by the Occusense team and the difficult situations data was recorded at 12Hz.
 
 \subsection{Person Detection}
 Janis implemented both proposed background subtraction algorithms in backgroundSubtractionSimple.m 
@@ -212,7 +212,7 @@ The best parameter ranges are described in Table \ref{bs_paramstable}.
 This implementation could
 be modified to run in real time and, depending on the size of the history for the computation of the background
 PDF, would not require too much memory. The output of this function is a binary array of pixel labels 
-(Figure~\ref{foregroundexample}). Motion events are identified by
+(red dots in Figure~\ref{foregroundexample}). Motion events are identified by
 thresholding the total number of detected pixels (Figure~ \ref{abs_example}).
 \begin{table}[htb]\begin{tabular}{|clr|clr|}
 \hline
@@ -266,7 +266,7 @@ Emily implemented this algorithm in the file opticalflow.m. It takes as input a 
 
 
 \subsection{People Count}
-Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients over time, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding the the middle of an event is too noisy. The direction is then decided based on this information. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to noise. In addition, this information is used to determine when an event starts and stops.
+Janis and Emily implemented this algorithm in the file pCounter.m. This files takes the output of the opticalflow.m, a series of vertical gradients over time, and averages them per a frame and calculates the temporal gradients based on the first and and last time frame as the optical flow information for the frames corresponding to the middle of an event are too noisy. The direction is then decided based on this information. This function also decides when single-frame events are considered noise are not based on the mean number of foreground pixels. If there are less than 4 foreground pixels, the frame is considered to be noise and discarded. In addition, this information is used to determine when an event starts and stops.
 
 \section{Experimental Results}  % Article style
 %\chapter{Final chapter}  % Report style
@@ -278,7 +278,7 @@ randomly vertically flipped to remove the directional bias.
 The temperatures of the frames are shifted for continuity between frames. 
 
 \subsection{Background Subtraction}  % Article style
-The background subtraction results are shown in the ROC curves (Figure~\ref{roc}).
+The background subtraction results are shown as ROC curves (Figure~\ref{roc}).
 The kernel-based method
 had overall better performance than the parametric method achieving hit rates of over 90\% for the best
 parameter sets with negligible false alarms in detecting a person in the frames. Most misses occurred
@@ -296,7 +296,7 @@ background subtraction algorithms.}
 \end{figure}
 
 \subsection{Direction Discrimination}  % Article style
-The direction discrimination works for all cases we tried except for multiple people walking in together. For the simple case of two people walking out, Figure~\ref{twoout}, the background subtraction algorithm correctly identifies two events, and the direction is easy to discriminate from the optical flow. For linger at the door, Figure~\ref{linger}, because the noisy information in the middle frames are ignored, this also works well with our algorithm. In the case of someone running out and in quickly, Figure~\ref{run}, again our algorithm is successful in determining between direction and successfully determines single frame events as motion versus noise. However, in the case where the background subtraction algorithm fails to detect individual people as individual events, the direction discrimination fails because it does not consider the middle frames in its decision, Figure~\ref{together}. This could be remedied by taking into account of the middle frames and employing peak counting or zero-crossing analysis. However, since the middle frames provide noisy information as seen in the lingering example, this information cannot be relied on counting the number of people entering or leaving. Overall, the direction discrimination works well, Figure~\ref{dirclass}, and the major result in error is accounted for by the error in the background subtraction algorithm.
+The direction discrimination works for all cases we tried except for multiple people walking in together. For the simple case of two people walking out, Figure~\ref{twoout}, the background subtraction algorithm correctly identifies two events, and the direction is easy to discriminate from the optical flow. For lingering at the door, Figure~\ref{linger}, because the noisy information in the middle frames is ignored, this also works well with our algorithm. In the case of someone running out and in quickly, Figure~\ref{run}, again our algorithm is successful in determining the direction and successfully determines single frame events as motion versus noise. However, in the case where the background subtraction algorithm fails to detect individual people as individual events, the direction discrimination fails because it does not consider the middle frames in its decision, Figure~\ref{together}. This could be remedied by taking into account the middle frames and employing peak counting or zero-crossing analysis. However, since the middle frames provide noisy information as seen in the lingering example, this information cannot be relied on when counting the number of people entering or leaving. Overall, the direction discrimination works well, Figure~\ref{dirclass}, and the major result in error is due to the error in the background subtraction algorithm.
 
 \begin{figure}[!htb]
 \centering
@@ -350,7 +350,7 @@ background noise but this can be dealt with by preprocessing the data or by the 
 the detection of motion events could be improved to split single events that are suggestive of multiple people
 For example, when two people pass through quickly, one event is labeled but there are two clear peaks in the
 number of detected pixels. Finally, this split could also occur in the direction detection state where zero crossings
-of the vertical gradient indicate a person passing through the doorway. In addition, the logically next step would be
+of the vertical gradient indicate a person passing through the doorway. In addition, logically the next step would be
 to implement the algorithms in real-time.
 
 % Plots (PostScript files) are included through the ``figure'' environment.
