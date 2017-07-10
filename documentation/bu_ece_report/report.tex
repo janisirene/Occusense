@@ -62,7 +62,7 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \buecereportsummary{
-A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and a standard deviation of 3 after 10 events.}
+A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and an error of $\pm$3 in the occupancy count after 10 people pass through the door in either direction.}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -124,33 +124,32 @@ Our project aims to keep track of the number of people in a room based on the tr
 In order to accomplish this
 we make several assumptions about the acquired data. First, we assume that the background has slow temporal dynamics.
 Second, we assume that the data starts with some number of background-only frames. For business and residential 
-buildings this is likely true if they close for the night. Finally, we assume that the surface temperature of a single body as 
-detected by the sensor has the same variance as the background, that is noise is not signal dependent, and that it will be greater than the temperature
-of the background.
+buildings this is likely true if they close for the night. Finally, we assume that the noise in the 
+surface temperature measurements is independent of the signal.
 Here we propose two background subtraction methods to detect a person or persons in the frame. 
 One method to detect foreground in each frame is to model the background temperatures of each pixel as a 
 Gaussian which is updated with each new frame. The parameters of the background model are updated when 
 the current pixel is labeled as background:
-$$\mu_t = \rho I_t + (1-\rho)\mu_{t-1}$$
-$$\sigma_t^2 = (I_t - \mu_t)^2 \rho + (1-\rho)\sigma_{t-1}^2$$
-where $I_t$ is the pixel temperature and $\mu_t$ and $\sigma_t^2$ are the mean and variance
+$$\mu_t [\mathbf{n}] = \rho I_t [\mathbf{n}] + (1-\rho)\mu_{t-1} [\mathbf{n}]$$
+$$\sigma_t^2 [\mathbf{n}] = (I_t [\mathbf{n}] - \mu_t [\mathbf{n}])^2 \rho + (1-\rho)\sigma_{t-1}^2 [\mathbf{n}]$$
+where $I_t [\mathbf{n}]$ is the pixel temperature at position $ [\mathbf{n}]$ 
+and $\mu_t$ and $\sigma_t^2$ are the mean and variance
 of the gaussian in frame $t$. A Markov model can be applied to improve the spatial coherency of foreground labels:
 a pixel surrounded by foreground pixels has a low threshold since it is likely also foreground. Therefore,
 a pixel is labelled as foreground when
-$$\frac{I_t - \mu_t}{\sigma_t} >_\mathcal{F} \theta \exp((Q_\mathcal{B} - Q_\mathcal{F}) / \gamma)$$
-where $\theta$ is an initial threshold (\# of standard deviations), $Q_\mathcal{B}$ and $Q_\mathcal{F}$ are the number
-of neighboring background and foreground pixels respectively, and $\gamma$ is a parameter that changes 
+$$\frac{I_t [\mathbf{n}] - \mu_{t-1} [\mathbf{n}]}{\sigma_{t-1} [\mathbf{n}]} >_\mathcal{F} \theta \exp((Q_\mathcal{B} [\mathbf{n}] - Q_\mathcal{F} [\mathbf{n}]) / \gamma)$$
+where $\theta$ is an initial threshold (\# of standard deviations), $Q_\mathcal{B}[\mathbf{n}]$ and $Q_\mathcal{F}[\mathbf{n}]$ are the number
+of background and foreground pixels neighboring the pixel at position $ \mathbf{n}$ respectively, and $\gamma$ is a parameter that changes 
 the influence of the Markov model on the threshold.
 \\ \\
 The second proposed solution is inspired primarily by the foreground-adaptive background subtraction described in
 \cite{Mchugh09}.
 The background can be modeled by a probability density function estimated at each pixel location $\mathbf{n}$
 from the $N$ most recent pixels that were labeled as background:
-$$P_\mathcal{B}\left(I^{(k)} [\mathbf{n}]\right) = \frac{1}{N}\sum_{i \in \mathcal{B}_k[\mathbf{n}]} \mathcal{K}
-	\left(I^{(k)}[\mathbf{n}] - I^{(i)}[\mathbf{n}] \right)$$
+$$P_\mathcal{B}\left(I_t [\mathbf{n}]\right) = \frac{1}{N}\sum_{i \in \mathcal{B}_t[\mathbf{n}]} \mathcal{K}
+	\left(I_t[\mathbf{n}] - I_i[\mathbf{n}] \right)$$
 where 
-$I^{(k)}[\mathbf{n}]$ is the temperature at location $\mathbf{n}$,
-$B_k[\mathbf{n}]$ are the $N$ previous time indices at which the pixel located at $\mathbf{n}$ was labeled
+$B_t[\mathbf{n}]$ are the $N$ previous time indices at which the pixel located at $\mathbf{n}$ was labeled
 background, and $\mathcal{K}$ is a zero-mean Gaussian with variance $\sigma^2$. Thresholding these probabilities
 with threshold $\theta$ gives an initial classification of pixels into background or foreground.
 \\ \\
@@ -161,21 +160,20 @@ $P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furth
 the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
 neighbors a pixel has the easier it is to be labeled as foreground. This will contribute to the spatial
 coherence of the labels. Thus, a pixel is labeled as background if
-$$\frac{P_\mathcal{B}(I[\mathbf{n}])}{P_\mathcal{F}(I[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
+$$\frac{P_\mathcal{B}(I_t[\mathbf{n}])}{P_\mathcal{F}(I_t[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
 	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] )\right)$$
-where $Q_\mathcal{F}[\mathbf{n}]$ and $Q_\mathcal{B}[\mathbf{n}]$ are the number of neighbors of $\mathbf{n}$ that are 
-foreground and background respectively and $\gamma$ is a parameter to control how strongly the threshold
+where $\gamma$ is a parameter to control how strongly the threshold
 adapts. The thresholding step can be done iteratively as labels are updated in each step.
 
 \subsection{Direction Discrimination}
 After determining the foreground from the background, we look at determining the direction of flow of the foreground elements. We do this by taking the foreground elements only, setting the background elements to zero, and applying a gradient-based optical flow algorithm. This can be modeled as described in \cite{Smith97}:
 $$\frac{\partial I}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial I}{\partial y}\frac{\partial y}{\partial t} + \frac{\partial I}{\partial t}=0$$
-Since we are only concerned about the vertical velocity, i.e. a person walks through the door frame and the laterally motion is trivial, the previous equation can be written: 
+Since we are only concerned with the vertical velocity, i.e. a person walks through the door frame and the laterally motion is trivial, the previous equation can be written as
 $$v_y = - \frac{\frac{\partial I}{\partial t}}{\frac{\partial I}{\partial y}}$$
-where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. In our system of 4x16 array of pixels, we generate an spatial gradient matrix consisting of 3x16 pixels to take the boundary condition into account. Next, we perform two averages, we average the rows to find the overall spatial gradient of the row, and we then average those row averages together to obtain an overall spatial gradient for the entire array per a time. Next, the temporal gradients are obtained between consecutive frames. The final velocity is then calculated and used to determine the optical flow of the foreground which determines whether a person is walking into or out of the room. 
+where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. In our system of 4x16 array of pixels, we generate a spatial gradient matrix consisting of 3x16 pixels to take the boundary condition into account. Next, we perform two averages, we average the rows to find the overall spatial gradient of the row, and we then average those row averages together to obtain an overall spatial gradient for the entire array per a time. Next, the temporal gradients are obtained between consecutive frames. The final velocity is then calculated and used to determine the optical flow of the foreground which determines whether a person is walking into or out of the room. 
 
 \subsection{Classifier and Counter}
-The classier determines when an event starts and stops based on the background subtraction algorithm. It then compares the spatial gradients at different times during each event and increments the overall counter according. In addition, it takes into account edge cases for determining between noise and data for single-frame events.
+A classier determines when an event starts and stops based on the background subtraction algorithm. It then compares the spatial gradients at different times during each event and increments the overall counter accordingly. In addition, it takes into account edge cases for determining between noise and data for single-frame events.
 
 \newpage
 
@@ -225,7 +223,7 @@ $\sigma$ & std of gaussian kernel & 0.4-0.6 & $\rho$ & size of temporal window &
 $\gamma$ & influence of MRF & 0.2 - 0.8 & $\gamma$ & influence of MRF & $>1$\\
 $N_\eta$ & neighborhood order & 1 & $N_\eta$ & neighborhood order & 1\\
 $it$ & labelling iterations & 3 & $it$ & labelling iterations & 3\\
-$\theta$ & automatic & - & $\theta$ & threshold & 2.5\\
+ &  &  & $\theta$ & threshold & 2.5\\
 \hline
 \end{tabular}
 \caption{Good parameter ranges for background subtraction algorithms.}
@@ -272,6 +270,8 @@ Janis and Emily implemented this algorithm in the file pCounter.m. This files ta
 %\chapter{Final chapter}  % Report style
 % Describe the experiments you have conducted and the results you have obtained. Are you results consistent
 % with your original goals?
+Janis To Do: Better explain test data.
+\\ \\
 Algorithms were tested on simulated data generated by randomly concatenating the labelled data. Since all
 of the data came from the same setup where the sensor was on the inside of the room, data were also
 randomly vertically flipped to remove the directional bias.
