@@ -168,9 +168,16 @@ adapts. The thresholding step can be done iteratively as labels are updated in e
 \subsection{Direction Discrimination}
 After determining the foreground from the background, we look at determining the direction of flow of the foreground elements. We do this by taking the foreground elements only, setting the background elements to zero, and applying a gradient-based optical flow algorithm. This can be modeled as described in \cite{Smith97}:
 $$\frac{\partial I}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial I}{\partial y}\frac{\partial y}{\partial t} + \frac{\partial I}{\partial t}=0$$
-Since we are only concerned with the vertical velocity, i.e. a person walks through the door frame and the laterally motion is trivial, the previous equation can be written as
+Since we are only concerned with the vertical velocity, i.e. a person walks through the door frame and the lateral motion is trivial, the previous equation can be written as
 $$v_y = - \frac{\frac{\partial I}{\partial t}}{\frac{\partial I}{\partial y}}$$
-where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. In our system of 4x16 array of pixels, we generate a spatial gradient matrix consisting of 3x16 pixels to take the boundary condition into account. Next, we perform two averages, we average the rows to find the overall spatial gradient of the row, and we then average those row averages together to obtain an overall spatial gradient for the entire array per a time. Next, the temporal gradients are obtained between consecutive frames. The final velocity is then calculated and used to determine the optical flow of the foreground which determines whether a person is walking into or out of the room. 
+where $v_y =  \frac{\partial y}{\partial t}$. A large $v_y $ would correspond to a lot of motion in that direction. 
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.3]{images/matrix.png}
+\caption{(a) raw 4x16xT matrix, $I(i,j,t)$ (b) 3x16 spatial gradients matrix at time $t$, $A(i,j,t)$, (c) 3x1 row averaged spatial gradients at time $t$, $B(i,t)$, (d) row and column averaged spatial gradients at time $t$, $C(t)$.}
+\label{matrix}
+\end{figure}
+In our system of 4x16 array of pixels, we only consider the foreground pixels with background elements set to zero. We generate a spatial gradient matrix consisting of 3x16 pixels to take the boundary condition into account to get matrix, $A(j,i,t)$, at time $t$, as follows: $$A(i,j,t) = I(i+1,j,t) - I(i,j,t) : i = 1, . . ., 3, j = 1, . . ., 16$$ Next, we perform two averages, we average the rows to find the overall spatial gradient of the row, $B(i,t)$, at time $t$, as follows: $$B(i,t) = \frac{1}{16}\sum_{j=1}^{16}A(i,j,t) : i = 1, . . .,3$$ Then we average those row averages together to obtain an overall spatial gradient for the entire matrix at time $t$, as follows: $$C(t) = \frac{1}{3}\sum_{i=1}^{3}B(i)$$ The temporal gradients are taken from $C(t)$ between consecutive frames, which also has spatial information embedded in it. The final velocity is then calculated as: $$v_y(t) = \frac{C(t)}{C(t+1)-C(t)}$$ which is used to determine the optical flow of the foreground which in turn determines whether a person is walking into or out of the room. 
 
 \subsection{Classifier and Counter}
 A classier determines when an event starts and stops based on the background subtraction algorithm. It then compares the spatial gradients at different times during each event and increments the overall counter accordingly. In addition, it takes into account edge cases for determining between noise and data for single-frame events.

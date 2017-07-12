@@ -13,41 +13,43 @@
 \citation{Mchugh09}
 \citation{Smith97}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Direction Discrimination}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Classifier and Counter}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Implementation}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three-step implementation.}}{5}}
-\newlabel{threestep}{{2}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Data Acquisition}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Person Detection}{5}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Good parameter ranges for background subtraction algorithms.}}{6}}
-\newlabel{bs_paramstable}{{1}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Example of detected foreground pixels.}}{6}}
-\newlabel{foregroundexample}{{3}{6}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Example of total number of foreground pixels in each frame compared to ground truth events in gray.}}{6}}
-\newlabel{abs_example}{{4}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Direction Discrimination}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example of optical flow vectors.}}{7}}
-\newlabel{opflw}{{5}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Mean vertical gradient for two people walking out.}}{7}}
-\newlabel{twoout}{{6}{7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}People Count}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Results}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Background Subtraction}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Direction Discrimination}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{9}}
-\newlabel{roc}{{7}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Mean vertical gradient for lingering through the door.}}{9}}
-\newlabel{linger}{{8}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{10}}
-\newlabel{run}{{9}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for two people walking in together}}{10}}
-\newlabel{together}{{10}{10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace  {}90\%.}}{11}}
-\newlabel{dirclass}{{11}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}}{11}}
-\newlabel{hist}{{12}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}People Count}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces (a) raw 4x16xT matrix, $I(i,j,t)$ (b) 3x16 spatial gradients matrix at time $t$, $A(i,j,t)$, (c) 3x1 row averaged spatial gradients at time $t$, $B(i,t)$, (d) row and column averaged spatial gradients at time $t$, $C(t)$.}}{4}}
+\newlabel{matrix}{{2}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Classifier and Counter}{5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Implementation}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Three-step implementation.}}{6}}
+\newlabel{threestep}{{3}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Data Acquisition}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Person Detection}{6}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Good parameter ranges for background subtraction algorithms.}}{7}}
+\newlabel{bs_paramstable}{{1}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Example of detected foreground pixels.}}{7}}
+\newlabel{foregroundexample}{{4}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example of total number of foreground pixels in each frame compared to ground truth events in gray.}}{7}}
+\newlabel{abs_example}{{5}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Direction Discrimination}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Example of optical flow vectors.}}{8}}
+\newlabel{opflw}{{6}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Mean vertical gradient for two people walking out.}}{8}}
+\newlabel{twoout}{{7}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}People Count}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Results}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Background Subtraction}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Direction Discrimination}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{10}}
+\newlabel{roc}{{8}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for lingering through the door.}}{10}}
+\newlabel{linger}{{9}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{11}}
+\newlabel{run}{{10}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Mean vertical gradient for two people walking in together}}{11}}
+\newlabel{together}{{11}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace  {}90\%.}}{12}}
+\newlabel{dirclass}{{12}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}}{12}}
+\newlabel{hist}{{13}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}People Count}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{13}}
 \bibstyle{ieeetrsrt}
 \bibdata{strings,konrad,manuals}
 \bibcite{Piccardi04}{1}
