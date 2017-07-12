@@ -1,14 +1,15 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.8.30)  11 JUL 2017 20:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  12 JUL 2017 17:49
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**./report.tex
+**report.tex
 (./report.tex
-LaTeX2e <2016/03/31> patch level 3
+LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
-(c:/texlive/2016/texmf-dist/tex/latex/base/article.cls
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(c:/texlive/2016/texmf-dist/tex/latex/base/size12.clo
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -22,8 +23,8 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (./bu_ece_report.sty
-(./fancyheadings.sty
+)
+(./bu_ece_report.sty (./fancyheadings.sty
 \headrulewidth=\dimen103
 \footrulewidth=\dimen104
 \plainheadrulewidth=\dimen105
@@ -43,37 +44,37 @@ Style option: `fancybox' v1.3 <2000/09/19> (tvz)
 \EndVerbatimTokens=\toks17
 \Verbatim@Outfile=\write3
 \Verbatim@Infile=\read1
-) (c:/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/epsfig.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/epsfig.sty
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks18
 )
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
 
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(c:/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 99.
+Package graphics Info: Driver file: pdftex.def on input line 96.
 
-(c:/texlive/2016/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count87
@@ -99,7 +100,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
- (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count88
 \scratchdimen=\dimen114
@@ -112,15 +114,15 @@ LaTeX Font Info:    ... okay on input line 30.
 \MPnumerator=\count92
 \makeMPintoPDFobject=\count93
 \everyMPtoPDFconversion=\toks20
-) (c:/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
+) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -128,36 +130,34 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(c:/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-(c:/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 ))
-(c:/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-(c:/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-38.
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 
-(c:/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -169,16 +169,16 @@ LaTeX Warning: \oval, \circle, or \line size unavailable on input line 44.
 
 [1
 
-{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 49.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 49.
 Package epstopdf Info: Source file: <BUlogo_cmyk.eps>
-(epstopdf)                    date: 2017-05-04 22:28:02
+(epstopdf)                    date: 2008-01-26 09:09:56
 (epstopdf)                    size: 399182 bytes
 (epstopdf)             Output file: <BUlogo_cmyk-eps-converted-to.pdf>
-(epstopdf)                    date: 2017-05-04 22:28:02
+(epstopdf)                    date: 2017-04-10 01:58:48
 (epstopdf)                    size: 20454 bytes
 (epstopdf)             Command: <repstopdf --outfile=BUlogo_cmyk-eps-converted-
 to.pdf BUlogo_cmyk.eps>
@@ -227,7 +227,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--65
  [4
 
 ]
-<images/door.png, id=35, 690.58pt x 743.77875pt>
+<images/door.png, id=36, 690.58pt x 743.77875pt>
 File: images/door.png Graphic file (type png)
  <use images/door.png>
 Package pdftex.def Info: images/door.png used on input line 94.
@@ -249,119 +249,143 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--163
 
  []
 
-[3] [4] <images/threestep.png, id=59, 1888.05376pt x 822.07124pt>
+[3] <images/matrix.png, id=56, 1288.815pt x 385.44pt>
+File: images/matrix.png Graphic file (type png)
+ <use images/matrix.png>
+Package pdftex.def Info: images/matrix.png used on input line 176.
+(pdftex.def)             Requested size: 386.64749pt x 115.63289pt.
+
+[4 <./images/matrix.png>] [5]
+<images/threestep.png, id=64, 1888.05376pt x 822.07124pt>
 File: images/threestep.png Graphic file (type png)
 
 <use images/threestep.png>
-Package pdftex.def Info: images/threestep.png used on input line 190.
+Package pdftex.def Info: images/threestep.png used on input line 197.
 (pdftex.def)             Requested size: 377.60406pt x 164.41133pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--206
+Underfull \hbox (badness 10000) in paragraph at lines 204--213
 
  []
 
 
-Overfull \hbox (30.98788pt too wide) in paragraph at lines 218--232
+Overfull \hbox (30.98788pt too wide) in paragraph at lines 225--239
 [][] 
  []
 
-[5 <./images/threestep.png>]
-<images/foreground_example.png, id=64, 650.43pt x 222.1098pt>
+[6 <./images/threestep.png>]
+<images/foreground_example.png, id=69, 650.43pt x 222.1098pt>
 File: images/foreground_example.png Graphic file (type png)
 
 <use images/foreground_example.png>
-Package pdftex.def Info: images/foreground_example.png used on input line 238.
+Package pdftex.def Info: images/foreground_example.png used on input line 245.
 (pdftex.def)             Requested size: 292.6908pt x 99.94847pt.
 
-<images/abs_example.png, id=65, 650.43pt x 300.1614pt>
+<images/abs_example.png, id=70, 650.43pt x 300.1614pt>
 File: images/abs_example.png Graphic file (type png)
 
 <use images/abs_example.png>
-Package pdftex.def Info: images/abs_example.png used on input line 245.
+Package pdftex.def Info: images/abs_example.png used on input line 252.
 (pdftex.def)             Requested size: 292.6908pt x 135.07138pt.
 
-<images/quiver_gradients.png, id=66, 562.1pt x 183.68625pt>
+<images/quiver_gradients.png, id=71, 562.1pt x 183.68625pt>
 File: images/quiver_gradients.png Graphic file (type png)
 
 <use images/quiver_gradients.png>
-Package pdftex.def Info: images/quiver_gradients.png used on input line 256.
+Package pdftex.def Info: images/quiver_gradients.png used on input line 263.
 (pdftex.def)             Requested size: 292.29369pt x 95.51738pt.
 
-<images/two_out.png, id=67, 620.0766pt x 413.3844pt>
+<images/two_out.png, id=72, 620.0766pt x 413.3844pt>
 File: images/two_out.png Graphic file (type png)
  <use images/two_out.png>
-Package pdftex.def Info: images/two_out.png used on input line 262.
+Package pdftex.def Info: images/two_out.png used on input line 269.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-[6 <./images/foreground_example.png> <./images/abs_example.png (PNG copy)>]
-[7 <./images/quiver_gradients.png> <./images/two_out.png>]
-<images/roc.png, id=78, 578.16pt x 433.62pt>
+[7 <./images/foreground_example.png> <./images/abs_example.png (PNG copy)>]
+[8 <./images/quiver_gradients.png> <./images/two_out.png>]
+<images/roc.png, id=83, 578.16pt x 433.62pt>
 File: images/roc.png Graphic file (type png)
  <use images/roc.png>
-Package pdftex.def Info: images/roc.png used on input line 294.
+Package pdftex.def Info: images/roc.png used on input line 301.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
 
-<images/legend.png, id=79, 350.5095pt x 230.66174pt>
-File: images/legend.png Graphic file (type png)
- <use images/legend.png>
-Package pdftex.def Info: images/legend.png used on input line 295.
-(pdftex.def)             Requested size: 140.20131pt x 92.26305pt.
 
-[8] <images/lingerThrough.png, id=83, 643.203pt x 413.3844pt>
+LaTeX Warning: File `images/legend.png' not found on input line 302.
+
+
+./report.tex:302: Package pdftex.def Error: File `images/legend.png' not found.
+
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.302 ...udegraphics[scale=0.4]{images/legend.png}
+                                                  
+? 
+[9] <images/lingerThrough.png, id=87, 643.203pt x 413.3844pt>
 File: images/lingerThrough.png Graphic file (type png)
 
 <use images/lingerThrough.png>
-Package pdftex.def Info: images/lingerThrough.png used on input line 306.
+Package pdftex.def Info: images/lingerThrough.png used on input line 313.
 (pdftex.def)             Requested size: 334.46748pt x 214.96112pt.
 
-<images/runoutandin.png, id=84, 620.0766pt x 413.3844pt>
+<images/runoutandin.png, id=88, 620.0766pt x 413.3844pt>
 File: images/runoutandin.png Graphic file (type png)
 
 <use images/runoutandin.png>
-Package pdftex.def Info: images/runoutandin.png used on input line 313.
+Package pdftex.def Info: images/runoutandin.png used on input line 320.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-<images/quickoutandin.png, id=85, 620.0766pt x 413.3844pt>
+<images/quickoutandin.png, id=89, 620.0766pt x 413.3844pt>
 File: images/quickoutandin.png Graphic file (type png)
 
 <use images/quickoutandin.png>
-Package pdftex.def Info: images/quickoutandin.png used on input line 320.
+Package pdftex.def Info: images/quickoutandin.png used on input line 327.
 (pdftex.def)             Requested size: 322.44168pt x 214.96112pt.
 
-<images/dirClass.png, id=86, 578.16pt x 433.62pt>
+<images/dirClass.png, id=90, 578.16pt x 433.62pt>
 File: images/dirClass.png Graphic file (type png)
  <use images/dirClass.png>
-Package pdftex.def Info: images/dirClass.png used on input line 327.
+Package pdftex.def Info: images/dirClass.png used on input line 334.
 (pdftex.def)             Requested size: 231.2599pt x 173.44492pt.
-File: images/legend.png Graphic file (type png)
 
-<use images/legend.png>
-Package pdftex.def Info: images/legend.png used on input line 328.
-(pdftex.def)             Requested size: 140.20131pt x 92.26305pt.
 
-<images/pcerror_gamma020_hist.png, id=87, 620.0766pt x 413.3844pt>
+LaTeX Warning: File `images/legend.png' not found on input line 335.
+
+
+./report.tex:335: Package pdftex.def Error: File `images/legend.png' not found.
+
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.335 ...udegraphics[scale=0.4]{images/legend.png}
+                                                  
+? 
+<images/pcerror_gamma020_hist.png, id=91, 620.0766pt x 413.3844pt>
 File: images/pcerror_gamma020_hist.png Graphic file (type png)
 
 <use images/pcerror_gamma020_hist.png>
-Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 33
-4.
+Package pdftex.def Info: images/pcerror_gamma020_hist.png used on input line 34
+1.
 (pdftex.def)             Requested size: 217.03006pt x 144.68669pt.
 
-<images/pcerror_gamma020.png, id=88, 620.0766pt x 413.3844pt>
+<images/pcerror_gamma020.png, id=92, 620.0766pt x 413.3844pt>
 File: images/pcerror_gamma020.png Graphic file (type png)
 
 <use images/pcerror_gamma020.png>
-Package pdftex.def Info: images/pcerror_gamma020.png used on input line 335.
+Package pdftex.def Info: images/pcerror_gamma020.png used on input line 342.
 (pdftex.def)             Requested size: 217.03006pt x 144.68669pt.
 
-Overfull \hbox (3.05121pt too wide) in paragraph at lines 334--336
+Overfull \hbox (3.05121pt too wide) in paragraph at lines 341--343
 [][] [] 
  []
 
-[9 <./images/roc.png (PNG copy)> <./images/legend.png> <./images/lingerThrough.
-png>] [10 <./images/runoutandin.png> <./images/quickoutandin.png>] [11 <./image
-s/dirClass.png (PNG copy)> <./images/pcerror_gamma020_hist.png (PNG copy)> <./i
-mages/pcerror_gamma020.png (PNG copy)>] [12
+[10 <./images/roc.png (PNG copy)> <./images/lingerThrough.png>] [11 <./images/r
+unoutandin.png> <./images/quickoutandin.png>] [12 <./images/dirClass.png (PNG c
+opy)> <./images/pcerror_gamma020_hist.png (PNG copy)> <./images/pcerror_gamma02
+0.png (PNG copy)>] [13
 
 ] (./report.bbl
 Underfull \hbox (badness 3690) in paragraph at lines 21--22
@@ -381,37 +405,39 @@ Underfull \hbox (badness 2529) in paragraph at lines 21--22
 n (FM-RIB)\OT1/cmr/m/n/12 ,
  []
 
-) [13
+) [14
 
 ] (./report.aux) ) 
 Here is how much of TeX's memory you used:
- 1971 strings out of 493013
- 27698 string characters out of 6136993
- 91055 words of memory out of 5000000
- 5473 multiletter control sequences out of 15000+600000
+ 1967 strings out of 493014
+ 28021 string characters out of 6133351
+ 90894 words of memory out of 5000000
+ 5468 multiletter control sequences out of 15000+600000
  11612 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,25p,1533b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-bx12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
-c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2016/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2016/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-msl12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
-><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/te
-xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb><c:/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2016/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmtt12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/latxfont/lcirclew.pfb>
-Output written on report.pdf (19 pages, 957248 bytes).
+ 41i,11n,25p,1531b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcirclew
+.pfb>
+Output written on report.pdf (20 pages, 963189 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
+ 167 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

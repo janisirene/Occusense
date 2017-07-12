@@ -1,12 +1,13 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Overarching system diagram. Our work focuses on the orange boxes.}}{1}
-\contentsline {figure}{\numberline {2}{\ignorespaces Three-step implementation.}}{5}
-\contentsline {figure}{\numberline {3}{\ignorespaces Example of detected foreground pixels.}}{6}
-\contentsline {figure}{\numberline {4}{\ignorespaces Example of total number of foreground pixels in each frame compared to ground truth events in gray.}}{6}
-\contentsline {figure}{\numberline {5}{\ignorespaces Example of optical flow vectors.}}{7}
-\contentsline {figure}{\numberline {6}{\ignorespaces Mean vertical gradient for two people walking out.}}{7}
-\contentsline {figure}{\numberline {7}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{9}
-\contentsline {figure}{\numberline {8}{\ignorespaces Mean vertical gradient for lingering through the door.}}{9}
-\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{10}
-\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for two people walking in together}}{10}
-\contentsline {figure}{\numberline {11}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace {}90\%.}}{11}
-\contentsline {figure}{\numberline {12}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}}{11}
+\contentsline {figure}{\numberline {2}{\ignorespaces (a) raw 4x16xT matrix, $I(i,j,t)$ (b) 3x16 spatial gradients matrix at time $t$, $A(i,j,t)$, (c) 3x1 row averaged spatial gradients at time $t$, $B(i,t)$, (d) row and column averaged spatial gradients at time $t$, $C(t)$.}}{4}
+\contentsline {figure}{\numberline {3}{\ignorespaces Three-step implementation.}}{6}
+\contentsline {figure}{\numberline {4}{\ignorespaces Example of detected foreground pixels.}}{7}
+\contentsline {figure}{\numberline {5}{\ignorespaces Example of total number of foreground pixels in each frame compared to ground truth events in gray.}}{7}
+\contentsline {figure}{\numberline {6}{\ignorespaces Example of optical flow vectors.}}{8}
+\contentsline {figure}{\numberline {7}{\ignorespaces Mean vertical gradient for two people walking out.}}{8}
+\contentsline {figure}{\numberline {8}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{10}
+\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for lingering through the door.}}{10}
+\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{11}
+\contentsline {figure}{\numberline {11}{\ignorespaces Mean vertical gradient for two people walking in together}}{11}
+\contentsline {figure}{\numberline {12}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace {}90\%.}}{12}
+\contentsline {figure}{\numberline {13}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}}{12}
