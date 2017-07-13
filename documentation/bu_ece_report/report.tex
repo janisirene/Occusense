@@ -35,7 +35,7 @@
         {Room Occupancy sensing using a thermal tripwire}
         {Occusense: Final Report}
         {Janis Intoy and Emily Lam}
-        {May 5, 2017}
+        {July 14, 2017}
         {2017-01} % Number of the report (four year digits and number) What is the number supposed to be???????? NO IDEA!!
 
 % Box with title to fit the opening in the cover
@@ -62,7 +62,7 @@
 \pagenumbering{roman}
 \setcounter{page}{1}
 \buecereportsummary{
-A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We test our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and an error of $\pm$3 in the occupancy count after 10 people pass through the door in either direction.}
+A large part of a building's efficiency depends on the efficiency of its HVAC (Heating Ventilation \& Air Conditioning) system, which can be improved with automatic adjustments based on room occupancy level. As thus, accurate prediction of the number of people in a room is needed. In order to estimate a room's occupancy level, the Occusense Senior Design team has created a privacy-preserving, low resolution, thermal sensor system to capture temperature images of people walking through the doorways. This project uses that information coupled with a background prediction algorithm and optical flow analysis to predict the direction of motion of the people passing through and keep a continuous count of the number of people in the room. \\ \\ We tested our algorithm on people moving in and out, people lingering at the door, people rushing through the door, and multiple people passing together through the door. Our algorithm was not successful for people passing together through the door. Final results are 90\% in classification and an error of $\pm$3 in the occupancy count after 10 people pass through the door in either direction.}
 
 % Table of contents, list of figures and list of tables.
 % ``\bueceemptypage'' adds empty page in double-sided
@@ -112,7 +112,7 @@ is based on spatial neighborhoods. To further improve the discrimination, they a
 so that labels are more spatially coherent
 \cite{Mchugh09}.
 \\ \\
-We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image move or change with space and time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach on foreground elements so that only the foreground elements are put through the gradient-based optical flow algorithm when determining object motion. While this method relies on background subtraction for foreground selection, it does not require prior training. The gradient-based optical flow algorithm models gradients based on partial derivatives for each pixel intensity with respect to space and time, as each pixel's intensity will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
+We also looked into algorithms for determining optical flow. Optical flow describes the direction elements in an image that move or change with space and time from frame to frame, usually in a vector form. There are three overarching approaches for determining optical flow: a feature-based approach, a correlation-based approach, and a gradient-based approach. For our project we consider the gradient-based approach on foreground elements so that only the foreground elements are put through the gradient-based optical flow algorithm when determining object motion. While this method relies on background subtraction for foreground selection, it does not require prior training. The gradient-based optical flow algorithm models gradients based on partial derivatives for each pixel intensity with respect to space and time, as each pixel's intensity will have a change in both the x-direction, y-direction, and time \cite{Smith97}.
 
 \section{Problem Statement and Proposed Solution}  % Article style
 %\section{Early section}  % Report style
@@ -134,9 +134,9 @@ $$\mu_t [\mathbf{n}] = \rho I_t [\mathbf{n}] + (1-\rho)\mu_{t-1} [\mathbf{n}]$$
 $$\sigma_t^2 [\mathbf{n}] = (I_t [\mathbf{n}] - \mu_t [\mathbf{n}])^2 \rho + (1-\rho)\sigma_{t-1}^2 [\mathbf{n}]$$
 where $I_t [\mathbf{n}]$ is the pixel temperature at position $ [\mathbf{n}]$ 
 and $\mu_t$ and $\sigma_t^2$ are the mean and variance
-of the gaussian in frame $t$. A Markov model can be applied to improve the spatial coherency of foreground labels:
+of the gaussian in frame $t$. A Markov model is applied to improve the spatial coherency of foreground labels:
 a pixel surrounded by foreground pixels has a low threshold since it is likely also foreground. Therefore,
-a pixel is labelled as foreground when
+a pixel at location $\mathbf{n}$ is labelled as foreground when
 $$\frac{I_t [\mathbf{n}] - \mu_{t-1} [\mathbf{n}]}{\sigma_{t-1} [\mathbf{n}]} >_\mathcal{F} \theta \exp((Q_\mathcal{B} [\mathbf{n}] - Q_\mathcal{F} [\mathbf{n}]) / \gamma)$$
 where $\theta$ is an initial threshold (\# of standard deviations), $Q_\mathcal{B}[\mathbf{n}]$ and $Q_\mathcal{F}[\mathbf{n}]$ are the number
 of background and foreground pixels neighboring the pixel at position $ \mathbf{n}$ respectively, and $\gamma$ is a parameter that changes 
@@ -144,7 +144,7 @@ the influence of the Markov model on the threshold.
 \\ \\
 The second proposed solution is inspired primarily by the foreground-adaptive background subtraction described in
 \cite{Mchugh09}.
-The background can be modeled by a probability density function estimated at each pixel location $\mathbf{n}$
+The background is modeled by a probability density function estimated at each pixel location $\mathbf{n}$
 from the $N$ most recent pixels that were labeled as background:
 $$P_\mathcal{B}\left(I_t [\mathbf{n}]\right) = \frac{1}{N}\sum_{i \in \mathcal{B}_t[\mathbf{n}]} \mathcal{K}
 	\left(I_t[\mathbf{n}] - I_i[\mathbf{n}] \right)$$
@@ -156,14 +156,16 @@ with threshold $\theta$ gives an initial classification of pixels into backgroun
 The development of the foreground model follows a similar formulation, but the summation is over
 pixels in the neighborhood of $\mathbf{n}$ that already have been labeled as foreground. The
 ratio of the probability density functions $P_\mathcal{B}$ and 
-$P_\mathcal{F}$ can be thresholded to determine new labels for each pixel. Furthermore,
-the number of foreground neighbors a pixel has can be used to adjust the threshold. The more foreground
-neighbors a pixel has the easier it is to be labeled as foreground. This will contribute to the spatial
+$P_\mathcal{F}$ is thresholded to determine new labels for each pixel. 
+Similar to the first proposed background subtraction solution,
+the number of foreground neighbors a pixel has is used to adjust the threshold. 
+The more foreground
+neighbors a pixel has the easier it is to be labeled as foreground. This contributes to the spatial
 coherence of the labels. Thus, a pixel is labeled as background if
-$$\frac{P_\mathcal{B}(I_t[\mathbf{n}])}{P_\mathcal{F}(I_t[\mathbf{n}])} > \theta \exp \left(\frac{1}{\gamma} 
-	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] )\right)$$
+$$\frac{P_\mathcal{B}(I_t[\mathbf{n}])}{P_\mathcal{F}(I_t[\mathbf{n}])} > \theta \exp \left(
+	(Q_\mathcal{F}[\mathbf{n}] - Q_\mathcal{B}[\mathbf{n}] ) / \gamma\right)$$
 where $\gamma$ is a parameter to control how strongly the threshold
-adapts. The thresholding step can be done iteratively as labels are updated in each step.
+adapts. The thresholding step is done iteratively as labels are updated in each step.
 
 \subsection{Direction Discrimination}
 After determining the foreground from the background, we look at determining the direction of flow of the foreground elements. We do this by taking the foreground elements only, setting the background elements to zero, and applying a gradient-based optical flow algorithm. This can be modeled as described in \cite{Smith97}:
@@ -276,7 +278,8 @@ Janis and Emily implemented this algorithm in the file pCounter.m. This files ta
 Algorithms were tested on labelled data that consisted of random concatenations of the 
 periods of background and foreground so that they resembled data collected
 over an extended period of time. The temperatures of the individual periods were biased
-to ensure continuity between frames. Also, since all of the data came from the same
+to ensure continuity of average temperature between frames. 
+Also, since all of the data came from the same
 setup where the sensor was on the inside of the room, individual periods were randomly flipped
 vertically to remove the directional bias.
 
@@ -293,8 +296,8 @@ the second peak in an event is sometimes much lower than the preceding one.
 \begin{figure}[htb]
 \includegraphics[scale=0.4]{images/roc.png}
 \includegraphics[scale=0.4]{images/legend.png}
-\caption{ROC curves of detecting motion events using different parameters for the two proposed
-background subtraction algorithms.}
+\caption{ROC curves of detecting motion events using different parameters for the kernel-based (blue)
+and running-gaussian (red) background subtraction algorithms.}
 \label{roc}
 \end{figure}
 
@@ -311,14 +314,14 @@ The direction discrimination works for all cases we tried except for multiple pe
 \begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.52]{images/lingerThrough.png}
-\caption{Mean vertical gradient for lingering through the door.}
+\caption{Mean vertical gradient for a person lingering through the door.}
 \label{linger}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.52]{images/runoutandin.png}
-\caption{Mean vertical gradient for running out and in through the door.}
+\caption{Mean vertical gradient for a person running out and in through the door.}
 \label{run}
 \end{figure}
 
@@ -333,14 +336,15 @@ The direction discrimination works for all cases we tried except for multiple pe
 \centering
 \includegraphics[scale=0.4]{images/dirClass.png}
 \includegraphics[scale=0.4]{images/legend.png}
-\caption{Proportion of correct direction classifications with peak peformance at ~90\%.}
+\caption{Proportion of correct direction classifications with peak peformance at ~90\%
+ following the kernel-based (blue) and running-gaussian (red) background subtraction algorithms.}
 \label{dirclass}
 \end{figure}
 
 \begin{figure}[!htb]
 \includegraphics[scale=0.35]{images/pcerror_gamma020_hist.png}
 \includegraphics[scale=0.35]{images/pcerror_gamma020.png}
-\caption{(LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}
+\caption{(LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) $\pm$ standard deviation (shaded region) as the number of motion events increases.}
 \label{hist}
 \end{figure}
 

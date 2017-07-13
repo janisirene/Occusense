@@ -4,10 +4,10 @@
 \contentsline {figure}{\numberline {4}{\ignorespaces Example of detected foreground pixels.}}{7}
 \contentsline {figure}{\numberline {5}{\ignorespaces Example of total number of foreground pixels in each frame compared to ground truth events in gray.}}{7}
 \contentsline {figure}{\numberline {6}{\ignorespaces Example of optical flow vectors.}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces ROC curves of detecting motion events using different parameters for the two proposed background subtraction algorithms.}}{9}
+\contentsline {figure}{\numberline {7}{\ignorespaces ROC curves of detecting motion events using different parameters for the kernel-based (blue) and running-gaussian (red) background subtraction algorithms.}}{9}
 \contentsline {figure}{\numberline {8}{\ignorespaces Mean vertical gradient for two people walking out.}}{10}
-\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for lingering through the door.}}{10}
-\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for running out and in through the door.}}{11}
+\contentsline {figure}{\numberline {9}{\ignorespaces Mean vertical gradient for a person lingering through the door.}}{10}
+\contentsline {figure}{\numberline {10}{\ignorespaces Mean vertical gradient for a person running out and in through the door.}}{11}
 \contentsline {figure}{\numberline {11}{\ignorespaces Mean vertical gradient for two people walking in together}}{11}
-\contentsline {figure}{\numberline {12}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace {}90\%.}}{12}
-\contentsline {figure}{\numberline {13}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) and standard deviation (shaded region) as the number of motion events increases.}}{12}
+\contentsline {figure}{\numberline {12}{\ignorespaces Proportion of correct direction classifications with peak peformance at \nobreakspace {}90\% following the kernel-based (blue) and running-gaussian (red) background subtraction algorithms.}}{12}
+\contentsline {figure}{\numberline {13}{\ignorespaces (LEFT) Histogram of people count errors after 1 motion event (blue) to 10 motion events (yellow). (RIGHT) The same distribution of errors shown as mean (solid line) $\pm $ standard deviation (shaded region) as the number of motion events increases.}}{12}
